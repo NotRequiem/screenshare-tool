@@ -23,10 +23,15 @@ The program will also tell you what to do exactly in any situation and will auto
 
 ## Currently in Development
 1. Detections for file executions using hive transactions that cannot be bypassed without low level kernel hooking.
+
 2. Detections for files executed with modified extensions and files without name and/or extension using System logs being reading and written by Windows constantly (so bypassers wont be able to modify it).
+
 3. Detections for DLL Injections without using csrss, antivirus processes, registry or prefetch (since these methods can be easily bypassed now) by analyzing the dll file structure and digital signature of accessed files by the system until the last boot time.
+
 4. Detections for ImportCode using RAM, because ActivitiesCache or ClipboardSvcGroup can be easily bypassed.
-5. Detections for jars and bats executed using RAM memory, because a bypasser could clean traces in DcomLaunch, PcaSvc and Prefetch to bypass them
+
+5. Detections for jars and bats executed using RAM memory, because a bypasser could clean traces in DcomLaunch, PcaSvc and Prefetch to bypass them.
+
 6 Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
 
 ## Compatibility
