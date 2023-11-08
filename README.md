@@ -32,7 +32,7 @@ The program will also tell you what to do exactly in any situation and will auto
 
 5. Detections for jars and bats executed using RAM memory, because a bypasser could clean traces in DcomLaunch, PcaSvc and Prefetch to bypass them.
 
-6 Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
+6. Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
 
 ## Compatibility
 From Windows XP/Vista to Windows 11.
