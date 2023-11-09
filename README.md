@@ -2,8 +2,6 @@
 
 !! THIS TOOL IS CURRENTLY IN DEVELOPMENT AND NOT DONE YET !!
 
-The program will also tell you what to do exactly in any situation and will automatically fix any possible errors.
-
 ## Features added by the moment
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
 
