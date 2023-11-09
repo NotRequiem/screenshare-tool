@@ -10,6 +10,9 @@
 // VM detection headers
 #include "vmaware.hpp"
 
+// Disk replaces detection headers
+#include "Disk\DiskChecker.hpp"
+
 // Process memory string scanning headers
 #include "String Scanner\process_scanner.hpp"
 #include "String Scanner\service_scanner.hpp"
