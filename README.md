@@ -15,9 +15,20 @@
 
 > 6. Detects UsnJournal cleared by analyzing the $J datastream, instead of using bad methods, such as analyzing event logs, disk clusters, unallocated space or $MFT entries.
 
-> 7. Analyzes the RAM memory to detect executed files, deleted files, accessed files and unsigned files.
+> 7. Detects for jar and batch files executed using RAM memory.
 
-> 8. Performs regular expression filtering in macro software processes to detect macro traces.
+> 8. Analyzes the RAM memory to detect PE executed files, deleted files, accessed files and unsigned files.
+
+> 9. Performs regular expression filtering and normal filtering in macro software processes to detect macro traces.
+   
+> 10. Uses a custom string scanner (that you can modify) to filter in process's memory certain string 'trackings' using regular expressions or not. It can detect a process by its process name and by its service name (for processes hosted as svchost.exe, etc).
+
+> 11. Checks if a drive was recently formatted or replaced (common anti-forensic bypass method) by using physical or virtual disks.
+
+> 12. Detects file replaces.
+
+> 13. Detects file modifications on files with special characters (any non-ascii character).
+
 
 ## Currently in Development
 1. Detections for file executions using hive transactions that cannot be bypassed without low level kernel hooking.
@@ -28,12 +39,8 @@
 
 4. Detections for ImportCode using RAM, because ActivitiesCache or ClipboardSvcGroup can be easily bypassed.
 
-5. Detections for jars and bats executed using RAM memory, because a bypasser could clean traces in DcomLaunch, PcaSvc and Prefetch to bypass them.
+5. Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
 
-6. Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
-
-## Compatibility
-From Windows XP/Vista to Windows 11.
 
 ## Requirements
 Running the program as admin, nothing more.
