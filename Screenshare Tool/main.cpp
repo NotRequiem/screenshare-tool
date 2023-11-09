@@ -149,6 +149,7 @@ int main(int argc, char* argv[]) {
     }
 
     ReplacedFiles(); // REPLACED FILE CHECKS //
+    CheckDiskInstallation(); // REPLACED DISK CHECKS //
 
     // ------------------------------------------------------------------------------------------------
     // RAM CHECKS
