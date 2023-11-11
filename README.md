@@ -29,17 +29,21 @@
 
 > 13. Detects file modifications on files with special characters (any non-ascii character).
 
+> 14. Detects files with no digital signature executed with modified extensions, by both using csrss and system hives.
+ 
+> 15. Detects dlls injected into the system without digital signature, by both using csrss and the dll file structure of NTFS file systems.
+
+> 16. Detects unsigned executed files using csrss.
+
 
 ## Currently in Development
 1. Detections for file executions using hive transactions that cannot be bypassed without low level kernel hooking.
 
-2. Detections for files executed with modified extensions and files without name and/or extension using System logs being reading and written by Windows constantly (so bypassers wont be able to modify it).
+2. Detections for files without name and/or extension using System logs being reading and written by Windows constantly (so bypassers wont be able to modify it).
 
-3. Detections for DLL Injections without using csrss, antivirus processes, registry or prefetch (since these methods can be easily bypassed now) by analyzing the dll file structure and digital signature of accessed files by the system until the last boot time.
+3. Detections for ImportCode using RAM, because ActivitiesCache or ClipboardSvcGroup can be easily bypassed.
 
-4. Detections for ImportCode using RAM, because ActivitiesCache or ClipboardSvcGroup can be easily bypassed.
-
-5. Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
+4. Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
 
 
 ## Requirements
