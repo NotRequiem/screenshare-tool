@@ -64,19 +64,19 @@
 Manually check any replaced file by uploading it to Hybrid or VirusTotal. 
 
 6. Virtual machine checks bassed on running assembly code to detect cpuid flag registers will not be added, because on VMWare, this detection method freezes the machine. Im referring to this code exactly:
-asm(
-        "pushfq\n"
-        "pop %%rcx\n"
-        "or $0x100, %%ecx\n"
-        "push %%rcx\n"
-        "popfq\n"
-        "cpuid\n"
-        "pushfq\n"
-        "pop %%rax\n"
-        : "=a" (result)
-        :
-        : "rcx"
-    );
+> asm(
+>         "pushfq\n"
+>         "pop %%rcx\n"
+>         "or $0x100, %%ecx\n"
+>         "push %%rcx\n"
+>         "popfq\n"
+>         "cpuid\n"
+>         "pushfq\n"
+>         "pop %%rax\n"
+>         : "=a" (result)
+>         :
+>         : "rcx"
+>     );
 
 7. The tool will not try to automatically download anything from external websites, as it could flag some antivirus products.
 
