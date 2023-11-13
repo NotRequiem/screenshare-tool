@@ -9,7 +9,7 @@
 
 > 3. Detects virtual machine environments with more than 30 different methods, such as querying virtual firmware, commonly used virtual drivers, commonly generated registry keys, processor brand, etc. It also informs you about possible mouse events being sent by the host machine to the virtual machine to autoclick.
 
-> 4. Detects more than 20 different macro file modifications and reads inside them to detect potential deleted macro traces, they will be constantly updated.
+> 4. Detects more than 20 different macro file modifications and reads inside them to detect potential deleted macro traces, the program also checks for deleted macro traces or renamed/overwritten macro files.
 
 > 5. Detects bypass methods in macro files based on attribute modifications.
 
@@ -21,7 +21,7 @@
 
 > 9. Checks if a drive was recently formatted or replaced (common anti-forensic bypass method) by using physical or virtual disks.
 
-> 10. Detects file replaces.
+> 10. Detects file replaces in all NTFS drives, does not matter the extension of the file.
 
 > 11. Detects file modifications on files with special characters (any non-ascii character).
 
