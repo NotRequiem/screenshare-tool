@@ -63,7 +63,7 @@
 5. The tool does not have a reliable counter (no public ss tool has it thought) against leaked (and official/valid) digital signatures obtained from places like the dark web, because using techniques such as sandboxing/string scanning would slow down the scan too much. The tool can't also use public api keys to contact antivirus engines such as VirusTotal due to the VT's API high restrictions. 
 Manually check any replaced file by uploading it to Hybrid or VirusTotal. 
 
-6. Virtual machine checks bassed on running assembly code to detect cpuid flag registers will not be added, because on VMWare, this detection method freezes the machine. Im referring to this code exactly:
+6. Virtual machine checks bassed on running assembly code to detect cpuid flag registers will not be added, because on vmware machines, this detection method freezes the machine. Im referring to this code exactly:
 > asm(
 >         "pushfq\n"
 >         "pop %%rcx\n"
