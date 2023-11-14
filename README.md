@@ -9,7 +9,7 @@ This tool is currently in development and cannot be build.
 
 > 3. Detects virtual machine environments with more than 30 different methods, such as querying virtual firmware, commonly used virtual drivers, commonly generated registry keys, processor brand, etc. It also informs you about possible mouse events being sent by the host machine to the virtual machine to autoclick.
 
-> 4. Detects more than 20 different macro file modifications and reads inside them to detect potential deleted macro traces, the program also checks for deleted macro traces or renamed/overwritten macro files.
+> 4. Detects more than 20 different macro file modifications and reads inside them to detect potential deleted macro traces, the program also checks for deleted macro files or renamed/overwritten macro files.
 
 > 5. Detects bypass methods in macro files based on attribute modifications.
 
@@ -19,17 +19,17 @@ This tool is currently in development and cannot be build.
    
 > 8. Uses a custom string scanner (that you can modify) to filter in process's memory certain string 'trackings' using regular expressions or not. It can detect a process by its process name and by its service name (for processes hosted as svchost.exe, etc).
 
-> 9. Checks if a drive was recently formatted or replaced (common anti-forensic bypass method) by using physical or virtual disks.
+> 9. Checks if a drive was recently formatted or replaced by using physical or virtual disks.
 
-> 10. Detects file replaces in all NTFS drives, does not matter the extension of the file.
+> 10. Detects file replaces (with any extension) in all NTFS drives.
 
 > 11. Detects file modifications on files with special characters (any non-ascii character).
 
 > 12. Detects files with no digital signature executed with modified extensions, by both using csrss and system hives.
  
-> 13. Detects dlls injected into the system without digital signature, by both using csrss and the dll file structure of NTFS file systems.
+> 13. Detects dlls injected into the system without digital signatures.
 
-> 14. Detects unsigned executed files using csrss.
+> 14. Detects unsigned executed files of all common cheat extensions using several processes, including csrss.
    
 > 15. Detects mods used by the game process instance that were modified while the process was running.
 
@@ -40,7 +40,7 @@ This tool is currently in development and cannot be build.
 2. The program requires administrator privileges.
 
 ## Currently in Development
-1. Detections for file executions using hive transactions that cannot be bypassed without low level kernel hooking.
+1. Detections for file executions using hive transactions.
 
 2. Detections for files without name and/or extension using System logs being reading and written by Windows constantly (so bypassers wont be able to modify it).
 
@@ -67,7 +67,7 @@ Manually check any replaced file by uploading it to Hybrid, or by using Bintext.
 
 6. The tool will not exploit signed and vulnerable kernel drivers, or use any kernel driver to scan memory in "protected" processes such as csrss, because the need of a digital signature to not be blocked by Windows.
 
-7. The tool does not detect any dll injection using Registry, prefetch, memory images, system snapshots or processes hosted by antivirus with memory persistence, due to their lack of reliability.
+7. The tool does not detect any dll injection using Registry, prefetch, memory images, system snapshots, Last Access and Last Record Change File/Directory Attribute modifications or processes hosted by antivirus with memory persistence, due to their lack of reliability for the "Screenshare" (out of instance) scenario.
 
 8. The tool doesn't need to detect deleted or renamed files, because the tool indirectly checks for those modifications when proving file execution.
 
