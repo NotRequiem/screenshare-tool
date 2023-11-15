@@ -71,3 +71,5 @@ Manually check any replaced file by uploading it to Hybrid, or by using Bintext.
 10. Task Scheduler bypasses will not be checked by analyzing file artifacts or refistry keys (because they can be easily deleted without affecting the running task). Plus, xml artifacts in the Scheduler's memory will not be scanned because it can be easily bypassed by running the task at the system boot.
 
 11. The tool will not use event logs, system hives or BAM to detect anything due to its ease of being tampered and their reliability in screenshare scenarios.
+
+12. Journal parsing is slow to ensure compatibility and low memory/disk impact on all Windows systems.
