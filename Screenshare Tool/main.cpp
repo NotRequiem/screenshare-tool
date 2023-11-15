@@ -83,15 +83,6 @@ int main() {
     UninitializeWMI(pLoc, pSvc);
 
     // ------------------------------------------------------------------------------------------------
-    // BAM CHECKS
-    // ------------------------------------------------------------------------------------------------
-
-    bool running = IsBAMRunning();
-    if (!running) {
-        std::cout << "The Background Activity Moderator service is not running, therefore checks for modified extensions, files without extensions and files without names won't run." << std::endl;
-    }
-
-    // ------------------------------------------------------------------------------------------------
     // USN JOURNAL CLEARED CHECKS
     // ------------------------------------------------------------------------------------------------
 
