@@ -14,9 +14,6 @@
 // Disk replaces checks
 #include "disk\diskchk.hpp"
 
-// Background Activity Moderator checks
-#include "bam\bamchk.hpp"
-
 // ImportCode checks
 #include "import code\importcode.hpp"
 
