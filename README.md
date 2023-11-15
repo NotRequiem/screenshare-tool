@@ -5,33 +5,31 @@ This tool is currently in development and cannot be build.
 ## Features
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
 
-> 2. Detects if certain drivers that the tool needs to perform several bypasses checks are running.
+> 2. Detects virtual machine environments with more than 30 different methods, such as querying virtual firmware, commonly used virtual drivers, commonly generated registry keys, processor brand, etc. It also informs you about possible mouse events being sent by the host machine to the virtual machine to autoclick.
 
-> 3. Detects virtual machine environments with more than 30 different methods, such as querying virtual firmware, commonly used virtual drivers, commonly generated registry keys, processor brand, etc. It also informs you about possible mouse events being sent by the host machine to the virtual machine to autoclick.
+> 3. Detects more than 20 different macro file modifications and reads inside them to detect potential deleted macro traces, the program also checks for deleted macro files or renamed/overwritten macro files.
 
-> 4. Detects more than 20 different macro file modifications and reads inside them to detect potential deleted macro traces, the program also checks for deleted macro files or renamed/overwritten macro files.
+> 4. Detects bypass methods in macro files based on attribute modifications.
 
-> 5. Detects bypass methods in macro files based on attribute modifications.
+> 5. Detects UsnJournal cleared by analyzing the $J datastream, instead of using bad methods, such as analyzing event logs, disk clusters, unallocated space or $MFT entries.
 
-> 6. Detects UsnJournal cleared by analyzing the $J datastream, instead of using bad methods, such as analyzing event logs, disk clusters, unallocated space or $MFT entries.
-
-> 7. Performs regular expression filtering and normal filtering in macro software processes to detect macro traces.
+> 6. Performs regular expression filtering and normal filtering in macro software processes to detect macro traces.
    
-> 8. Uses a custom string scanner (that you can modify) to filter in process's memory certain string 'trackings' using regular expressions or not. It can detect a process by its process name and by its service name (for processes hosted as svchost.exe, etc).
+> 7. Uses a custom string scanner (that you can modify) to filter in process's memory certain string 'trackings' using regular expressions or not. It can detect a process by its process name and by its service name (for processes hosted as svchost.exe, etc).
 
-> 9. Checks if a drive was recently formatted or replaced by using physical or virtual disks.
+> 8. Checks if a drive was recently formatted or replaced by using physical or virtual disks.
 
-> 10. Detects file replaces (with any extension) in all NTFS drives.
+> 9. Detects file replaces (with any extension) in all NTFS drives.
 
-> 11. Detects file modifications on files with special characters (any non-ascii character).
+> 10. Detects file modifications on files with special characters (any non-ascii character).
 
-> 12. Detects files with no digital signature executed with modified extensions, by both using csrss and system hives.
+> 11. Detects files with no digital signature executed with modified extensions.
  
-> 13. Detects dlls injected into the system without digital signatures.
+> 12. Detects dlls injected into the system without digital signatures.
 
-> 14. Detects unsigned executed files of all common cheat extensions using several processes, including csrss.
+> 13. Detects unsigned executed files of all common cheat extensions using several processes, including csrss.
    
-> 15. Detects mods used by the game process instance that were modified while the process was running.
+> 14. Detects mods used by the game process instance that were modified while the process was running.
 
 ## Requirements
 
@@ -40,15 +38,12 @@ This tool is currently in development and cannot be build.
 2. The program requires administrator privileges.
 
 ## Currently in Development
-1. Detections for file executions using hive transactions.
 
-2. Detections for files without name and/or extension using System logs being reading and written by Windows constantly (so bypassers wont be able to modify it).
+1. Detections for Task Scheduler bypasses.
 
-3. Detections for deleted BAM keys using the SYSTEM hive (a better method than the one integrated into Registry Explorer).
+2. Unplugged USB checks for any device.
 
-4. Detections for Task Scheduler bypasses.
-
-5. Unplugged USB checks for any device.
+3. Detections for files executed without extension. 
 
 ## Disclaimers
 
