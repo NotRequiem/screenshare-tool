@@ -45,7 +45,9 @@ This tool is currently in development and cannot be build.
 
 2. Unplugged USB checks for any device.
 
-3. Detections for files executed without extension. 
+3. Detections for files executed without extension.
+   
+4. Detections for files executed without name.
 
 ## Disclaimers
 
