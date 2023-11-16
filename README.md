@@ -31,6 +31,8 @@ This tool is currently in development and cannot be build.
    
 > 14. Detects mods used by the game process instance that were modified while the process was running.
 
+> 15. Detects code imports (ommon anti-forensic bypass method) in memory.
+
 ## Requirements
 
 1. This is a Windows program. It can work on any windows client operating system ranging from Windows 7 to Windows 11. However, some checks will not work if you are not running the program under Windows 10/11 (impossible to fix).
