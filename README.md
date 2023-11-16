@@ -31,7 +31,7 @@ This tool is currently in development and cannot be build.
    
 > 14. Detects mods used by the game process instance that were modified while the process was running.
 
-> 15. Detects code imports (ommon anti-forensic bypass method) in memory.
+> 15. Detects code imports (ommon anti-forensic bypass method) pasted on consoles, like cmd, powershell, or any other terminal.
 
 ## Requirements
 
