@@ -1,6 +1,5 @@
 #include "..\wmi\wmi.hpp"
 #include "importcode.hpp"
-#include <fstream>
 
 bool isStringChar(unsigned char ch) {
     return (ch >= 32 && ch <= 126);
