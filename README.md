@@ -33,17 +33,21 @@ This tool is currently in development and cannot be build.
 
 > 15. Detects code imports (ommon anti-forensic bypass method) pasted on consoles, like cmd, powershell, or any other terminal.
 
+> 16. Detects Task Scheduler bypasses by checking executed files by the scheduler process in memory and running digital signature checks against them.
+
+> 17. Detects executed and deleted files in csrss and scheduler.
+
 ## Requirements
 
-1. This is a Windows program. It can work on any windows client operating system ranging from Windows 7 to Windows 11. However, some checks will not work if you are not running the program under Windows 10/11 (impossible to fix).
+1. This is a Windows program. It can work on any windows client operating system ranging from Windows 7 to Windows 11.
 
-2. The program requires administrator privileges.
+2. The program requires administrator privileges to run.
 
 ## Currently in Development
 
-1. Detections for Task Scheduler bypasses.
+1. Detections for Task Scheduler bypasses using special characters in the command line.
 
-2. Unplugged USB checks for any device.
+2. Detections for any unplugged device.
 
 3. Detections for files executed without extension.
    
