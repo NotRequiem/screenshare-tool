@@ -1,0 +1,16 @@
+D:\Screenshare Tool\Screenshare Tool\csrss\csrss.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\csrss.obj
+D:\Screenshare Tool\Screenshare Tool\devices\devices.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\devices.obj
+D:\Screenshare Tool\Screenshare Tool\digital signature\trustverify.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\trustverify.obj
+D:\Screenshare Tool\Screenshare Tool\disk\diskchk.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\diskchk.obj
+D:\Screenshare Tool\Screenshare Tool\import code\importcode.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\importcode.obj
+D:\Screenshare Tool\Screenshare Tool\javaw\mods.c;D:\Screenshare Tool\Screenshare Tool\x64\Release\mods.obj
+D:\Screenshare Tool\Screenshare Tool\macros\macros.c;D:\Screenshare Tool\Screenshare Tool\x64\Release\macros.obj
+D:\Screenshare Tool\Screenshare Tool\main.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\main.obj
+D:\Screenshare Tool\Screenshare Tool\onboard memory macros\keyboardhook.c;D:\Screenshare Tool\Screenshare Tool\x64\Release\keyboardhook.obj
+D:\Screenshare Tool\Screenshare Tool\onboard memory macros\mousehook.c;D:\Screenshare Tool\Screenshare Tool\x64\Release\mousehook.obj
+D:\Screenshare Tool\Screenshare Tool\string scanner\process_scanner.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\process_scanner.obj
+D:\Screenshare Tool\Screenshare Tool\string scanner\service_scanner.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\service_scanner.obj
+D:\Screenshare Tool\Screenshare Tool\task scheduler\scheduler.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\scheduler.obj
+D:\Screenshare Tool\Screenshare Tool\usn journal\fsutil.c;D:\Screenshare Tool\Screenshare Tool\x64\Release\fsutil.obj
+D:\Screenshare Tool\Screenshare Tool\usn journal\journal.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\journal.obj
+D:\Screenshare Tool\Screenshare Tool\wmi\wmi.cpp;D:\Screenshare Tool\Screenshare Tool\x64\Release\wmi.obj
