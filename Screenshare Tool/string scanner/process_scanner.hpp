@@ -7,6 +7,8 @@
 #include <string>
 #include <regex>
 #include <set>
+#include <locale>
+#include <codecvt>
 
 void scanProcessStrings(const wchar_t* processName, const std::wstring& searchPattern, bool useRegex);
 
