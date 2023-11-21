@@ -44,6 +44,8 @@ This screenshare tools aims to detect every cheat and bypass, it is designed to 
 
 > 19. Detects executed and/or deleted files without extension.
 
+> 20. Detects if more than one mice device is plugged (bannable).
+
 ## Methodology
 The tool does not use 9929392 methods to check for certain things, it focuses on one strong method, and then patches every bypass possible for that method.
 
