@@ -1,146 +1,101 @@
-#include <Windows.h>
-#include <Wbemidl.h>
-#include <comdef.h>
 #include <iostream>
+#include <vector>
+#include <tuple>
+#include <Windows.h>
+#include <TlHelp32.h>
+#include <string>
+#include <codecvt>
 
-#pragma comment(lib, "wbemuuid.lib")
+bool warningDisplayed = false;
 
-bool MouseCheck() {
-    HRESULT hr = CoInitializeEx(0, COINIT_MULTITHREADED);
-    if (FAILED(hr)) {
-        std::cerr << "Failed to initialize COM library." << std::endl;
-        return hr;
+static void scanProcessStrings(const wchar_t* processName, const std::wstring& searchPattern, bool useRegex, const std::wstring& message) {
+    PROCESSENTRY32 entry{};
+    entry.dwSize = sizeof(PROCESSENTRY32);
+
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+
+    if (Process32First(snapshot, &entry)) {
+        do {
+            if (wcscmp(entry.szExeFile, processName) == 0) {
+                DWORD pid = entry.th32ProcessID;
+
+                // Build command line directly in the scanProcessStrings function
+                std::wstring commandLine = L"memory scanner.exe -p " + std::to_wstring(pid);
+
+                SECURITY_ATTRIBUTES saAttr;
+                saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+                saAttr.bInheritHandle = TRUE;
+                saAttr.lpSecurityDescriptor = NULL;
+
+                HANDLE hChildStdoutRd, hChildStdoutWr;
+                CreatePipe(&hChildStdoutRd, &hChildStdoutWr, &saAttr, 0);
+                SetHandleInformation(hChildStdoutRd, HANDLE_FLAG_INHERIT, 0);
+
+                STARTUPINFO si = { sizeof(STARTUPINFO) };
+                si.hStdOutput = hChildStdoutWr;
+                si.dwFlags |= STARTF_USESTDHANDLES;
+
+                PROCESS_INFORMATION pi;
+
+                if (CreateProcess(NULL, const_cast<wchar_t*>(commandLine.c_str()), NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)) {
+                    CloseHandle(hChildStdoutWr);
+
+                    CHAR buffer[4096]{};
+                    DWORD bytesRead;
+
+                    while (ReadFile(hChildStdoutRd, buffer, sizeof(buffer), &bytesRead, NULL) && bytesRead != 0) {
+                        // Convert std::wstring to std::string
+                        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+                        std::string searchPatternStr = converter.to_bytes(searchPattern);
+
+                        // Check if the search pattern is found in the output
+                        std::string outputString(buffer, bytesRead);
+                        if (outputString.find(searchPatternStr) != std::string::npos) {
+                            std::wcout << message << searchPattern << L". This is bannable" << std::endl;
+                        }
+                    }
+
+                    WaitForSingleObject(pi.hProcess, INFINITE);
+                    CloseHandle(pi.hProcess);
+                    CloseHandle(pi.hThread);
+                }
+                else {
+                    if (!warningDisplayed) {
+                        std::wcerr << L"Warning: memory scanner.exe not found near the Screenshare Tool. Please download it at: https://github.com/NotRequiem/StrngExtract/blob/main/Release/xxstrings.exe" << std::endl;
+                        warningDisplayed = true;
+                    }
+                }
+
+                CloseHandle(hChildStdoutRd);
+
+                break;
+            }
+        } while (Process32Next(snapshot, &entry));
     }
 
-    hr = CoInitializeSecurity(
-        NULL,
-        -1,
-        NULL,
-        NULL,
-        RPC_C_AUTHN_LEVEL_DEFAULT,
-        RPC_C_IMP_LEVEL_IMPERSONATE,
-        NULL,
-        EOAC_NONE,
-        NULL
-    );
-
-    if (FAILED(hr)) {
-        std::cerr << "Failed to initialize security." << std::endl;
-        CoUninitialize();
-        return hr;
-    }
-
-    IWbemLocator* pLocator = NULL;
-    hr = CoCreateInstance(
-        CLSID_WbemLocator,
-        0,
-        CLSCTX_INPROC_SERVER,
-        IID_IWbemLocator,
-        (LPVOID*)&pLocator
-    );
-
-    if (FAILED(hr)) {
-        std::cerr << "Failed to create IWbemLocator object." << std::endl;
-        CoUninitialize();
-        return hr;
-    }
-
-    IWbemServices* pServices = NULL;
-    hr = pLocator->ConnectServer(
-        SysAllocString(L"ROOT\\CIMv2"),
-        NULL,
-        NULL,
-        0,
-        NULL,
-        0,
-        0,
-        &pServices
-    );
-
-    if (FAILED(hr)) {
-        std::cerr << "Failed to connect to WMI." << std::endl;
-        pLocator->Release();
-        CoUninitialize();
-        return hr;
-    }
-
-    hr = CoSetProxyBlanket(
-        pServices,
-        RPC_C_AUTHN_WINNT,
-        RPC_C_AUTHZ_NONE,
-        NULL,
-        RPC_C_AUTHN_LEVEL_CALL,
-        RPC_C_IMP_LEVEL_IMPERSONATE,
-        NULL,
-        EOAC_NONE
-    );
-
-    if (FAILED(hr)) {
-        std::cerr << "Failed to set proxy blanket." << std::endl;
-        pServices->Release();
-        pLocator->Release();
-        CoUninitialize();
-        return hr;
-    }
-
-    IEnumWbemClassObject* pEnumerator = NULL;
-    hr = pServices->ExecQuery(
-        SysAllocString(L"WQL"),
-        SysAllocString(L"SELECT * FROM Win32_PointingDevice"),
-        WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
-        NULL,
-        &pEnumerator
-    );
-
-    if (FAILED(hr)) {
-        std::cerr << "Failed to execute WMI query." << std::endl;
-        pServices->Release();
-        pLocator->Release();
-        CoUninitialize();
-        return hr;
-    }
-
-    IWbemClassObject* pclsObj = NULL;
-    ULONG uReturn = 0;
-    int deviceCount = 0;
-
-    while (pEnumerator) {
-        hr = pEnumerator->Next(WBEM_INFINITE, 1, &pclsObj, &uReturn);
-
-        if (uReturn == 0) {
-            break;
-        }
-
-        VARIANT vtProp;
-        VariantInit(&vtProp);
-
-        hr = pclsObj->Get(L"DeviceID", 0, &vtProp, 0, 0);
-        if (SUCCEEDED(hr)) {
-            wprintf(L"Mouse: %s\n", vtProp.bstrVal);
-            VariantClear(&vtProp);
-        }
-
-        wprintf(L"\n");
-
-        pclsObj->Release();
-        deviceCount++;
-    }
-
-    pEnumerator->Release();
-    pServices->Release();
-    pLocator->Release();
-    CoUninitialize();
-
-    // Display warning if there are more than one pointing devices
-    if (deviceCount > 1) {
-        std::cerr << "WARNING: This user has two mice connected on this computer, which is bannable." << std::endl;
-    }
-
-    return 0;
+    CloseHandle(snapshot);
 }
 
 int main() {
-    MouseCheck();
+    std::vector<std::tuple<const wchar_t*, std::wstring, bool, std::wstring>> processParameters = {
+        std::make_tuple(L"lghub_agent.exe", L"durationms", true, L"Found illegal macro string in lghub_agent.exe: "),
+        std::make_tuple(L"Razer Synapse.exe", L"DeleteMacroEvent", false, L"Found illegal macro string in Razer Synapse.exe: "),
+        std::make_tuple(L"Razer Synapse 3.exe", L"SetKeysPerSecond", false, L"Found illegal macro string in Razer Synapse 3.exe: "),
+        std::make_tuple(L"RazerCentralService.exe", L"Datasync: Status: COMPLETE Action: NONE Macros/", false, L"Found illegal macro string in RazerCentralService.exe: "),
+        std::make_tuple(L"SteelSeriesGGClient.exe", L"delay.+is_deleted", true, L"Found illegal macro string in SteelSeriesGGClient.exe: "),
+        std::make_tuple(L"Onikuma.exe", L"LeftKey CODE:", false, L"Found illegal macro string inOnikuma.exe: "),
+    };
+
+    for (const auto& params : processParameters) {
+        const wchar_t* processName = std::get<0>(params);
+        std::wstring searchPattern = std::get<1>(params);
+        bool useRegex = std::get<2>(params);
+        std::wstring message = std::get<3>(params);
+
+        std::wcout << L"Scanning process: " << processName << std::endl;
+
+        scanProcessStrings(processName, searchPattern, useRegex, message);
+    }
 
     return 0;
 }
