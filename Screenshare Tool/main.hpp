@@ -13,10 +13,6 @@
 // Task Scheduler checks
 #include "task scheduler\scheduler.hpp"
 
-// Device checks
-#include "devices\devices.hpp"
-#include "devices\mouse.hpp"
-
 // Digital signature checks
 #include "digital signature\trustverify.hpp"
 
@@ -28,6 +24,10 @@
 
 // Mods checks
 #include "javaw\mods.h"
+
+// Device checks
+#include "devices\devices.hpp"
+#include "devices\mouse.hpp"
 
 // Process memory string scanning headers
 #include "string scanner\process_scanner.hpp"
