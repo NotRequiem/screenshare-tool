@@ -87,9 +87,7 @@ I followed the same methodology of selecting the "strongest method" and then pat
 
 2. Detections for ImportCode will not be checked using ActivitiesCache because the possiblity of false flagging legitimate (but suspicious) copy-paste actions that are not different from unlegit traces. It will be checked using the process' memory of several processes.
 
-3. Detections for client-specific strings will not be added for two main reasons:
-    - The tool already has a custom string scanner, with the ability to use regular expressions (if you want) and find a process with its service name or process name.
-    - I will not add a large database if the tool can detect any cheat with generic methods.
+3. Detections for client-specific strings will not be added, the tool can detect any cheat with generic methods.
 
 4. Detections for dll injections using Registry, prefetch, memory images, system snapshots, Last Access and Last Record Change File/Directory Attribute modifications or processes hosted by antivirus with memory persistence will not be added, due to their lack of reliability for the "Screenshare" (out of instance) scenario.
 
