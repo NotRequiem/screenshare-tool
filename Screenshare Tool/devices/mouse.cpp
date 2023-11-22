@@ -133,9 +133,3 @@ bool MouseCheck() {
 
     return 0;
 }
-
-int main() {
-    MouseCheck();
-
-    return 0;
-}
