@@ -7,8 +7,6 @@ int main() {
     return 1;
     }
 
-    EnableDebugPrivilege(); // Enable privileges to scan certain processes system processes.
-
     Macros(); // Checks for macros (This should run first because macro strings are fastly erased)
 
     // ------------------------------------------------------------------------------------------------
