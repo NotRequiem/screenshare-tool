@@ -65,7 +65,7 @@ The tool then just checks ".exe" and ".dll" files using csrss, and then it focus
 I followed the same methodology of selecting the "strongest method" and then patching every bypass that may affect the detection.
 
 ## Memory scanning
-If anyone is interested, this is the external program coded to scan the memory of the necessary processes: https://github.com/NotRequiem/memory-scanner
+If anyone is interested, this is the external program coded to scan the memory of the necessary processes: [https://github.com/NotRequiem/memory-scanner](https://github.com/NotRequiem/memscanner)
 
 ## Currently in Development
 
