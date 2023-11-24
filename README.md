@@ -29,7 +29,7 @@ This tool is currently in development and not released.
 
 > 13. Detects code imports (common anti-forensic bypass method) pasted on consoles, like cmd, powershell, or any other terminal.
 
-> 14. Detects Task Scheduler bypasses by detecting deleted tasks, checking executed files with the scheduler process in memory and running digital signature checks against them.
+> 14. Detects Task Scheduler bypasses by checking executed files with the scheduler process in memory and running digital signature checks against them.
 
 > 16. Detects executed and/or deleted files without name.
 
