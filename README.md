@@ -2,6 +2,10 @@
 
 This tool is currently in beta version.
 
+## Currently in Development
+- Detections for executed files with special characters (like korean, russian, chinese, etc...)
+- Detections for executed files with special characters using Task Scheduler.
+
 ## Features
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
 
