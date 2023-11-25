@@ -67,6 +67,24 @@ I followed the same methodology of selecting the "strongest method" and then pat
 ## Memory scanning
 If anyone is interested, this is the external program coded to scan the memory of the necessary processes: [https://github.com/NotRequiem/memory-scanner](https://github.com/NotRequiem/memscanner)
 
-## Currently in Development
+## How to Build the project
 
-Detections for Task Scheduler bypasses using special characters, while also bypassing registry and usnjournal.
+> 1. Download Source Code:
+
+In https://github.com/NotRequiem/Advanced-SS-Tool, go to "Code" -> "Download zip".
+Extract the zip contents to a folder.
+
+> 2. Open Visual Studio:
+
+Launch Microsoft Visual Studio.
+If you don't have Visual Studio installed, you can download and install it from the official Microsoft website. You should download "Visual Studio 2022 Community".
+
+> 3. Open Solution:
+
+Go to "File" -> "Open" -> "Project/Solution...", the solution is a ".sln" file located inside the folder you downloaded in the first step.
+Navigate to the location of your .sln file and select it.
+
+> 4. Build Solution:
+
+Once the solution is open, you can build it by going to "Build" -> "Build Solution" from the menu.
+Alternatively, you can press Ctrl + Shift + B to build the solution.
