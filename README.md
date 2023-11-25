@@ -1,6 +1,6 @@
 # Advanced Screenshare Tool
 
-This tool is currently in development and not released.
+This tool is currently in beta version.
 
 ## Features
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
