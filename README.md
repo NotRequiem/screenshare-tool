@@ -2,9 +2,13 @@
 
 This tool is currently in beta version.
 
+## Bugs detected
+- Possibility of false flag macro file modifications because an issue when converting macro file modifications.
+
 ## Currently in Development
 - Detections for executed files with special characters (like korean, russian, chinese, etc...)
 - Detections for executed files with special characters using Task Scheduler.
+- Code optimizations for the official release.
 
 ## Features
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
