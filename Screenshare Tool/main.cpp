@@ -26,6 +26,10 @@ int main() {
 
     USNJournalCleared(); // Check if USNJournal was cleared
 
+    SystemTimeChange(); // Checks if the system time was changed
+
+    EventlogBypass(); // Checks if eventlog was bypassed
+
     SuspiciousMods(); // Checks for mods that were modified while Minecraft was running
 
     ReplacedDisks(); // Detects physical or virtual disks replaced or formatted before the Screenshare
