@@ -5,7 +5,6 @@ This tool is currently in beta version.
 ## Currently in Development
 - Detections for executed files with special characters (like korean, russian, chinese, etc...)
 - Detections for executed files with special characters using Task Scheduler.
-- Detections for system time change on macro files.
 - Code optimizations for the official release.
 
 ## Features
@@ -29,7 +28,7 @@ This tool is currently in beta version.
  
 > 10. Detects dlls injected into the system without digital signatures.
 
-> 11. Detects unsigned executed files of all common cheat extensions using several processes, including kernel level processes like csrss and covering all common cheat extensions: .jar, .bat, .exe, .dll, .py, .ps1, .vbs.
+> 11. Detects unsigned executed files of all common cheat extensions using several processes, including kernel level processes like csrss and covering all common cheat extensions: .exe, .dll, .jar, .bat, .py, .ps1, .vbs.
    
 > 12. Detects mods used by the game process instance that were modified while the process was running.
 
@@ -44,6 +43,10 @@ This tool is currently in beta version.
 > 18. Detects unsigned executed files with modified extensions.
 
 > 19. Detects if more than one mice device is plugged (bannable).
+
+> 20. Detects if the system time was changed to bypass macro file modifications.
+
+> 21. Detects if the user renamed, replaced, corrupted or modified .evtx logs or eventlog entries to bypass the previous system time check.
 
 ## Methodology
 The tool does not use a lot of methods to check for certain things, it focuses on one strong method, and then patches every bypass possible for that method.
