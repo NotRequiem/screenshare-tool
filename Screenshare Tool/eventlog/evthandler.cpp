@@ -1,3 +1,4 @@
+#include "..\gui\color.hpp"
 #include "evthandler.hpp"
 
 static void LastPCBootTime(SYSTEMTIME& lastBootTime) {
@@ -23,6 +24,9 @@ static void LastPCBootTime(SYSTEMTIME& lastBootTime) {
 }
 
 void EventlogBypass() {
+    Console::SetColor(ConsoleColor::Gray, ConsoleColor::Black);
+    std::wcout << "[System Scanner] Running checks to detect eventlog bypasses... " << std::endl;
+    Console::ResetColor();
     HKEY hKey;
     SYSTEMTIME lastBootTime, lastWriteTime;
     FILETIME ftLastWriteTime, ftLastBootTime{};
