@@ -1,5 +1,5 @@
 #include "..\gui\color.hpp"
-#include "diskchk.hpp"
+#include "disk.hpp"
 
 // Function to check if a file exists at the given file path
 static bool FileExists(const std::wstring& filePath) {
