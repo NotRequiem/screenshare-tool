@@ -39,7 +39,7 @@ void EventlogBypass() {
 
             // Compare the last write time with the last system boot time
             if (CompareFileTime(&ftLastWriteTime, &ftLastBootTime) == 1) {
-                std::cout << "Warning: Registry key last write time is after the last system boot time." << std::endl;
+                std::cout << "[!] Eventlog bypass detected. Ban the user." << std::endl;
             }
         }
         else {
