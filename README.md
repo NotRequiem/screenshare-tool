@@ -4,6 +4,7 @@ This tool is currently in beta version.
 
 ## Bugs detected
 - Possibility of false flag macro file modifications because an issue when converting macro file modifications.
+- Possibility of false flagging two mices connected into the computer.
 
 ## Currently in Development
 - Detections for executed files with special characters (like korean, russian, chinese, etc...)
