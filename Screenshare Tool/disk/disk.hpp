@@ -1,5 +1,5 @@
-#ifndef DISK_CHK_H
-#define DISK_CHK_H
+#ifndef DISK_H
+#define DISK_H
 
 #include <Windows.h> 
 #include <vector>    
