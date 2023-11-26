@@ -64,7 +64,7 @@ After knowing we will use csrss to detect .exes (and also can be used to detect 
 > 3. Clearing strings with a kernel driver
 > 4. Modified extensions
 > 5. Replaced files
-> 6. Executing files using intermediary process like cmd
+> 6. Executing files using intermediary processes like cmd
 
 The tool then just checks ".exe" and ".dll" files using csrss, and then it focuses on covering all its possible bypasses.
 
