@@ -61,7 +61,6 @@ static void PrintEvent(EVT_HANDLE hEvent, SYSTEMTIME& lastBootTime) {
             }
             else
             {
-                wprintf(L"Memory allocation failed.\n");
                 EvtClose(hContext);
                 return;
             }
@@ -83,11 +82,11 @@ static void PrintEvent(EVT_HANDLE hEvent, SYSTEMTIME& lastBootTime) {
         ft.dwLowDateTime = (DWORD)pRenderedValues[EvtSystemTimeCreated].FileTimeVal;
         FileTimeToLocalFileTime(&ft, &lft);
         FileTimeToSystemTime(&lft, &st);
-        wprintf(L"The system time was modified in: %02d/%02d/%04d %02d:%02d:%02d\n", st.wDay, st.wMonth, st.wYear, st.wHour, st.wMinute, st.wSecond);
+        wprintf(L"The system time was last modified in: %02d/%02d/%04d %02d:%02d:%02d\n", st.wDay, st.wMonth, st.wYear, st.wHour, st.wMinute, st.wSecond);
 
         // Compare the last boot time with the system time change
         if (CompareSystemTimes(lastBootTime, st) < 0) {
-            wprintf(L"Warning: System time change detected after last boot time!\n");
+            wprintf(L"[!] Warning: System time change detected after last boot time. This can be used to bypass macro file modifications. Ban the user!\n");
         }
 
         free(pRenderedValues);
