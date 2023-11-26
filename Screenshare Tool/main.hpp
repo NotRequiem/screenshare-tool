@@ -29,6 +29,10 @@
 // GUI related headers
 #include "gui\color.hpp"
 
+// Eventlog checks
+#include "eventlog\evtquery.hpp"
+#include "eventlog\evthandler.hpp"
+
 // Device checks
 #include "devices\devices.hpp"
 #include "devices\mouse.hpp"
