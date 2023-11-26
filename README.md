@@ -5,6 +5,7 @@ This tool is currently in beta version.
 ## Currently in Development
 - Detections for executed files with special characters (like korean, russian, chinese, etc...)
 - Detections for executed files with special characters using Task Scheduler.
+- Detections for system time change on macro files.
 - Code optimizations for the official release.
 
 ## Features
