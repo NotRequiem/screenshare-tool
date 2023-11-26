@@ -2,9 +2,6 @@
 
 This tool is currently in beta version.
 
-## Bugs detected
-- Possibility of false flagging unplugged usb devices on Windows 10.
-
 ## Currently in Development
 - Detections for executed files with special characters (like korean, russian, chinese, etc...)
 - Detections for executed files with special characters using Task Scheduler.
