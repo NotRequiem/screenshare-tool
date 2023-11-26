@@ -1,3 +1,4 @@
+#include "..\gui\color.hpp"
 #include "evtquery.hpp"
 
 static void BootTime(SYSTEMTIME& lastBootTime) {
@@ -96,6 +97,9 @@ static void PrintEvent(EVT_HANDLE hEvent, SYSTEMTIME& lastBootTime) {
 }
 
 void SystemTimeChange() {
+    Console::SetColor(ConsoleColor::Gray, ConsoleColor::Black);
+    std::wcout << "[System Scanner] Running checks to detect if the system time was changed... " << std::endl;
+    Console::ResetColor();
     EVT_HANDLE hResults;
     EVT_HANDLE hEvent;
     DWORD dwReturned = 0;
