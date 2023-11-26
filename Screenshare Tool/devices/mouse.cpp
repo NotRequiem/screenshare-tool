@@ -1,7 +1,7 @@
 #include "..\gui\color.hpp"
 #include "mouse.hpp"
 
-bool MouseVidAndPid() {
+static bool MouseVidAndPid() {
     Console::SetColor(ConsoleColor::BrightGreen, ConsoleColor::Black);
     std::wcout << "[Device Scanner] Analyzing mice's Vendor ID and Product ID..." << std::endl;
     Console::ResetColor();
