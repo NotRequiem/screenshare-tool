@@ -5,7 +5,7 @@
 #include "virtual machines\vmaware.hpp"
 
 // Disk replaces checks
-#include "disk\diskchk.hpp"
+#include "disk\disk.hpp"
 
 // Code import checks
 #include "import code\importcode.hpp"
