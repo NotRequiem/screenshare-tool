@@ -4,7 +4,6 @@ This tool is currently in beta version.
 
 ## Bugs detected
 - Possibility of false flagging unplugged usb devices on Windows 10.
-- Possibility of false flagging deleted journal on the C: drive
 
 ## Currently in Development
 - Detections for executed files with special characters (like korean, russian, chinese, etc...)
