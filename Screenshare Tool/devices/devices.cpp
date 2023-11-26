@@ -22,9 +22,6 @@ static void LastComputerBootTime(SYSTEMTIME& lastBootTime) {
 
     // Convert the calculated start time back to SYSTEMTIME
     FileTimeToSystemTime((FILETIME*)&startDateTime, &lastBootTime);
-
-    // Print the last boot time
-    printf("Last boot time: %02d:%02d:%02d\n", lastBootTime.wHour, lastBootTime.wMinute, lastBootTime.wSecond);
 }
 
 static void FileTimeToLocalTimeString(const FILETIME& fileTime, std::wstring& localTimeString) {
