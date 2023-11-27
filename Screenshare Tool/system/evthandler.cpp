@@ -22,23 +22,16 @@ void EventlogBypass() {
 
             if (result == ERROR_SUCCESS) {
                 std::string value(buffer);
-                if (value != expectedValue) {
+
+                // Perform case-insensitive comparison to avoid false flags
+                if (_stricmp(value.c_str(), expectedValue) != 0) {
                     std::cout << "[!] Eventlog bypass detected. Ban the user." << std::endl;
                 }
-            }
-            else {
-                std::cerr << "Error reading registry value. Error code: " << result << std::endl;
             }
 
             delete[] buffer;
         }
-        else {
-            std::cerr << "Error querying registry value size. Error code: " << result << std::endl;
-        }
 
         RegCloseKey(hKey);
-    }
-    else {
-        std::cerr << "Error opening registry key. Error code: " << result << std::endl;
     }
 }
