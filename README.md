@@ -2,6 +2,12 @@
 
 This tool is currently in beta version.
 
+## Bugs detected
+- Mouse checks do not retrieve a correct VID and PID.
+- False flags while detecting eventlog bypasses.
+- False flags while detecting system time changes.
+- Csrss checks may not detect your input in characters with unicode paths.
+
 ## Currently in Development
 - Detections for executed files with special characters (like korean, russian, chinese, etc...)
 - Detections for executed files with special characters using Task Scheduler.
