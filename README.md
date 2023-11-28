@@ -56,6 +56,8 @@ This tool is currently in beta version.
 
 > 25. Detects if the user modified the registry to bypass certain logs.
 
+> 26. Detects fileless cheat injections.
+
 ## Methodology
 The tool does not use a lot of methods to check for certain things, it focuses on one strong method, and then patches every bypass possible for that method.
 
