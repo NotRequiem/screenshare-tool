@@ -20,7 +20,7 @@
 - Checks to detect macros with files.
 - Checks to detect macros with memory traces.
 
-- 7. Memory:
+> 7. Memory:
 - Checks to detect executed files.
 - Checks to detect accessed files.
 
