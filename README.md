@@ -4,9 +4,8 @@ This general-purpose screenshare tool aims to detect, without false positives, a
 This tool is currently in beta version.
 
 ## Currently in Development
-- Detections for executed files with special characters (like korean, russian, chinese, etc...)
-- Detections for executed files with special characters using Task Scheduler.
-- Code optimizations for the official release.
+- Detections for executed files for characters with more than 2 bytes (wild chars) (like korean, russian, chinese, etc...).
+- Detection improvements for external java cheats.
 
 ## Features
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
@@ -36,6 +35,8 @@ This tool is currently in beta version.
 > 13. Detects code imports (common anti-forensic bypass method) pasted on consoles, like cmd, powershell, or any other terminal.
 
 > 14. Detects Task Scheduler bypasses by checking executed files with the scheduler process in memory and running digital signature checks against them.
+
+> 15. Detects executed files with special characters and files without name in the Scheduler process.
 
 > 16. Detects executed and/or deleted files without name.
 
