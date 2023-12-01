@@ -85,7 +85,7 @@ void checkMemoryExe() {
     std::filesystem::path memoryExePath = exePath.parent_path() / L"memory.exe";
 
     if (!std::filesystem::exists(memoryExePath)) {
-        std::wcerr << L"Path being checked: " << memoryExePath << std::endl;
+        std::wcerr << L"Download 'memory.exe' at: https://github.com/NotRequiem/memscanner/releases/download/memscanner/memory.exe" << std::endl;
     }
 }
 
