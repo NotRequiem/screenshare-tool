@@ -1,8 +1,6 @@
 # Advanced Screenshare Tool
 This general-purpose screenshare tool aims to detect, without false positives, any kind of cheats, macros, injectors and any other illegal modification on videogame servers (Minecraft Java, Minecraft Bedrock, Rust, FiveM, Roblox, etc...), while patching the necessary anti-forensic methods to do so. 
 
-This tool is currently in beta version.
-
 ## Currently in Development
 - Detections for executed files for characters with more than 2 bytes (wild chars) (like korean, russian, chinese, etc...).
 - Detection improvements for external java cheats.
