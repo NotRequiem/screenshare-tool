@@ -3,17 +3,13 @@ This general-purpose screenshare tool aims to detect, without false positives, a
 
 This tool only retrieves information that has occurred since the last boot time.
 
-# Currently in development
+# Currently In Development
 
-> 1. Detection improvements for external java cheats that self-destructs its own execution traces in memory.
+> 1. Improvements for the macro memory scanner.
 
-> 2. Speed improvements for the NFTS Scanner modules, with a proper usn journal parser.
+> 2. Speed improvements for the NFTS Scanner modules so it does not take 5 years to scan.
 
-> 3. Currently researching: Detections for certain macro bypasses not covered by the ss guide in this server.
-
-> 4. Improvements for the suspicious file output.
-
-> 5. Bug fixes for the Macro Scanner and checks for jar and batch file executions.
+> 3. Improvements for the memory scanner while detecting executions in usermode processes.
 
 ## Features
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
