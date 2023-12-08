@@ -55,5 +55,5 @@
 - Checks to detect system time changes.
 - Checks to detect possible anti-forensic methods that would bypass the system time checks.
 
-> 14. Prefetch
+> 16. Prefetch
 - Checks to detect executed files with Prefetch
