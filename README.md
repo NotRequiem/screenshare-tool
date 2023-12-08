@@ -1,21 +1,19 @@
 # Advanced Screenshare Tool
 This general-purpose screenshare tool aims to detect, without false positives, any kind of cheats, macros, injectors and any other illegal modification on videogame servers (Minecraft Java, Minecraft Bedrock, Rust, FiveM, Roblox, etc...), while patching the necessary anti-forensic methods to do so. 
 
+This tool only retrieves information that has occurred since the last boot time.
+
 # Currently in development
 
-> 1. Detections for executed files for characters with more than 2 bytes (like korean, russian, chinese, japanese, arabic, etc...).
+> 1. Detection improvements for external java cheats that self-destructs its own execution traces in memory.
 
-> 2. Detection improvements for external java cheats that self-destructs its own execution traces in memory.
+> 2. Speed improvements for the NFTS Scanner modules, with a proper usn journal parser.
 
-> 3. Speed improvements for the NFTS Scanner modules, with a proper usn journal parser.
+> 3. Currently researching: Detections for certain macro bypasses not covered by the ss guide in this server.
 
-> 4. Currently researching: Detections for certain macro bypasses not covered by the ss guide in this server.
+> 4. Improvements for the suspicious file output.
 
-> 5. Improvements for the suspicious file output.
-
-> 6. Bug fixes for the Macro Scanner and checks for jar and batch file executions.
-
-> 7. Improvements for file processing in the csrss schan check.
+> 5. Bug fixes for the Macro Scanner and checks for jar and batch file executions.
 
 ## Features
 > 1. Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
@@ -69,6 +67,10 @@ This general-purpose screenshare tool aims to detect, without false positives, a
 > 25. Detects if the user modified the registry to bypass certain logs.
 
 > 26. Detects fileless cheat injections.
+
+> 27. Detects autoclickers by using MouseKeys.
+
+> 28. Detects executed and unsigned files with BAM.
 
 ## Methodology
 The tool does not use a lot of methods to check for certain things, it focuses on one strong method, and then patches every bypass possible for that method.
