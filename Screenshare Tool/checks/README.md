@@ -33,11 +33,8 @@
 - Checks to detect macros integrated in the memory of a mice.
 
 > 10. System
-- Checks to detect eventlog bypasses.
-- Checks to detect system time modifications.
 - Checks to detect if System Informer or Process Hacker was ran.
 - Checks to detect if a process was restarted.
-- Checks to detect executed files with Registry.
 
 > 11. Task Scheduler
 - Checks to detect suspicious files executed with Task Scheduler.
@@ -50,6 +47,13 @@
 
 > 13. Virtual Machines
 - Checks to detect if the Screenshare Tool is running under a Virtual Machine (this can be used for bypassers to autoclick).
+
+> 14. BAM
+- Checks to detect executed files with the Windows Registry.
+
+> 15. Eventlog
+- Checks to detect system time changes.
+- Checks to detect possible anti-forensic methods that would bypass the system time checks.
 
 > 14. Prefetch
 - Checks to detect executed files with Prefetch
