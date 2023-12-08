@@ -72,6 +72,8 @@ This tool only retrieves information that has occurred since the last boot time.
 
 > 28. Detects executed and unsigned files with BAM.
 
+> 29. Detects java files loaded into the game to detect internal cheats.
+
 ## Methodology
 The tool does not use a lot of methods to check for certain things, it focuses on one strong method, and then patches every bypass possible for that method.
 
