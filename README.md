@@ -5,7 +5,7 @@
 - [Currently In Development](#currently-in-development)
 - [Features](#features)
 - [Detection Methodology](#detection-methodology)
-- [Memory Scanner](#memory-scanning)
+- [Memory Scanner](#memory-scanner)
 - [Disclaimers](#disclaimers)
 - [Notes and Considerations](#notes-and-considerations)
 - [License](#license)
@@ -166,6 +166,9 @@ The tool abstains from exploiting signed and vulnerable kernel drivers or utiliz
 ## 3. Build Process Simplification:
 As the tool is specifically designed for Windows, there are no CMake files provided to simplify the build process for a wider audience. Instead, users can streamline the build process by downloading Visual Studio, opening the solution file, and initiating the build by clicking on "Build." This straightforward approach ensures ease of use for Windows environments.
 
+## 4. USNJournal Parsing:
+To maintain compatibility across various Windows systems and minimize the impact on memory and disk usage, the journal parsing process has been optimized for efficiency, albeit with a slight trade-off in speed.”
+
 # License
 
 ## Overview
@@ -173,7 +176,7 @@ The Advanced Screenshare Tool ("the Software") is provided under the terms of th
 
 ## MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) [2023] [Advanced Screenshare Tool]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -210,5 +213,3 @@ For support or inquiries related to the Software, you may contact me at my disco
 
 ## Changes to this License
 This License documentation may be updated from time to time. It is your responsibility to check for updates. Substantial changes will be notified in the repository's release notes.
-
-4. Journal parsing is a bit slow to ensure compatibility and low memory/disk impact on all Windows systems.
