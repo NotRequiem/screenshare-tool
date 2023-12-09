@@ -176,6 +176,8 @@ Alternatively, you can press Ctrl + Shift + B to build the solution.
 
 10. Detections for VPN or Recording Software will not be added.
 
+11. Detections for internal mods using Prefetch will not be added due to the possibility of false flagging.
+    
 # Notes and Considerations
 
 ## 1. Digital Signature Limitations:
