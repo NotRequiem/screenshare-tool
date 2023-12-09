@@ -1,16 +1,41 @@
-<details>
-<summary>Click here to display the table of contents</summary>
-
-- [Introduction](#introduction)
-- [Currently In Development](#currently-in-development)
-- [Features](#features)
-- [Detection Methodology](#detection-methodology)
-- [Memory Scanner](#memory-scanner)
-- [Disclaimers](#disclaimers)
-- [Notes and Considerations](#notes-and-considerations)
-- [License](#license)
-
-</details>
+ <table>
+    <tr>
+      <th>Section</th>
+      <th>Link</th>
+    </tr>
+    <tr>
+      <td>Introduction</td>
+      <td><a href="#introduction">#introduction</a></td>
+    </tr>
+    <tr>
+      <td>Currently In Development</td>
+      <td><a href="#currently-in-development">#currently-in-development</a></td>
+    </tr>
+    <tr>
+      <td>Features</td>
+      <td><a href="#features">#features</a></td>
+    </tr>
+    <tr>
+      <td>Detection Methodology</td>
+      <td><a href="#detection-methodology">#detection-methodology</a></td>
+    </tr>
+    <tr>
+      <td>Memory Scanner</td>
+      <td><a href="#memory-scanner">#memory-scanner</a></td>
+    </tr>
+    <tr>
+      <td>Disclaimers</td>
+      <td><a href="#disclaimers">#disclaimers</a></td>
+    </tr>
+    <tr>
+      <td>Notes and Considerations</td>
+      <td><a href="#notes-and-considerations">#notes-and-considerations</a></td>
+    </tr>
+    <tr>
+      <td>License</td>
+      <td><a href="#license">#license</a></td>
+    </tr>
+ </table>
 
 # Introduction
 This versatile screenshare tool is dedicated to accurately detecting various forms of cheats, macros, injectors, and any unauthorized modifications on video game servers (Minecraft Java, Minecraft Bedrock, Rust, FiveM, Roblox, etc.). The tool ensures a robust defense against false positives and implements anti-forensic methods to safeguard the integrity of its detection mechanisms.
@@ -170,6 +195,17 @@ As the tool is specifically designed for Windows, there are no CMake files provi
 To maintain compatibility across various Windows systems and minimize the impact on memory and disk usage, the journal parsing process has been optimized for efficiency, albeit with a slight trade-off in speed.”
 
 # License
+
+<details>
+<summary>Click here to display the License's table of contents</summary>
+
+- [Overview](#overview)
+- [MIT License](#mit-license)
+- [Terms and Conditions](#terms-and-conditions)
+- [Support and Contact](#support-and-contact)
+- [Changes to this License](#changes-to-this-license)
+
+</details>
 
 ## Overview
 The Advanced Screenshare Tool ("the Software") is provided under the terms of the MIT License. By using, modifying, or distributing the Software, you agree to comply with the terms of this license.
