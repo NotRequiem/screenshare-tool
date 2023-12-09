@@ -45,7 +45,6 @@ Please note that this tool exclusively retrieves information generated since the
 # Currently In Development
 - Improvements for the Macro Memory Scanner: Ongoing enhancements to bolster macro memory scanning capabilities.
 - Speed Improvements for the NFTS Scanner Modules: Addressing performance concerns to expedite scanning processes.
-- Enhancements for the Memory Scanner: Improving detection of executions in user-mode processes.
 
 # Features
 > `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
