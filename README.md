@@ -103,8 +103,6 @@ Please note that this tool exclusively retrieves information generated since the
 
 > `28.` Detects executed and unsigned files with BAM.
 
-> `29.` Detects jar files loaded into the game to detect internal cheats.
-
 # Detection Methodology
 
 The methodology employed by the tool is characterized by a strategic focus on a singular, robust detection method, followed by the implementation of comprehensive patches to counteract any potential bypasses associated with that method.
