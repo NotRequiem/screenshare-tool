@@ -149,11 +149,8 @@ void TaskScheduler() {
     hr = InitializeWMI(pLoc, pSvc);
 
     // Execute WMI query to retrieve the process ID
-    if (SUCCEEDED(hr)) {
-        // Execute WMI query to retrieve the process ID
-        const wchar_t* serviceName = L"Schedule"; // Service name for Task Scheduler
-        hr = ExecuteWMIQuery(pSvc, serviceName, processId);
-    }
+    const wchar_t* serviceName = L"Schedule"; // Service name for Task Scheduler
+    hr = ExecuteWMIQuery(pSvc, serviceName, processId); // ignore hr overwriting
 
     if (FAILED(hr)) {
         UninitializeWMI(pLoc, pSvc);
