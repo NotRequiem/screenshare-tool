@@ -203,10 +203,9 @@ void ExecutedFiles() {
 
         // Initialize WMI
         hr = InitializeWMI(pLoc, pSvc);
-        if (SUCCEEDED(hr)) {
-            // Execute WMI query to get process ID
-            hr = ExecuteWMIQuery(pSvc, serviceName, processId);
-        }
+        
+        // Execute WMI query to get process ID
+        hr = ExecuteWMIQuery(pSvc, serviceName, processId); // ignore hr overwriting
         
         if (FAILED(hr)) {
             UninitializeWMI(pLoc, pSvc);
