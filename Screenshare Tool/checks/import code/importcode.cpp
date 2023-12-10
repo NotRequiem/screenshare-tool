@@ -95,10 +95,9 @@ void ImportCode() {
         // Initialize WMI
         hr = InitializeWMI(pLoc, pSvc);
    
-        if (SUCCEEDED(hr)) {
-            // Execute WMI query to get process ID
-            hr = ExecuteWMIQuery(pSvc, serviceName, processId);
-        }
+        // Execute WMI query to get process ID
+        hr = ExecuteWMIQuery(pSvc, serviceName, processId); // ignore hr overwritting
+        
         if (FAILED(hr)) {
             // Print a warning message if the "eventlog" service is not found
             if (wcscmp(serviceName, L"eventlog") == 0) {
