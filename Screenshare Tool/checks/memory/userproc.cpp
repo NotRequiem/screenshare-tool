@@ -207,6 +207,7 @@ void ExecutedFiles() {
             // Execute WMI query to get process ID
             hr = ExecuteWMIQuery(pSvc, serviceName, processId);
         }
+        
         if (FAILED(hr)) {
             UninitializeWMI(pLoc, pSvc);
             return;
