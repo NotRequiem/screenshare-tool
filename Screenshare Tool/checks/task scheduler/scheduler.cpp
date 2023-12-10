@@ -49,6 +49,7 @@ static void DetectTaskScheduler(DWORD pid) {
         DWORD bytesRead;
 
         std::string previousLine;  // To store the previous line
+        std::unordered_set<std::string> printedPaths;  // Set to keep track of printed paths, this should be outside the loop
 
         while (ReadFile(hChildStdoutRd, buffer, sizeof(buffer), &bytesRead, NULL) && bytesRead != 0) {
             std::string outputString(buffer, bytesRead);
@@ -87,7 +88,6 @@ static void DetectTaskScheduler(DWORD pid) {
                 }
 
                 std::smatch match;
-                std::unordered_set<std::string> printedPaths;  // Set to keep track of printed paths
 
                 if (!line.empty() && printedPaths.find(line) == printedPaths.end() && std::regex_search(line, match, SchedulerRegex)) {
                     std::string matchedPart = match.str();
