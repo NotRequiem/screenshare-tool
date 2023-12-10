@@ -10,8 +10,5 @@
 > 3. main.cpp:
 - Entrypoint of the program. This source file runs every check.
 
-> 4. hint.cpp:
-- Hint file to help the Visual Studio IDE interpret Visual C++ identifiers for the Prefetch parser.
-
-> 5. Files with the name "Screenshare Tool":
+> 4. Files with the name "Screenshare Tool":
 - Used to build the project in your computer with Visual Studio.
