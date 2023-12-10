@@ -208,7 +208,7 @@ void Macros() {
            L"%appdata%\\Local\\BY-COMBO\\pro.dct",
            L"C:\\Program Files (x86)\\Bloody7\\Bloody7\\UserLog\\Mouse\\TLcir_9EFF3FF4\\language\\Settings\\EnvironmentVar.ini",
            L"C:\\ProgramData\\Glorious Core\\userdata\\%username%\\data\\MacroDB.db",
-           L"C:\\ProgramData\\Glorious Core\\userdata\\%username%\\data\\DevicesDB.db",
+           L"C:\\ProgramData\\Glorious Core\\userdata\\%username%\\data\\DeviceDB.db",
            L"C:\\Program Files (x86)\\KROM KOLT\\Config\\sequence.dat",
            L"C:\\Program Files (x86)\\SPC Gear",
            L"C:\\Users\\%username%\\AppData\\Roaming\\ROCCAT\\SWARM\\macro\\macro_list.dat",
