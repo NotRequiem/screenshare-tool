@@ -26,6 +26,9 @@ static void ReplaceUsername(wchar_t* filePath, int maxPathLength, const wchar_t*
         position = wcsstr(filePath + placeholderIndex + usernameSize, placeholder);
     }
 }
+
+// I make separate functions so that the intentionality its more clear
+
 // Function to search for "durationMs" in the Logitech macro file
 static void SearchForDurationMS(const wchar_t* logFilePath) {
     FILE* file = NULL;
@@ -102,6 +105,10 @@ static void SearchForTurbo(const wchar_t* logFilePath) {
 
 static void PrintFileModificationTime(const wchar_t* filePath) {
     WIN32_FILE_ATTRIBUTE_DATA fileData;
+
+    if (wcsstr(filePath, L"Glorious Core") != NULL) {
+        wprintf(L"[!] Glorious software detected. Open the 'Glorious Core' program and check if any button click contains a macro. If so, ban the player.");
+    }
 
     if (GetFileAttributesExW(filePath, GetFileExInfoStandard, &fileData)) {
         FILETIME lastWriteTime = fileData.ftLastWriteTime;
@@ -200,8 +207,8 @@ void Macros() {
            L"%appdata%\\Local\\BY-COMBO\\curid.dct",
            L"%appdata%\\Local\\BY-COMBO\\pro.dct",
            L"C:\\Program Files (x86)\\Bloody7\\Bloody7\\UserLog\\Mouse\\TLcir_9EFF3FF4\\language\\Settings\\EnvironmentVar.ini",
-           L"C:\\ProgramData\\Glorious Core\\userdata\\guru\\data\\MacroDB.db",
-           L"C:\\ProgramData\\Glorious Core\\userdata\\guru\\data\\DevicesDB.db",
+           L"C:\\ProgramData\\Glorious Core\\userdata\\%username%\\data\\MacroDB.db",
+           L"C:\\ProgramData\\Glorious Core\\userdata\\%username%\\data\\DevicesDB.db",
            L"C:\\Program Files (x86)\\KROM KOLT\\Config\\sequence.dat",
            L"C:\\Program Files (x86)\\SPC Gear",
            L"C:\\Users\\%username%\\AppData\\Roaming\\ROCCAT\\SWARM\\macro\\macro_list.dat",
