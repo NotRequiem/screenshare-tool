@@ -43,7 +43,7 @@ static void SearchForDurationMS(const wchar_t* logFilePath) {
         while (file != NULL && fgetws(line, sizeof(line) / sizeof(line[0]), file) != NULL) {
             // Use case-insensitive search
             if (_wcsicmp(line, searchString) != 0) {
-                wprintf(L"[!] Logitech Macro detected. Ban the player.");
+                wprintf(L"[!] Logitech Macro detected. Ban the player.\n");
             }
         }
 
@@ -69,7 +69,7 @@ static void SearchForMacroClientDelete(const wchar_t* logFilePath) {
 
         while (file != NULL && fgetws(line, sizeof(line) / sizeof(line[0]), file) != NULL) {
             if (wcsstr(line, searchString) != NULL) {
-                wprintf(L"[!] Razer Macro detected and deleted: %ls. Ban the player.", line);
+                wprintf(L"[!] Razer Macro detected and deleted: %ls. Ban the player.\n", line);
             }
         }
 
