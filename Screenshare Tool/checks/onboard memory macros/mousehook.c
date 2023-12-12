@@ -214,7 +214,7 @@ bool InstallMouseHook() {
 
     setConsoleTextColor(BrightRed);    
     printf("[Onboard Memory Macro Scanner] Running onboard memory macro checks...\n");
-    printf("[Onboard Memory Macro Scanner] Press the DELETE key to stop the checks for onboard macros at any time.\n");
+    printf("[Onboard Memory Macro Scanner] Press the DELETE key to stop the checks for onboard macros at any time. Since this is the final check, the program will close.\n");
     printf("[Onboard Memory Macro Scanner] Mouse and keyboard hooks installed successfully.\n");
     printf("[Onboard Memory Macro Scanner] If you click on the console, the hook may freeze and any click will not be detected. Click outside the console.\n");
     resetConsoleTextColor();
