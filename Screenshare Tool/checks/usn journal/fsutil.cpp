@@ -197,10 +197,6 @@ static void processLogFileComparison() {
     // Close the log files
     fclose(file1);
     fclose(file2);
-
-    // Attempt to delete unnecesary log files
-    std::filesystem::remove(L"new_renamed_files.txt");
-    std::filesystem::remove(L"old_renamed_files.txt");
 }
 
 // Function to run journal query for a specific drive (to detect file modifications)
@@ -318,4 +314,8 @@ void USNJournal() {
     if (scanMacroTraces) {
         _tprintf(_T("In the case of the 'logitech.txt' file, only ban if this modification is exactly 'settings.db'.\n"));
     }
+
+    // Attempt to delete unnecesary log files
+    std::filesystem::remove(L"new_renamed_files.txt");
+    std::filesystem::remove(L"old_renamed_files.txt");
 }
