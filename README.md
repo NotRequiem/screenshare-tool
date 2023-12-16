@@ -1,4 +1,6 @@
- <table>
+ **Discord:** https://discord.gg/AyqVMVF2gN
+
+<table>
     <tr>
       <th>Section</th>
       <th>Link</th>
@@ -45,6 +47,7 @@ Please note that this tool exclusively retrieves information generated since the
 # Currently In Development
 - Improvements for the Macro Memory Scanner: Ongoing enhancements to bolster macro memory scanning capabilities.
 - Speed Improvements for the NFTS Scanner Modules: Addressing performance concerns to expedite scanning processes.
+- Minecraft Client class modifications: Detections for modified java classes in legit clients by scanning client's memory.
 
 # Features
 > `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
@@ -177,6 +180,8 @@ Alternatively, you can press Ctrl + Shift + B to build the solution.
 10. Detections for VPN or Recording Software will not be added.
 
 11. Detections for internal mods using Prefetch will not be added due to the possibility of false flagging.
+
+12. Detections for Minecraft Client class modifications will not be checked using hashing algorithms in the mods folder, or by decompiling/statically analyzing these mods due to its ease of being bypassed by a simple file obfuscation. 
     
 # Notes and Considerations
 
