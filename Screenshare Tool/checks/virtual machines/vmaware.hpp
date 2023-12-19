@@ -4,7 +4,7 @@
  * ██║   ██║██╔████╔██║███████║██║ █╗ ██║███████║██████╔╝█████╗
  * ╚██╗ ██╔╝██║╚██╔╝██║██╔══██║██║███╗██║██╔══██║██╔══██╗██╔══╝
  *  ╚████╔╝ ██║ ╚═╝ ██║██║  ██║╚███╔███╔╝██║  ██║██║  ██║███████╗
- *   ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ fixed by Requiem
+ *   ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
  *
  *  A C++ VM detection library
  *
@@ -2579,7 +2579,10 @@
 
                 if (Process32First(hSnapshot, &pe)) {
                     do {
-                        if (wcscmp(pe.szExeFile, proc) == 0) {
+                        std::wstring wc(strlen(pe.szExeFile) + 1, L'#');
+                        mbstowcs(&wc[0], pe.szExeFile, strlen(pe.szExeFile) + 1);
+
+                        if (wcscmp(wc.c_str(), proc) == 0) {
                             present = true;
                             break;
                         }
