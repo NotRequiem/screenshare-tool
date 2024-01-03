@@ -46,8 +46,8 @@ Please note that this tool exclusively retrieves information generated since the
 
 # Currently In Development
 - Improvements for the Macro Memory Scanner: Ongoing enhancements to bolster macro memory scanning capabilities.
-- Speed Improvements for the NFTS Scanner Modules: Addressing performance concerns to expedite scanning processes.
-- Minecraft Client class modifications: Detections for modified java classes in legit clients by scanning client's memory.
+
+- Minecraft External Java Cheats: Detections for external java cheats that cannot be detected with DComLaunch, javaw's memory or Prefetch.
 
 # Features
 > `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
@@ -105,6 +105,10 @@ Please note that this tool exclusively retrieves information generated since the
 > `27.` Detects autoclickers by using MouseKeys.
 
 > `28.` Detects executed and unsigned files with BAM.
+
+> `29.` Detects slightly legitimate modified Java classes in legit known clients to make cheat modules.
+
+> `30.` Detects network shared locations where cheats can be ran.
 
 # Detection Methodology
 
