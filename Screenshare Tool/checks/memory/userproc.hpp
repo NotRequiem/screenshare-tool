@@ -7,7 +7,6 @@
 #include <regex>
 #include <set>
 
-#include "..\..\miscellaneous\digital signature\trustverify.hpp"
 #include "..\..\miscellaneous\wmi\wmi.hpp"
 #include "..\..\miscellaneous\gui\color.h"
 
