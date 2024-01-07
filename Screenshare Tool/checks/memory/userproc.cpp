@@ -1,11 +1,5 @@
 #include "userproc.hpp"
 
-// Function to check if a file signature is valid
-static bool IsFileSignatureValid(const std::wstring& filePath) {
-    TrustVerifyWrapper wrapper;
-    return wrapper.VerifyFileSignature(filePath);
-}
-
 static void DetectJarsAndBats(DWORD pid) {
     const std::vector<std::pair<std::wstring, std::wstring>> patternsAndMessages = {
         { L".bat", L"[#] Executed file (false flags here may happen and won't be fixed): " },
