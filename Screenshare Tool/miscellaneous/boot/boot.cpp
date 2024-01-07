@@ -1,6 +1,6 @@
 #include "boot.hpp"
 
-static bool LogonBoot(SYSTEMTIME& lastLogonTime) {
+bool LogonBoot(SYSTEMTIME& lastLogonTime) {
     IWbemLocator* pLoc = nullptr;
     IWbemServices* pSvc = nullptr;
 
