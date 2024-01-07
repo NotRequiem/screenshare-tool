@@ -263,4 +263,7 @@ void csrss() {
         fileScanned = true;  // Assuming both files are processed now
         std::filesystem::remove(filePath2);
     }
+
+    std::string journal = "journal.txt";
+    std::filesystem::remove(journal);
 }
