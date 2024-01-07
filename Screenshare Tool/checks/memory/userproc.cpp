@@ -6,111 +6,6 @@ static bool IsFileSignatureValid(const std::wstring& filePath) {
     return wrapper.VerifyFileSignature(filePath);
 }
 
-// Function to detect accessed files using Explorer's memory
-static void Explorer() {
-    PROCESSENTRY32 entry{};
-    entry.dwSize = sizeof(PROCESSENTRY32);
-
-    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-
-    if (Process32First(snapshot, &entry)) {
-        do {
-            if (strcmp(entry.szExeFile, "explorer.exe") == 0) {
-                DWORD pid = entry.th32ProcessID;
-
-                // Build command line to execute the memory scanner
-                std::wstring commandLine = L"memory.exe -p " + std::to_wstring(pid);
-
-                SECURITY_ATTRIBUTES saAttr{};
-                saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
-                saAttr.bInheritHandle = TRUE;
-                saAttr.lpSecurityDescriptor = NULL;
-
-                HANDLE hChildStdoutRd, hChildStdoutWr;
-                CreatePipe(&hChildStdoutRd, &hChildStdoutWr, &saAttr, 0);
-                SetHandleInformation(hChildStdoutRd, HANDLE_FLAG_INHERIT, 0);
-
-                STARTUPINFOW si = { sizeof(STARTUPINFOW) };
-                si.hStdOutput = hChildStdoutWr;
-                si.dwFlags |= STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
-                si.wShowWindow = SW_HIDE;  // Hide the console window so that it does not annoy the Screensharer
-
-                PROCESS_INFORMATION pi;
-
-                if (CreateProcessW(NULL, const_cast<wchar_t*>(commandLine.c_str()), NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)) {
-                    CloseHandle(hChildStdoutWr);
-
-                    CHAR buffer[4096]{};
-                    DWORD bytesRead;
-
-                    while (ReadFile(hChildStdoutRd, buffer, sizeof(buffer), &bytesRead, NULL) && bytesRead != 0) {
-                        std::string outputString(buffer, bytesRead);
-
-                        std::regex ExplorerAccessedFiles(R"(file:///.+\.(exe|bat|jar|vbs|py|ps1))");
-
-                        std::istringstream outputStream(outputString);
-                        std::string line;
-
-                        std::set<std::wstring> printedLines;  // Container to track printed lines
-
-                        while (std::getline(outputStream, line)) {
-                            if (std::regex_search(line, ExplorerAccessedFiles)) {
-
-                                // Here I just process the memory contents for better output:
-
-                                // Remove "file:///" and replace "%20" with "/"
-                                std::wstring wline;
-                                int requiredSize = MultiByteToWideChar(CP_UTF8, 0, line.c_str(), -1, NULL, 0);
-                                if (requiredSize > 0) {
-                                    wline.resize(requiredSize);
-                                    MultiByteToWideChar(CP_UTF8, 0, line.c_str(), -1, &wline[0], requiredSize);
-                                }
-
-                                size_t pos = wline.find(L"file:///");
-                                if (pos != std::wstring::npos) {
-                                    wline.erase(pos, 8);  // Remove "file:///"
-                                }
-
-                                // Replace %20 with a space
-                                size_t pos_percent = wline.find(L"%20");
-                                while (pos_percent != std::wstring::npos) {
-                                    wline.replace(pos_percent, 3, L" ");  // Replace %20 with a space
-                                    pos_percent = wline.find(L"%20");
-                                }
-
-                                // Replace \\20 with a backslash
-                                size_t pos_backslash = wline.find(L"\\20");
-                                while (pos_backslash != std::wstring::npos) {
-                                    wline.replace(pos_backslash, 3, L"\\");  // Replace \\20 with a backslash
-                                    pos_backslash = wline.find(L"\\20");
-                                }
-
-                                // Replace / with a forward slash
-                                std::replace(wline.begin(), wline.end(), L'/', L'\\');
-
-                                if (printedLines.find(wline) == printedLines.end() && !IsFileSignatureValid(wline)) {
-                                    std::wcout << L"[[#] Accessed file: " << wline << std::endl;
-                                    printedLines.insert(wline);  // to not print the same file twice
-                                }
-                            }
-                        }
-                    }
-
-                    WaitForSingleObject(pi.hProcess, INFINITE);
-                    CloseHandle(pi.hProcess);
-                    CloseHandle(pi.hThread);
-                }
-
-                CloseHandle(hChildStdoutRd);
-
-                break;
-            }
-        } while (Process32Next(snapshot, &entry));
-    }
-
-    CloseHandle(snapshot);
-}
-
 static void DetectJarsAndBats(DWORD pid) {
     const std::vector<std::pair<std::wstring, std::wstring>> patternsAndMessages = {
         { L".bat", L"[#] Executed file (false flags here may happen and won't be fixed): " },
@@ -187,7 +82,6 @@ void ExecutedFiles() {
     std::wcout << "[Memory Scanner] Running checks to detect accessed files in memory...\n";
     resetConsoleTextColor();
 
-    Explorer();
     const wchar_t* serviceNames[] = { L"PlugPlay", L"PcaSvc" };
 
     IWbemLocator* pLoc = NULL;
