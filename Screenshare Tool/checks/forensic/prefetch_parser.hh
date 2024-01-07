@@ -79,7 +79,7 @@ public:
 
 			ULONG final_uncompressed_size;
 
-			auto* const workspace = malloc(compressed_buffer_workspace_size);
+			auto* const workspace = malloc(static_cast<size_t>(compressed_buffer_workspace_size));
 			if (!workspace)
 				return;
 
