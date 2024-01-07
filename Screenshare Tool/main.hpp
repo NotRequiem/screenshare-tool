@@ -45,6 +45,9 @@
 // Restarted processes checks
 #include "checks\system\prochandler.hpp"
 
+// Forensic checks
+#include "checks\forensic\prefetch.hpp"
+
 // Localhost environment checks
 #include "checks\system\localhost.h"
 
