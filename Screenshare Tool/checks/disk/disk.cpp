@@ -81,18 +81,18 @@ void ReplacedDisks() {
                 }
                 else {
                     // Handle error when getting local time fails
-                    std::wcerr << L"Error getting local time for drive " << driveLetter << std::endl;
+                    std::wcerr << L"[#] Error getting local time for drive " << driveLetter << std::endl;
                 }
             }
             else {
                 // Handle error when the path doesn't exist
-                std::wcerr << L"Path does not exist: " << systemInfoPath << std::endl;
+                std::wcerr << L"[#] Path does not exist: " << systemInfoPath << L". Ignore this warning." << std::endl;
             }
         }
     }
     catch (const std::exception& ex) {
         // Handle any other exceptions that might occur
-        std::wcerr << L"Exception: " << ex.what() << std::endl;
+        std::wcerr << L"[#] Exception: " << ex.what() << L". Report the error to Requiem if you see this warning." << std::endl;
     }
 }
 
