@@ -38,47 +38,61 @@ void ReplacedDisks() {
     std::wcout << "[Disk Scanner] Running checks for replaced drives bypass... \n";
     resetConsoleTextColor();
 
-    // Get a list of drive letters on the system
-    std::vector<std::wstring> driveLetters;
-    DWORD drives = GetLogicalDrives();
-    for (wchar_t i = L'A'; i <= L'Z'; i++) {
-        if ((drives & 1) == 1) {
-            std::wstring driveLetter(1, i);
-            driveLetters.push_back(driveLetter);
-        }
-        drives >>= 1;
-    }
-
-    // Get the system's last boot time
-    time_t lastBootTime = GetLastBootTime();
-
-    // Check each drive for replacement
-    for (const std::wstring& driveLetter : driveLetters) {
-        // Skip the C: drive
-        if (driveLetter == L"C") {
-            continue;
+    try {
+        // Get a list of drive letters on the system
+        std::vector<std::wstring> driveLetters;
+        DWORD drives = GetLogicalDrives();
+        for (wchar_t i = L'A'; i <= L'Z'; i++) {
+            if ((drives & 1) == 1) {
+                std::wstring driveLetter(1, i);
+                driveLetters.push_back(driveLetter);
+            }
+            drives >>= 1;
         }
 
-        // Construct paths for the root and the "System Volume Information" directory
-        std::wstring rootPath = driveLetter + L":\\";
-        std::wstring systemInfoPath = rootPath + L"System Volume Information";
+        // Get the system's last boot time
+        time_t lastBootTime = GetLastBootTime();
 
-        // Check if the path exists before attempting to get the last modified time
-        if (FileExists(systemInfoPath)) {
-            // Get the last modified time of the "System Volume Information" directory
-            time_t lastModifiedTime = GetLastModifiedTime(systemInfoPath);
+        // Check each drive for replacement
+        for (const std::wstring& driveLetter : driveLetters) {
+            // Skip the C: drive
+            if (driveLetter == L"C") {
+                continue;
+            }
 
-            // Check if the "System Volume Information" directory was modified after the last boot
-            
-            struct tm timeInfo {}; // just to ensure that timeInfo is initialized before calling localtime_s to avoid warnings
-            localtime_s(&timeInfo, &lastModifiedTime);
+            // Construct paths for the root and the "System Volume Information" directory
+            std::wstring rootPath = driveLetter + L":\\";
+            std::wstring systemInfoPath = rootPath + L"System Volume Information";
 
-            if (lastModifiedTime > lastBootTime) {
-                // Display a warning message
-                std::wcout << L"[!] Disk " << driveLetter << L" was installed at: "
-                    << std::put_time(&timeInfo, L"%c")
-                    << L". Ban the user." << std::endl;
+            // Check if the path exists before attempting to get the last modified time
+            if (FileExists(systemInfoPath)) {
+                // Get the last modified time of the "System Volume Information" directory
+                time_t lastModifiedTime = GetLastModifiedTime(systemInfoPath);
+
+                // Check if the "System Volume Information" directory was modified after the last boot
+                struct tm timeInfo {};
+                if (localtime_s(&timeInfo, &lastModifiedTime) == 0) {
+                    if (lastModifiedTime > lastBootTime) {
+                        // Display a warning message
+                        std::wcout << L"[!] Disk " << driveLetter << L" was installed at: "
+                            << std::put_time(&timeInfo, L"%c")
+                            << L". Ban the user." << std::endl;
+                    }
+                }
+                else {
+                    // Handle error when getting local time fails
+                    std::wcerr << L"Error getting local time for drive " << driveLetter << std::endl;
+                }
+            }
+            else {
+                // Handle error when the path doesn't exist
+                std::wcerr << L"Path does not exist: " << systemInfoPath << std::endl;
             }
         }
     }
+    catch (const std::exception& ex) {
+        // Handle any other exceptions that might occur
+        std::wcerr << L"Exception: " << ex.what() << std::endl;
+    }
 }
+
