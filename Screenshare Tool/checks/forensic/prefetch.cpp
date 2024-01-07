@@ -161,14 +161,14 @@ static std::wstring GetDriveLetterFromVolumePath(const std::wstring& volumePath)
     std::wstring fullVolumePath = L"\\\\?\\" + volumePath;
 
     // Get a list of all the logical drives
-    DWORD success = GetLogicalDriveStrings(sizeof(driveStrings) / sizeof(driveStrings[0]), driveStrings);
+    DWORD success = GetLogicalDriveStringsW(sizeof(driveStrings) / sizeof(driveStrings[0]), driveStrings);
 
     if (success > 0) {
         driveLetter = driveStrings;
 
         while (*driveLetter) {
             // Check if the volume ID matches with the current drive
-            if (GetVolumeNameForVolumeMountPoint(driveLetter, &fullVolumePath[0], MAX_PATH)) {
+            if (GetVolumeNameForVolumeMountPointW(driveLetter, &fullVolumePath[0], MAX_PATH)) {
                 // Replace the original volume path with the drive letter
                 return driveLetter;
             }
@@ -191,8 +191,8 @@ void Prefetch() {
     }
 
     std::wstring prefetchDir = L"C:\\Windows\\Prefetch\\";
-    WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile((prefetchDir + L"*").c_str(), &findFileData);
+    WIN32_FIND_DATAW findFileData;
+    HANDLE hFind = FindFirstFileW((prefetchDir + L"*").c_str(), &findFileData);
 
     if (hFind == INVALID_HANDLE_VALUE) {
         std::cerr << "[!] Prefetch directory not found. Ensure that you can access C:\\Windows\\Prefetch\\ and ban the player if you can't." << std::endl;
@@ -206,14 +206,14 @@ void Prefetch() {
 
     do {
         if (findFileData.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY) {
-            std::wstring prefetchFileName = findFileData.cFileName;
+            std::wstring prefetchFile = findFileData.cFileName;
 
             // Check if the prefetch file name contains ".exe" (case-insensitive)
-            if (prefetchFileName.find(L".EXE") == std::wstring::npos) {
+            if (prefetchFile.find(L".EXE") == std::wstring::npos) {
                 continue;  // Skip files that do not contain ".exe"
             }
 
-            std::wstring prefetchFilePath = prefetchDir + prefetchFileName;
+            std::wstring prefetchFilePath = prefetchDir + prefetchFile;
 
             FILETIME lastWriteTime;
             FileTimeToLocalFileTime(&findFileData.ftLastWriteTime, &lastWriteTime);
@@ -225,7 +225,7 @@ void Prefetch() {
             SystemTimeToFileTime(&lastLogonTime, &lastLogonFileTime);
 
             if (CompareFileTime(&lastWriteTime, &lastLogonFileTime) > 0) {
-                std::wstring fullFilePathW = prefetchDir + prefetchFileName;
+                std::wstring fullFilePathW = prefetchDir + prefetchFile;
 
                 int bufferSize = WideCharToMultiByte(CP_UTF8, 0, fullFilePathW.c_str(), -1, nullptr, 0, nullptr, nullptr);
                 std::string fullFilePath(bufferSize, 0);
@@ -259,7 +259,7 @@ void Prefetch() {
             }
         }
 
-    } while (FindNextFile(hFind, &findFileData) != 0);
+    } while (FindNextFileW(hFind, &findFileData) != 0);
 
     FindClose(hFind);
 }
