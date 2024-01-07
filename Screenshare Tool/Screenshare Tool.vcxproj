@@ -29,21 +29,25 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -165,6 +169,7 @@
     <ClCompile Include="checks\disk\disk.cpp" />
     <ClCompile Include="checks\eventlog\evthandler.cpp" />
     <ClCompile Include="checks\eventlog\evtquery.cpp" />
+    <ClCompile Include="checks\forensic\prefetch.cpp" />
     <ClCompile Include="checks\import code\importcode.cpp" />
     <ClCompile Include="checks\macros\macros.c" />
     <ClCompile Include="checks\macros\macroscanner.cpp" />
@@ -181,6 +186,7 @@
     <ClCompile Include="checks\usn journal\fsutil.cpp" />
     <ClCompile Include="checks\usn journal\journal.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="miscellaneous\boot\boot.cpp" />
     <ClCompile Include="miscellaneous\digital signature\trustverify.cpp" />
     <ClCompile Include="miscellaneous\gui\color.c" />
     <ClCompile Include="miscellaneous\wmi\wmi.cpp" />
@@ -193,6 +199,8 @@
     <ClInclude Include="checks\disk\disk.hpp" />
     <ClInclude Include="checks\eventlog\evthandler.hpp" />
     <ClInclude Include="checks\eventlog\evtquery.hpp" />
+    <ClInclude Include="checks\forensic\prefetch.hpp" />
+    <ClInclude Include="checks\forensic\prefetch_parser.hh" />
     <ClInclude Include="checks\import code\importcode.hpp" />
     <ClInclude Include="checks\macros\macros.h" />
     <ClInclude Include="checks\macros\macroscanner.hpp" />
@@ -210,6 +218,7 @@
     <ClInclude Include="checks\usn journal\journal.hpp" />
     <ClInclude Include="checks\virtual machines\vmaware.hpp" />
     <ClInclude Include="main.hpp" />
+    <ClInclude Include="miscellaneous\boot\boot.hpp" />
     <ClInclude Include="miscellaneous\digital signature\trustverify.hpp" />
     <ClInclude Include="miscellaneous\gui\color.h" />
     <ClInclude Include="miscellaneous\wmi\wmi.hpp" />
