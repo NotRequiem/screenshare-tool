@@ -55,6 +55,8 @@ int main() {
 
     Javaw(); // Detects unlegit clients and mods using Minecraft's memory
 
+    Prefetch(); // Detects executed files with Prefetch
+
     csrss(); // Detects execution of unsigned files with modified extensions, unsigned executed files and unsigned injected dlls
 
     USNJournal(); // Detects certain file modifications, such as macro modifications, replaced files and special characters
