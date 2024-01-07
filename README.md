@@ -158,7 +158,7 @@ Navigate to the location of your .sln file and select it.
 
 > 4. Build Solution:
 
-Once the solution is open, you can build it by going to "Build" -> "Build Solution" from the menu.
+Once the solution is open, you can build it by going to "Build" -> "Build Solution" from the menu. Make sure the Unicode Character set is not set, and the C++ standard is 20.
 Alternatively, you can press Ctrl + Shift + B to build the solution.
 
 # Disclaimers
