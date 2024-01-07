@@ -1,11 +1,10 @@
 #pragma once
+
 #include <windows.h>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <iostream>
-#include <comdef.h>
-#include <Wbemidl.h>
 #include <string>
 #include <unordered_set>
 
@@ -13,7 +12,6 @@
 
 #include "..\..\miscellaneous\gui\color.h"
 #include "..\..\miscellaneous\digital signature\trustverify.hpp"
-
-#pragma comment(lib, "wbemuuid.lib")
+#include "..\..\miscellaneous\boot\boot.hpp"
 
 void Prefetch();
