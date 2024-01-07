@@ -20,6 +20,8 @@ int main() {
     // ================================================================================================
     //                                    SCREENSHARE TOOL CHECKS
     // ================================================================================================
+    
+    std::wcout << "DO NOT CLICK INSIDE THE CONSOLE DURING THE SCAN!\n";
 
     MacroStrings(); // Checks for macro strings. This should run first because macro strings are fastly erased
 
