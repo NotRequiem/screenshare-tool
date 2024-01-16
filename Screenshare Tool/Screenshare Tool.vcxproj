@@ -169,6 +169,7 @@
     <ClCompile Include="checks\disk\disk.cpp" />
     <ClCompile Include="checks\eventlog\evthandler.cpp" />
     <ClCompile Include="checks\eventlog\evtquery.cpp" />
+    <ClCompile Include="checks\forensic\appcrash.cpp" />
     <ClCompile Include="checks\forensic\prefetch.cpp" />
     <ClCompile Include="checks\import code\importcode.cpp" />
     <ClCompile Include="checks\macros\macros.c" />
@@ -199,6 +200,7 @@
     <ClInclude Include="checks\disk\disk.hpp" />
     <ClInclude Include="checks\eventlog\evthandler.hpp" />
     <ClInclude Include="checks\eventlog\evtquery.hpp" />
+    <ClInclude Include="checks\forensic\appcrash.hpp" />
     <ClInclude Include="checks\forensic\prefetch.hpp" />
     <ClInclude Include="checks\forensic\prefetch_parser.hh" />
     <ClInclude Include="checks\import code\importcode.hpp" />
