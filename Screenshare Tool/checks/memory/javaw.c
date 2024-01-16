@@ -1,4 +1,4 @@
-#include "javaw.h"   
+#include "javaw.h"
 
 static void AnalyzeStrings(HANDLE hProcess) {
     SIZE_T bytesRead;
@@ -13,33 +13,46 @@ static void AnalyzeStrings(HANDLE hProcess) {
     }
 
     size_t startIndex = 0;
+    ULONGLONG startTime = GetTickCount64();
 
-    while (VirtualQueryEx(hProcess, address, &mbi, sizeof(mbi)) != 0) {
-        if ((mbi.State == MEM_COMMIT) &&
-            (mbi.Type == MEM_PRIVATE) &&
-            (mbi.Protect & (PAGE_READWRITE | PAGE_EXECUTE_READWRITE))) {
-            address = (unsigned char*)mbi.BaseAddress;
+    __try {
+        while (VirtualQueryEx(hProcess, address, &mbi, sizeof(mbi)) != 0) {
+            if ((mbi.State == MEM_COMMIT) &&
+                (mbi.Type == MEM_PRIVATE) &&
+                (mbi.Protect & (PAGE_READWRITE | PAGE_EXECUTE_READWRITE))) {
+                address = (unsigned char*)mbi.BaseAddress;
 
-            if (ReadProcessMemory(hProcess, address, buffer, BUFFER_SIZE, &bytesRead)) {
-                for (size_t i = 0; i < bytesRead; i++) {
-                    if (buffer[i] >= 32 && buffer[i] <= 126) {
-                        continue;
-                    }
-
-                    if (i - startIndex >= MIN_STRING_LENGTH) {
-                        // Check for the specific string "mouse_event"
-                        if (strstr((char*)&buffer[startIndex], "Autoclicker.class") != NULL) {
-                            wprintf(L"Internal cheat string detected in minecraft process: %lu, ban the user.\n", GetProcessId(hProcess));
+                if (ReadProcessMemory(hProcess, address, buffer, BUFFER_SIZE, &bytesRead)) {
+                    for (size_t i = 0; i < bytesRead; i++) {
+                        if (buffer[i] >= 32 && buffer[i] <= 126) {
+                            continue;
                         }
+
+                        if (i - startIndex >= MIN_STRING_LENGTH) {
+                            // Check for the specific string "mouse_event"
+                            if (strstr((char*)&buffer[startIndex], "clicker.class") != NULL) {
+                                wprintf(L"Internal cheat string detected in minecraft process: %lu, ban the user.\n", GetProcessId(hProcess));
+                            }
+                        }
+
+                        startIndex = i + 1;
                     }
-
-                    startIndex = i + 1;
                 }
-            }
 
-            address += bytesRead;
+                address += bytesRead;
+            }
+            address += mbi.RegionSize;
+
+            // Check for the timeout
+            ULONGLONG elapsedTime = GetTickCount64() - startTime;
+            if (elapsedTime > TIMEOUT_DURATION) {
+                fprintf(stderr, "Timeout reached. Scanning took more than 10 seconds. Continuing...\n");
+                break;
+            }
         }
-        address += mbi.RegionSize;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        fprintf(stderr, "Exception caught during memory analysis.\n");
     }
 
     free(buffer);
@@ -61,9 +74,18 @@ void Javaw() {
         return;
     }
 
+    int processCount = 0; // Count the number of matching processes
+
     if (Process32First(hSnapshot, &pe32)) {
         do {
             if (strcmp(pe32.szExeFile, "javaw.exe") == 0 || strcmp(pe32.szExeFile, "Minecraft.Windows.exe") == 0) {
+                processCount++;
+
+                if (processCount > 1) {
+                    // Print a warning if more than one process is detected
+                    wprintf(L"Warning: Multiple processes detected. The scan might take a while.\n");
+                }
+
                 HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pe32.th32ProcessID);
                 if (hProcess != NULL) {
                     // Call the function to analyze strings
