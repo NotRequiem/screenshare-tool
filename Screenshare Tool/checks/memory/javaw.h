@@ -5,6 +5,7 @@
 #define MIN_STRING_LENGTH 5
 #define OUTPUT_FILE_NAME "strings.txt"
 #define BUFFER_SIZE 1050000
+#define TIMEOUT_DURATION 10000 // 10 seconds in milliseconds
 
 #ifdef __cplusplus
 extern "C" {
