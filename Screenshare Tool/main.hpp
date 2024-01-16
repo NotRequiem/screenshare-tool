@@ -9,14 +9,15 @@
    ================================================================================================
 */ 
 
-// WMI related headers
-#include "miscellaneous\WMI\wmi.hpp"
+/* WMI related headers
+"miscellaneous\WMI\wmi.hpp"
 
 // Digital signature headers
-#include "miscellaneous\digital signature\trustverify.hpp"
+"miscellaneous\digital signature\trustverify.hpp"
 
 // GUI related headers
-#include "miscellaneous\gui\color.h"
+"miscellaneous\gui\color.h"
+*/
 
 /*
    ================================================================================================
