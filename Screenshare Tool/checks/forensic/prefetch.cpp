@@ -102,7 +102,7 @@ void Prefetch() {
                         if (properPath.find(fileNameFromPrefetch) != std::wstring::npos && !IsFileSignatureValid(properPath)) {
                             // Check if the path has already been printed or ends with ".EXE"
                             if (printedPaths.find(properPath) == printedPaths.end() && properPath.length() >= 4 && properPath.substr(properPath.length() - 4) == L".EXE") {
-                                std::wcout << L"\t[#] Executed & Unsigned file: " << properPath << std::endl;
+                                std::wcout << L"[#] Executed & Unsigned file: " << properPath << std::endl;
                                 printedPaths.insert(properPath);  // Add the path to the set
                             }
 
