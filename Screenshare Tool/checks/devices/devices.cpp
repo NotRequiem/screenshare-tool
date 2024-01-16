@@ -256,7 +256,7 @@ static void EnumerateSubkeys(const std::wstring& parentKeyPath, const SYSTEMTIME
 
                     // Check if this device has already been flagged
                     if (flaggedDevices.find(subkeyPath.substr(0, 17)) == flaggedDevices.end()) {
-                        std::wcout << "[!] Warning: Unplugged device detected:  " << subkeyPath << ". Ban the user." << std::endl;
+                        std::wcout << "[!] Warning: Unplugged device detected:  " << subkeyPath << ". Ban the user if after looking for the VID and PID on Google, you find that the device its a peripheral device." << std::endl;
                         std::wcout << "    Device was unplugged at: " << localTimeString << std::endl;
 
                         // Add the device to the flagged set
