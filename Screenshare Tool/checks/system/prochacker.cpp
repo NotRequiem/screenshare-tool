@@ -17,12 +17,18 @@ static void Time(SYSTEMTIME& lastBootTime) {
     FileTimeToSystemTime(reinterpret_cast<FILETIME*>(reinterpret_cast<void*>(&startDateTime)), &lastBootTime);
 }
 
+static void FileTimeToSystemTimeLocal(const FILETIME* ft, SYSTEMTIME* st) {
+    FILETIME localFileTime;
+    FileTimeToLocalFileTime(ft, &localFileTime);
+    FileTimeToSystemTime(&localFileTime, st);
+}
+
 static void CheckPrefetchFolder(const std::wstring& folderPath, const SYSTEMTIME& lastBootTime) {
     WIN32_FIND_DATAW findFileData;
     HANDLE hFind = FindFirstFileW((folderPath + L"\\*.pf").c_str(), &findFileData);
 
     if (hFind == INVALID_HANDLE_VALUE) {
-        std::wcerr << L"[!] The Prefetch folder does not contain prefeth files. This may be bannable if the user is running an official, non modified version of Windows.\n";
+        std::wcerr << L"[!] The Prefetch folder does not contain prefetch files. This may be bannable if the user is running an official, non-modified version of Windows.\n";
         return;
     }
 
@@ -35,15 +41,15 @@ static void CheckPrefetchFolder(const std::wstring& folderPath, const SYSTEMTIME
             fileName.compare(0, 18, L"PROCESSHACKER.EXE-") == 0) &&
             CompareFileTime(&findFileData.ftLastWriteTime, (FILETIME*)&lastBootTime) > 0) { // Ignore C-style pointer casting here
 
-            // Convert FILETIME to SYSTEMTIME
+            // Convert FILETIME to SYSTEMTIME using local time
             SYSTEMTIME systemTime;
-            FileTimeToSystemTime(&findFileData.ftLastWriteTime, &systemTime);
+            FileTimeToSystemTimeLocal(&findFileData.ftLastWriteTime, &systemTime);
 
             // Print a warning message
             std::wcout << L"[!] System Informer or Process Hacker were executed at: "
                 << systemTime.wYear << L"/" << systemTime.wMonth << L"/" << systemTime.wDay
                 << L" " << systemTime.wHour << L":" << systemTime.wMinute << L":" << systemTime.wSecond
-                << L". Ban the user if you didn't open this program in this computer." << std::endl;
+                << L". Ban the user if you didn't open this program on this computer." << std::endl;
         }
     } while (FindNextFileW(hFind, &findFileData) != 0);
 
@@ -62,5 +68,5 @@ void SystemInformer() {
     std::wstring prefetchFolderPath = L"C:\\Windows\\Prefetch";
 
     // Check for SYSTEMINFORMER.EXE-*.pf files in the Prefetch folder
-    CheckPrefetchFolder(prefetchFolderPath, lastBootTime);  
+    CheckPrefetchFolder(prefetchFolderPath, lastBootTime);
 }
