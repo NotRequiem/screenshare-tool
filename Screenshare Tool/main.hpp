@@ -47,6 +47,7 @@
 
 // Forensic checks
 #include "checks\forensic\prefetch.hpp"
+#include "checks\forensic\appcrash.hpp"
 
 // Localhost environment checks
 #include "checks\system\localhost.h"
