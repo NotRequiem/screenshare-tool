@@ -1,15 +1,15 @@
 #include "mods.h"
 
 // Function to check the last modified time of files in a directory
-static void CheckLastModifiedTime(const TCHAR* directoryPath, const SYSTEMTIME* processStartTime) {
+static void CheckLastModifiedTime(const wchar_t* directoryPath, const SYSTEMTIME* processStartTime) {
     // Expand the environment variables in the directory path
-    TCHAR expandedPath[MAX_PATH];
-    if (ExpandEnvironmentStrings(directoryPath, expandedPath, MAX_PATH) == 0) {
+    wchar_t expandedPath[MAX_PATH];
+    if (ExpandEnvironmentStringsW(directoryPath, expandedPath, MAX_PATH) == 0) {
         return;
     }
 
-    WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile(expandedPath, &findFileData);
+    WIN32_FIND_DATAW findFileData;
+    HANDLE hFind = FindFirstFileW(expandedPath, &findFileData);
 
     if (hFind == INVALID_HANDLE_VALUE) {
         return;
@@ -27,24 +27,24 @@ static void CheckLastModifiedTime(const TCHAR* directoryPath, const SYSTEMTIME* 
 
             // Compare with process start time
             if (CompareFileTime(&findFileData.ftLastWriteTime, &processStartFileTime) > 0) {
-                _tprintf(_T("[!] Suspicious mod found: %s. Analyze it with Bintext.\n"), findFileData.cFileName);
+                wprintf(L"[!] Suspicious mod found: %s. Analyze it with Bintext.\n", findFileData.cFileName);
             }
         }
-    } while (FindNextFile(hFind, &findFileData) != 0);
+    } while (FindNextFileW(hFind, &findFileData) != 0);
 
     FindClose(hFind);
 }
 
 // Function to get the start time of javaw.exe and Minecraft.Windows.exe
-static void GetProcessStartTime(const TCHAR* processName) {
+static void GetProcessStartTime(const wchar_t* processName) {
     HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 
-    PROCESSENTRY32 pe32;
-    pe32.dwSize = sizeof(PROCESSENTRY32);
+    PROCESSENTRY32W pe32;
+    pe32.dwSize = sizeof(PROCESSENTRY32W);
 
-    if (Process32First(hSnapshot, &pe32)) {
+    if (Process32FirstW(hSnapshot, &pe32)) {
         do {
-            if (_tcsicmp(pe32.szExeFile, processName) == 0) {
+            if (_wcsicmp(pe32.szExeFile, processName) == 0) {
                 HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pe32.th32ProcessID);
                 if (hProcess != NULL) {
                     FILETIME createTime, exitTime, kernelTime, userTime;
@@ -55,13 +55,13 @@ static void GetProcessStartTime(const TCHAR* processName) {
                         FileTimeToSystemTime(&createTime, &sysTime);
 
                         // Check the last modified time of files in the Minecraft mod directory
-                        CheckLastModifiedTime(_T("%appdata%\\.minecraft\\mods\\*.jar"), &sysTime);
+                        CheckLastModifiedTime(L"%appdata%\\.minecraft\\mods\\*.jar", &sysTime);
                     }
 
                     CloseHandle(hProcess);
                 }
             }
-        } while (Process32Next(hSnapshot, &pe32));
+        } while (Process32NextW(hSnapshot, &pe32));
     }
 
     CloseHandle(hSnapshot);
@@ -70,11 +70,11 @@ static void GetProcessStartTime(const TCHAR* processName) {
 // Function to detect suspicious mods by checking the start time of relevant processes
 void SuspiciousMods() {
     setConsoleTextColor(BrightMagenta);
-    printf("[Mods Scanner] Running checks to detect suspicious mods ran by the game...\n");
+    wprintf(L"[Mods Scanner] Running checks to detect suspicious mods ran by the game...\n");
     resetConsoleTextColor();
 
     // Get the start time of the Java process
-    GetProcessStartTime(_T("javaw.exe"));
+    GetProcessStartTime(L"javaw.exe");
     // Get the start time of the Minecraft Windows process
-    GetProcessStartTime(_T("Minecraft.Windows.exe"));
+    GetProcessStartTime(L"Minecraft.Windows.exe");
 }
