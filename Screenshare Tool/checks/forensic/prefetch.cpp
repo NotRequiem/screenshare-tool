@@ -38,7 +38,7 @@ static std::wstring GetDriveLetterFromVolumePath(const std::wstring& volumePath)
 void Prefetch() {
     SYSTEMTIME lastLogonTime;
 
-    if (!LogonBoot(lastLogonTime)) {
+    if (!LogonTime(lastLogonTime)) {
         std::cerr << "Failed to retrieve last logon time." << std::endl;
         return;
     }
@@ -48,7 +48,7 @@ void Prefetch() {
     HANDLE hFind = FindFirstFileW((prefetchDir + L"*").c_str(), &findFileData);
 
     if (hFind == INVALID_HANDLE_VALUE) {
-        std::cerr << "[!] Prefetch directory not found. Ensure that you can access C:\\Windows\\Prefetch\\ and ban the player if you can't." << std::endl;
+        std::cerr << "[!] Prefetch directory not found. Ensure that C:\\Windows\\Prefetch\\ exists and ban the player if not." << std::endl;
         return;
     }
 
@@ -96,7 +96,7 @@ void Prefetch() {
                         std::wstring fileNameFromPrefetch = (hyphenPos != std::wstring::npos) ? prefetchFileName.substr(0, hyphenPos) : prefetchFileName;
 
                         // Convert volume path to proper path with disk letter
-                        std::wstring properPath = GetDriveLetterFromVolumePath(filename) + filename.substr(35);
+                        std::wstring properPath = GetDriveLetterFromVolumePath(filename) + filename.substr(35); // 35 is the character length of the Volume ID
 
                         // Check if the properPath contains the name of the file from the prefetch file
                         if (properPath.find(fileNameFromPrefetch) != std::wstring::npos && !IsFileSignatureValid(properPath)) {
