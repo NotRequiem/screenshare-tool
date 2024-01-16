@@ -56,9 +56,11 @@ int main() {
 
     TaskScheduler(); // Detects bypasses using Task Scheduler
 
-    Javaw(); // Detects unlegit clients and mods using Minecraft's memory
-
     Prefetch(); // Detects executed files with Prefetch
+
+    AppCrash(); // Detects executed (and crashed) files with WER
+
+    Javaw(); // Detects unlegit clients and mods using Minecraft's memory
 
     csrss(); // Detects execution of unsigned files with modified extensions, unsigned executed files and unsigned injected dlls
 
