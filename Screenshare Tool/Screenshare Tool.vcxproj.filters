@@ -117,6 +117,9 @@
     <ClCompile Include="miscellaneous\boot\boot.cpp">
       <Filter>Source Files\main\checks</Filter>
     </ClCompile>
+    <ClCompile Include="checks\forensic\appcrash.cpp">
+      <Filter>Source Files\main\checks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="miscellaneous\wmi\wmi.hpp">
@@ -200,14 +203,17 @@
     <ClInclude Include="checks\memory\javaw.h">
       <Filter>Header Files\checks</Filter>
     </ClInclude>
-    <ClInclude Include="checks\forensic\prefetch.hpp">
-      <Filter>Source Files\main\checks</Filter>
-    </ClInclude>
     <ClInclude Include="checks\forensic\prefetch_parser.hh">
       <Filter>Header Files\checks</Filter>
     </ClInclude>
     <ClInclude Include="miscellaneous\boot\boot.hpp">
       <Filter>Header Files\others</Filter>
+    </ClInclude>
+    <ClInclude Include="checks\forensic\appcrash.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="checks\forensic\prefetch.hpp">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
