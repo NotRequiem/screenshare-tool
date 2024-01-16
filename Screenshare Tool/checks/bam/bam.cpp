@@ -38,6 +38,8 @@ static std::wstring ConvertDevicePathToFilePath(const std::wstring& devicePath)
     return devicePath; // Return original if no match is found
 }
 
+void ListBinaryRegistryValues(HKEY hKey, const wchar_t* subKey);
+
 static void ListBinaryValuesRecursively(HKEY hKey, const wchar_t* subKey) {
     HKEY keyHandle;
     if (RegOpenKeyExW(hKey, subKey, 0, KEY_READ, &keyHandle) == ERROR_SUCCESS) {
