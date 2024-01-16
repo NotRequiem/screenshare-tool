@@ -6,4 +6,4 @@
 
 #pragma comment(lib, "wbemuuid.lib")
 
-bool LogonBoot(SYSTEMTIME& lastLogonTime);
+bool LogonTime(SYSTEMTIME& lastLogonTime);
