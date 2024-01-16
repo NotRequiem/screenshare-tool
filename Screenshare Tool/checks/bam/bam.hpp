@@ -11,6 +11,7 @@
 
 #include "..\..\miscellaneous\gui\color.h"
 #include "..\..\miscellaneous\digital signature\trustverify.hpp"
+#include "..\..\miscellaneous\boot\boot.hpp"
 
 #pragma comment(lib, "wbemuuid.lib")
 
