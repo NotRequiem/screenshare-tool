@@ -22,6 +22,7 @@ int main() {
     // ================================================================================================
     
     std::wcout << "DO NOT CLICK INSIDE THE CONSOLE DURING THE SCAN!\n";
+    std::wcout << "If you press Enter, the console will continue but will skip the current check.\n";
 
     MacroStrings(); // Checks for macro strings. This should run first because macro strings are fastly erased
 
