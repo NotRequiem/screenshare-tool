@@ -47,10 +47,10 @@ Please note that this tool exclusively retrieves information generated since the
 # Currently In Development
 - Improvements for the Macro Memory Scanner: Ongoing enhancements to bolster macro memory scanning capabilities.
 
-- Minecraft External Java Cheats: Detections for external java cheats that cannot be detected with DComLaunch, javaw's memory or Prefetch.
+- Minecraft External Java Cheats: Detections for external java cheats that cannot be detected with DComLaunch's process memory, javaw's process memory or Prefetch artifacts.
 
 # Features
-> `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hooks.
+> `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hardware hooks.
 
 > `2.` Detects virtual machine environments with reliable methods. It also informs you about possible mouse events being sent by the host machine to the virtual machine in order to autoclick.
 
@@ -181,7 +181,7 @@ Alternatively, you can press Ctrl + Shift + B to build the solution.
 
 9. Detections for tokens or threads suspended will not be added as they are not necessary for the processes that the tool scans by default.
 
-10. Detections for VPN or Recording Software will not be added.
+10. Detections for Virtual Private Networks or recording software will not be added.
 
 11. Detections for internal mods using Prefetch will not be added due to the possibility of false flagging.
 
@@ -194,13 +194,13 @@ The tool lacks a reliable counter against leaked (and official/valid) digital si
 Public API keys for contacting antivirus engines, such as VirusTotal, are not utilized due to the high restrictions imposed on the VirusTotal API. As a precaution, it is recommended to manually check any replaced file by uploading it to Hybrid or using tools like Bintext.
 
 ## 2. Kernel Driver Usage:
-The tool abstains from exploiting signed and vulnerable kernel drivers or utilizing any kernel driver to scan memory in "protected" processes like csrss. This decision is motivated by the requirement for a digital signature to avoid being blocked by Windows. Consequently, the tool is not equipped to scan for server-side cheats or detect fileless malware.
+The tool abstains from exploiting signed and vulnerable kernel drivers or utilizing any kernel driver to scan memory in "protected" processes like csrss. This decision is motivated by the requirement for a digital signature to avoid being blocked by Windows. Consequently, the tool is not equipped to scan for server-side cheats or detect some fileless malware techniques using the network.
 
 ## 3. Build Process Simplification:
 As the tool is specifically designed for Windows, there are no CMake files provided to simplify the build process for a wider audience. Instead, users can streamline the build process by downloading Visual Studio, opening the solution file, and initiating the build by clicking on "Build." This straightforward approach ensures ease of use for Windows environments.
 
 ## 4. USNJournal Parsing:
-To maintain compatibility across various Windows systems and minimize the impact on memory and disk usage, the journal parsing process has been optimized for efficiency, albeit with a slight trade-off in speed.”
+To maintain compatibility across various Windows systems and minimize the impact on memory and disk usage, the journal parsing process has been optimized for efficiency, albeit with a slight trade-off in speed.
 
 # License
 
@@ -220,7 +220,7 @@ The Advanced Screenshare Tool ("the Software") is provided under the terms of th
 
 ## MIT License
 
-Copyright (c) [2023] [Advanced Screenshare Tool]
+Copyright (c) [2024] [Advanced Screenshare Tool]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
