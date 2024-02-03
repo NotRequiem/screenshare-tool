@@ -1,5 +1,70 @@
 #include "javaw.h"
 
+static const char* cheatStrings[] = {
+    "ReachCommands.class",
+    "aimassist.class",
+    "aimbot.class",
+    "killaura.class",
+    "triggerbot.class",
+    "autopot.class",
+    "bhop.class",
+    "smoothaimbot.class",
+    "nofall.class",
+    "wallhack.class",
+    "autoclick.class",
+    "reach.class",
+    "forcefield.class",
+    "aimboat.class",
+    "antivoid.class",
+    "AimbotGui.class",
+    "AutoSoup.class",
+    "AutoPot.class",
+    "Freecam.class",
+    "NoSlowDown.class",
+    "NoFall.class",
+    "AntiFall.class",
+    "Scaffold.block", // Instead of .combat and /combat, add .block
+    "Player ESP.class",
+    "BedFucker.class",
+    "InvWalk.class",
+    "FastEat.class",
+    "ChestEsp.class",
+    "ChestStealer.class",
+    "InfinityJump.class",
+    "AutoArmor.class",
+    "MobAura.class",
+    "BaseFinder.class",
+    "FastBow.class",
+    "Misplace.class",
+    "FightBot.class",
+    "AutoGap.class",
+    "ChestAura.class",
+    "AutoBlockhit.class",
+    "SpawnerFinder.class",
+    "Cavefinder.class",
+    "StorageESP.class",
+    "NametagsESP.class",
+    "ItemESP.class",
+    "NoClickDelay.class",
+    "AutoRefill.class",
+    "AutoPearl.class",
+    "AutoEat.class",
+    "airjump.class",
+    "Lagback.class",
+    "Backtrack.class",
+    "TPAura_Attack.class",
+    "_Velocity_Horizontal.class",
+    "_Velocity_Vertical.class",
+    "_Regen_Health_.class",
+    "_NoFall_Mode_.class",
+    "WaterSpeed.class",
+    "AntiFire.class",
+    "AimSpeed.class",
+    "XRay.class",
+    "EntityKiller.class",
+    "Bhop.class"
+};
+
 static void AnalyzeStrings(HANDLE hProcess) {
     SIZE_T bytesRead;
     MEMORY_BASIC_INFORMATION mbi;
@@ -29,9 +94,10 @@ static void AnalyzeStrings(HANDLE hProcess) {
                         }
 
                         if (i - startIndex >= MIN_STRING_LENGTH) {
-                            // Check for the specific string "mouse_event"
-                            if (strstr((char*)&buffer[startIndex], "clicker.class") != NULL) {
-                                wprintf(L"Internal cheat string detected in minecraft process: %lu, ban the user.\n", GetProcessId(hProcess));
+                            for (size_t j = 0; j < sizeof(cheatStrings) / sizeof(cheatStrings[0]); j++) {
+                                if (strstr((char*)&buffer[startIndex], cheatStrings[j]) != NULL) {
+                                    wprintf(L"Cheating string detected in minecraft process: %lu, ban the user.\n", GetProcessId(hProcess));
+                                }
                             }
                         }
 
