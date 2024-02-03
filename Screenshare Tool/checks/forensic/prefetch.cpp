@@ -17,11 +17,12 @@ static std::wstring GetDriveLetterFromVolumePath(const std::wstring& volumePath)
         driveLetter = driveStrings;
 
         // Check for specific strings in volumePath
-        if (volumePath.find(L"Program Files") != std::wstring::npos ||
-            volumePath.find(L"Symbols") != std::wstring::npos ||
-            volumePath.find(L"Users") != std::wstring::npos ||
-            volumePath.find(L"Windows") != std::wstring::npos ||
-            volumePath.find(L"XboxGames") != std::wstring::npos) {
+        if (volumePath.find(L"PROGRAM FILES") != std::wstring::npos ||
+            volumePath.find(L"SYMBOLS") != std::wstring::npos ||
+            volumePath.find(L"USERS") != std::wstring::npos ||
+            volumePath.find(L"WINDOWS") != std::wstring::npos ||
+            volumePath.find(L"PROGRAMDATA") != std::wstring::npos ||
+            volumePath.find(L"XBOXGAMES") != std::wstring::npos) {
             // Return C:\ if one of the specified strings is present
             return L"C:\\";
         }
@@ -35,11 +36,12 @@ static std::wstring GetDriveLetterFromVolumePath(const std::wstring& volumePath)
 
             // Return the other disk letter if there are only two drives
             if (driveLetters.size() == 2) {
-                return (driveLetters[0] == L"C:\\") ? L"D:\\" : L"C:\\";
+                std::wstring otherDrive = (driveLetters[0] == volumePath.substr(0, 3)) ? driveLetters[1] : driveLetters[0];
+                return otherDrive + L"\\";
             }
             else {
                 // Return (UnknownDisk) if there are more than two drives
-                return L"(UnknownDisk)";
+                return L"(UnknownDisk)\\";
             }
         }
     }
@@ -112,13 +114,21 @@ void Prefetch() {
                         std::wstring properPath = GetDriveLetterFromVolumePath(filename) + filename.substr(35); // 35 is the character length of the Volume ID
 
                         // Check if the properPath contains the name of the file from the prefetch file
-                        if (properPath.find(fileNameFromPrefetch) != std::wstring::npos && !IsFileSignatureValid(properPath)) {
+                        if (properPath.find(fileNameFromPrefetch) != std::wstring::npos) {
                             // Check if the path has already been printed or ends with ".EXE"
                             if (printedPaths.find(properPath) == printedPaths.end() && properPath.length() >= 4 && properPath.substr(properPath.length() - 4) == L".EXE") {
-                                std::wcout << L"[#] Executed & Unsigned file: " << properPath << std::endl;
+                                // Check if properPath contains "UnknownDisk"
+                                if (properPath.find(L"UnknownDisk") != std::wstring::npos) {
+                                    std::wcout << L"[#] Executed file: " << properPath << std::endl;
+                                }
+                                else {
+                                    // Call IsFileSignatureValid only if properPath doesn't contain "UnknownDisk"
+                                    if (!IsFileSignatureValid(properPath)) {
+                                        std::wcout << L"[#] Executed & Unsigned file: " << properPath << std::endl;
+                                    }
+                                }
                                 printedPaths.insert(properPath);  // Add the path to the set
                             }
-
                         }
                     }
                 }
