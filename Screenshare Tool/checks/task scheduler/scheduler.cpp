@@ -2,7 +2,7 @@
 
 namespace fs = std::filesystem;
 
-// Function to check if a file executed with Task Scheduler is valid
+// Function to check if a digital signature of an executed file is valid
 static bool IsFileSignatureValid(const std::wstring& filePath) {
     TrustVerifyWrapper wrapper;
     return wrapper.VerifyFileSignature(filePath);
