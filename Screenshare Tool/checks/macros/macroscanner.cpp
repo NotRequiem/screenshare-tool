@@ -17,7 +17,7 @@ static void scanProcessStrings(const wchar_t* processName, const std::wstring& s
                 DWORD pid = entry.th32ProcessID;
 
                 // Build command line to execute the memory scanner.exe
-                std::wstring commandLine = L"memory scanner.exe -p " + std::to_wstring(pid);
+                std::wstring commandLine = L"memory.exe -p " + std::to_wstring(pid);
 
                 // Set up security attributes for the pipe
                 SECURITY_ATTRIBUTES saAttr{};
