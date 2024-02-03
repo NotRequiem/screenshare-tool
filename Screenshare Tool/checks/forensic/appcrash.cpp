@@ -1,4 +1,5 @@
 #include "appcrash.hpp"
+#include <memory>
 
 void AppCrash() {
     setConsoleTextColor(Magenta);
@@ -18,10 +19,16 @@ void AppCrash() {
     std::wstring searchPattern = directoryPath + L"AppCrash_*";
 
     WIN32_FIND_DATAW findFileData;
-    HANDLE hFind = FindFirstFileW(searchPattern.c_str(), &findFileData);
+    std::unique_ptr<void, decltype(&FindClose)> hFind(FindFirstFileW(searchPattern.c_str(), &findFileData), &FindClose);
 
-    if (hFind == INVALID_HANDLE_VALUE) {
+    if (hFind.get() == nullptr) {
         std::cerr << "Error scanning for AppCrash files\n";
+        return;
+    }
+
+    // Check for an empty directory
+    if (FindNextFileW(hFind.get(), &findFileData) == 0) {
+        std::cerr << "No AppCrash files found\n";
         return;
     }
 
@@ -57,7 +64,5 @@ void AppCrash() {
                 << std::endl;
         }
 
-    } while (FindNextFileW(hFind, &findFileData) != 0);
-
-    FindClose(hFind);
+    } while (FindNextFileW(hFind.get(), &findFileData) != 0);
 }
