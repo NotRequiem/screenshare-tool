@@ -273,6 +273,9 @@ void USNJournal() {
 
     // Ask the user if they want to scan macro traces
     char userInput;
+    setConsoleTextColor(Cyan);
+    _tprintf(_T("[NTFS Scanner] Running checks for important file modifications...\n"));
+    resetConsoleTextColor();
     std::cout << "Scanning macro traces may be useless in 1.9+ servers. Do you want to scan macro traces? (y/n): ";
     std::cin >> userInput;
 
