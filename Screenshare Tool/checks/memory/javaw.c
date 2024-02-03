@@ -23,7 +23,7 @@ static const char* cheatStrings[] = {
     "NoSlowDown.class",
     "NoFall.class",
     "AntiFall.class",
-    "Scaffold.block", // Instead of .combat and /combat, add .block
+    "Scaffold.block",
     "Player ESP.class",
     "BedFucker.class",
     "InvWalk.class",
@@ -62,7 +62,8 @@ static const char* cheatStrings[] = {
     "AimSpeed.class",
     "XRay.class",
     "EntityKiller.class",
-    "Bhop.class"
+    "Bhop.class",
+    "clicker.class"
 };
 
 static void AnalyzeStrings(HANDLE hProcess) {
