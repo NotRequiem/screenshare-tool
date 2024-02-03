@@ -42,34 +42,43 @@ static bool IsLineInDeletedFile(const std::wstring& lineToCheck, const std::unor
 static std::wstring PromptForFilePath(const std::wstring& promptMessage) {
     std::wstring userInput;
     do {
-        std::wcout << promptMessage;
-        std::getline(std::wcin, userInput);
+        try {
+            std::wcout << promptMessage;
+            std::getline(std::wcin, userInput);
 
-        // Convert the user input to lowercase for case-insensitive comparison
-        std::transform(userInput.begin(), userInput.end(), userInput.begin(), ::towlower);
+            // Convert the user input to lowercase for case-insensitive comparison
+            std::transform(userInput.begin(), userInput.end(), userInput.begin(), ::towlower);
 
-        // Check if the user wants to cancel
-        if (userInput == L"cancel") {
-            return L""; // Return an empty string to indicate cancellation
+            // Check if the user wants to cancel
+            if (userInput == L"cancel") {
+                return L""; // Return an empty string to indicate cancellation
+            }
+
+            if (userInput.empty()) {
+                std::wcerr << L"You entered an empty file path. Please re-enter a valid file path, it should include the file extension without double quotes.\n";
+            }
+
+            // Attempt to open the specified file using std::wifstream
+            std::wifstream inputFile(userInput.c_str());
+            if (inputFile.is_open()) {
+                inputFile.close();
+                return userInput; // Valid file path provided
+            }
+            else {
+                // Display an error message if the file cannot be opened
+                std::wcerr << L"Could not open the file at the specified path. Please re-enter a valid file path, it should include the file extension without double quotes.\n";
+            }
         }
-
-        if (userInput.empty()) {
-            std::wcerr << L"You entered an empty file path. Please re-enter a valid file path, it should include the file extension without double quotes.\n";
+        catch (const std::exception& e) {
+            std::wcerr << L"Exception occurred: " << e.what() << std::endl;
         }
-
-        // Attempt to open the specified file
-        std::wifstream inputFile(userInput.c_str());
-        if (inputFile.is_open()) {
-            inputFile.close();
-            return userInput; // Valid file path provided
-        }
-        else {
-            // Display an error message if the file cannot be opened
-            std::wcerr << L"Could not open the file at the specified path. Please re-enter a valid file path, it should include the file extension without double quotes.\n";
+        catch (...) {
+            std::wcerr << L"An unknown exception occurred during file input.\n";
         }
 
     } while (true);
 }
+
 
 // Function to perform file execution and dll injection checks in csrss memory dumps
 void csrss() {
