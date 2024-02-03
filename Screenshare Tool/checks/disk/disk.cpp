@@ -86,7 +86,7 @@ void ReplacedDisks() {
             }
             else {
                 // Handle error when the path doesn't exist
-                std::wcerr << L"[#] Could not detect disk bypasses in drive letter: " << systemInfoPath << std::endl;
+                std::wcerr << L"[#] Could not detect disk bypasses in drive letter: " << rootPath << std::endl;
             }
         }
     }
