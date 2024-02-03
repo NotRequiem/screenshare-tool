@@ -1,6 +1,6 @@
 #include "prefetch.hpp"
 
-// Function to check if a file executed with Task Scheduler is valid
+// Function to check if a digital signature of an executed file is valid
 static bool IsFileSignatureValid(const std::wstring& filePath) {
     TrustVerifyWrapper wrapper;
     return wrapper.VerifyFileSignature(filePath);
@@ -10,24 +10,37 @@ static std::wstring GetDriveLetterFromVolumePath(const std::wstring& volumePath)
     wchar_t driveStrings[255];
     wchar_t* driveLetter;
 
-    // Add "\\?\" prefix to the volume path
-    std::wstring fullVolumePath = L"\\\\?\\" + volumePath;
-
     // Get a list of all the logical drives
     DWORD success = GetLogicalDriveStringsW(sizeof(driveStrings) / sizeof(driveStrings[0]), driveStrings);
 
     if (success > 0) {
         driveLetter = driveStrings;
 
-        while (*driveLetter) {
-            // Check if the volume ID matches with the current drive
-            if (GetVolumeNameForVolumeMountPointW(driveLetter, &fullVolumePath[0], MAX_PATH)) {
-                // Replace the original volume path with the drive letter
-                return driveLetter;
+        // Check for specific strings in volumePath
+        if (volumePath.find(L"Program Files") != std::wstring::npos ||
+            volumePath.find(L"Symbols") != std::wstring::npos ||
+            volumePath.find(L"Users") != std::wstring::npos ||
+            volumePath.find(L"Windows") != std::wstring::npos ||
+            volumePath.find(L"XboxGames") != std::wstring::npos) {
+            // Return C:\ if one of the specified strings is present
+            return L"C:\\";
+        }
+        else {
+            // Count the number of drives
+            std::vector<std::wstring> driveLetters;
+            while (*driveLetter) {
+                driveLetters.push_back(driveLetter);
+                driveLetter += wcslen(driveLetter) + 1;
             }
 
-            // Go to the next drive
-            driveLetter += wcslen(driveLetter) + 1;
+            // Return the other disk letter if there are only two drives
+            if (driveLetters.size() == 2) {
+                return (driveLetters[0] == L"C:\\") ? L"D:\\" : L"C:\\";
+            }
+            else {
+                // Return (UnknownDisk) if there are more than two drives
+                return L"(UnknownDisk)";
+            }
         }
     }
 
