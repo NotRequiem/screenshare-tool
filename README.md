@@ -40,7 +40,7 @@
  </table>
 
 # Introduction
-This versatile screenshare tool is dedicated to accurately detecting various forms of cheats, macros, injectors, and any unauthorized modifications on video game servers (Minecraft Java, Minecraft Bedrock, Rust, FiveM, Roblox, etc.). The tool ensures a robust defense against false positives and implements anti-forensic methods to safeguard the integrity of its detection mechanisms.
+This versatile screenshare tool is dedicated to accurately detecting various forms of cheats, macros, injectors, and any unauthorized modifications on video game servers (Minecraft Java, Minecraft Bedrock, Rust, FiveM, Roblox, GTA V, etc.). The tool ensures a robust defense against false positives and implements anti-forensic methods to safeguard the integrity of its detection mechanisms.
 
 Please note that this tool exclusively retrieves information generated since the last boot time.
 
@@ -48,6 +48,8 @@ Please note that this tool exclusively retrieves information generated since the
 - Improvements for the Macro Memory Scanner: Ongoing enhancements to bolster macro memory scanning capabilities.
 
 - Minecraft External Java Cheats: Detections for external java cheats that cannot be detected with DComLaunch's process memory, javaw's process memory or Prefetch artifacts.
+
+- Adding more forensic artifacts to detect file execution.
 
 # Features
 > `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hardware hooks.
@@ -185,7 +187,7 @@ Alternatively, you can press Ctrl + Shift + B to build the solution.
 
 11. Detections for internal mods using Prefetch will not be added due to the possibility of false flagging.
 
-12. Detections for Minecraft Client class modifications will not be checked using hashing algorithms in the mods folder, or by decompiling/statically analyzing these mods due to its ease of being bypassed by a simple file obfuscation. 
+12. Detections for Minecraft Client class modifications will not be checked using hashing algorithms in the mods folder, or by decompiling/statically analyzing these mods due to its ease of being bypassed by a simple file obfuscation or XOR encryption (commonly used nowadays in these kind of cheats). 
     
 # Notes and Considerations
 
