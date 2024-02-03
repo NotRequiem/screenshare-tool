@@ -2,8 +2,8 @@
 
 static void DetectJarsAndBats(DWORD pid) {
     const std::vector<std::pair<std::wstring, std::wstring>> patternsAndMessages = {
-        { L".bat", L"[#] Executed file (false flags here may happen and won't be fixed): " },
-        { L"-jar", L"[#] Executed file (false flags here may happen and won't be fixed): " },
+        { L"-jar", L"[[#] Executed file: " },
+        { L".bat", L"[[#] Executed file: " },
     };
 
     // Build command line to execute the memory scanner
@@ -73,17 +73,17 @@ static void DetectJarsAndBats(DWORD pid) {
 // Function to detect executed files by checking specific services
 void ExecutedFiles() {
     setConsoleTextColor(BrightYellow);
-    std::wcout << "[Memory Scanner] Running checks to detect accessed files in memory...\n";
+    std::wcout << "[Memory Scanner] Running checks to detect executed files in memory...\n";
     resetConsoleTextColor();
 
-    const wchar_t* serviceNames[] = { L"PlugPlay", L"PcaSvc" };
+    // Service names to detect jar and batch file executions
+    const wchar_t* serviceNames[] = { L"PlugPlay", L"PcaSvc", L"Winmgmt", L"DiagTrack" };
 
     IWbemLocator* pLoc = NULL;
     IWbemServices* pSvc = NULL;
 
     // Iterate through specified services
     for (const wchar_t* serviceName : serviceNames) {
-
         VARIANT processId;
         VariantInit(&processId);
 
@@ -91,10 +91,10 @@ void ExecutedFiles() {
 
         // Initialize WMI
         hr = InitializeWMI(pLoc, pSvc);
-        
+
         // Execute WMI query to get process ID
-        hr = ExecuteWMIQuery(pSvc, serviceName, processId); // ignore hr overwriting
-        
+        hr = ExecuteWMIQuery(pSvc, serviceName, processId);
+
         if (FAILED(hr)) {
             UninitializeWMI(pLoc, pSvc);
             return;
@@ -102,11 +102,11 @@ void ExecutedFiles() {
 
         // Check if process ID is retrieved successfully
         if (V_VT(&processId) == VT_I4) {
-            // Detect jars and bats file executions in PcaSvc and PlugPlay
+            // Detect jars and bats file executions in the specified service
             DetectJarsAndBats(V_I4(&processId));
         }
         else {
-            std::wcerr << L"[!] The following process is not running: '" << serviceName << L"'. Ban the user.\n";
+            std::wcerr << L"[!] The following service is not running: '" << serviceName << L"'. Ban the user.\n";
         }
 
         // Clear the variant and uninitialize WMI
