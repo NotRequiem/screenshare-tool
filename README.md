@@ -45,11 +45,8 @@ This versatile screenshare tool is dedicated to accurately detecting various for
 Please note that this tool exclusively retrieves information generated since the last boot time.
 
 # Currently In Development
-- Improvements for the Macro Memory Scanner: Ongoing enhancements to bolster macro memory scanning capabilities.
 
-- Minecraft External Java Cheats: Detections for external java cheats that cannot be detected with DComLaunch's process memory, javaw's process memory or Prefetch artifacts.
-
-- Adding more forensic artifacts to detect file execution.
+- Adding JumpLists as a forensic artifact to detect file execution.
 
 # Features
 > `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hardware hooks.
