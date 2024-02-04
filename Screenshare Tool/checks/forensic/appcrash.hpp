@@ -6,6 +6,7 @@
 #include <string>
 
 #include "..\..\miscellaneous\boot\boot.hpp"
+#include "..\..\miscellaneous\string\string.hpp"
 #include "..\..\miscellaneous\gui\color.h"
 
 void AppCrash();
