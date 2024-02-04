@@ -9,7 +9,7 @@ int main() {
 
     checkMemoryExe(); // Checks if the memory scanner is present
 
-    setConsoleTextColor(Magenta);
+    setConsoleTextColor(BrightWhite);
     std::wcout << "[Virtual Machine Scanner] Running checks to detect virtual machines...\n";
     resetConsoleTextColor();
 
@@ -36,13 +36,13 @@ int main() {
 
     USNJournalCleared(); // Check if USNJournal was cleared
 
+    SystemTimeChange(); // Checks if the system time was changed
+
     SystemInformer(); // Checks if System Informer or Process Hacker were executed
 
     RestartedProcesses(); // Checks if certain processes needed to check for certain bypasses and file executions are restarted
 
     EventlogBypass(); // Checks if eventlog was bypassed
-
-    SystemTimeChange(); // Checks if the system time was changed
 
     LocalHost(); // Checks if there is a networh shared drive that could contain cheat files
 
