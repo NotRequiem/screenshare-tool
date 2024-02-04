@@ -190,6 +190,7 @@
     <ClCompile Include="miscellaneous\boot\boot.cpp" />
     <ClCompile Include="miscellaneous\digital signature\trustverify.cpp" />
     <ClCompile Include="miscellaneous\gui\color.c" />
+    <ClCompile Include="miscellaneous\string\string.cpp" />
     <ClCompile Include="miscellaneous\wmi\wmi.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +224,7 @@
     <ClInclude Include="miscellaneous\boot\boot.hpp" />
     <ClInclude Include="miscellaneous\digital signature\trustverify.hpp" />
     <ClInclude Include="miscellaneous\gui\color.h" />
+    <ClInclude Include="miscellaneous\string\string.hpp" />
     <ClInclude Include="miscellaneous\wmi\wmi.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
