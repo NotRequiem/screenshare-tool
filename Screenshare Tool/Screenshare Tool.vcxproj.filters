@@ -120,6 +120,9 @@
     <ClCompile Include="checks\forensic\appcrash.cpp">
       <Filter>Source Files\main\checks</Filter>
     </ClCompile>
+    <ClCompile Include="miscellaneous\string\string.cpp">
+      <Filter>Source Files\others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="miscellaneous\wmi\wmi.hpp">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="checks\forensic\prefetch.hpp">
       <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="miscellaneous\string\string.hpp">
+      <Filter>Header Files\others</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
