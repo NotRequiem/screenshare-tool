@@ -15,7 +15,6 @@ extern "C" {
 	#include <windows.h>
 	#include <psapi.h>
 	#include <tlhelp32.h>
-	#include <shlwapi.h>
 
 	void Javaw();
 
