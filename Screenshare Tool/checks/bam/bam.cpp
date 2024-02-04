@@ -23,6 +23,14 @@ static bool IsFileSignatureValid(const std::wstring& filePath) {
     return wrapper.VerifyFileSignature(filePath);
 }
 
+// Function to convert std::wstring to UTF-8 std::string
+static std::string convertWStringToUtf8(const std::wstring& wstr) {
+    int utf8Length = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr);
+    std::string utf8String(utf8Length, 0);
+    WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &utf8String[0], utf8Length, nullptr, nullptr);
+    return utf8String;
+}
+
 static std::wstring ConvertDevicePathToFilePath(const std::wstring& devicePath)
 {
     static std::map<std::wstring, std::wstring> dosPathDevicePathMap = GetDosPathDevicePathMap();
@@ -122,12 +130,13 @@ void ListBinaryRegistryValues(HKEY hKey, const wchar_t* subKey) {
                                     if (CompareFileTime(&fileTime, &lastLogonFileTime) > 0) {
                                         // Check if the file signature is valid
                                         if (!IsFileSignatureValid(ConvertDevicePathToFilePath(devicePath))) {
-                                            std::wcout << L"[#] Executed & Unsigned file: " << ConvertDevicePathToFilePath(devicePath)
-                                                << L" at: " << localTime.wYear << L"/" << std::setw(2) << std::setfill(L'0') << localTime.wMonth
-                                                << L"/" << std::setw(2) << std::setfill(L'0') << localTime.wDay
-                                                << L" " << std::setw(2) << std::setfill(L'0') << localTime.wHour
-                                                << L":" << std::setw(2) << std::setfill(L'0') << localTime.wMinute
-                                                << L":" << std::setw(2) << std::setfill(L'0') << localTime.wSecond << L'\n';
+                                            std::string filePathUtf8 = convertWStringToUtf8(ConvertDevicePathToFilePath(devicePath));
+
+                                            // Display file path using wprintf
+                                            wprintf(L"[#] Executed & Unsigned file: %hs at: %04d/%02d/%02d %02d:%02d:%02d\n",
+                                                filePathUtf8.c_str(),
+                                                localTime.wYear, localTime.wMonth, localTime.wDay,
+                                                localTime.wHour, localTime.wMinute, localTime.wSecond);
                                         }
                                     }
                                 }
