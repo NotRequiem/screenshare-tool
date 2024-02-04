@@ -16,6 +16,7 @@
 "miscellaneous\digital signature\trustverify.hpp"
 
 // GUI related headers
+"miscellaneous\string\string.hpp"
 "miscellaneous\gui\color.h"
 */
 
