@@ -161,8 +161,8 @@ static void AnalyzeStrings(HANDLE hProcess) {
 
                         if (i - startIndex >= MIN_STRING_LENGTH) {
                             for (size_t j = 0; j < sizeof(cheatStrings) / sizeof(cheatStrings[0]); j++) {
-                                // Use StrStrI for case-insensitive substring matching
-                                if (StrStrI((LPCSTR)&buffer[startIndex], cheatStrings[j]) != NULL) {
+                                // Use stricmp for case-insensitive string comparison
+                                if (_stricmp((const char*)&buffer[startIndex], cheatStrings[j]) == 0) {
                                     wprintf(L"Cheating string detected in Minecraft process: %lu, ban the user.\n", GetProcessId(hProcess));
                                 }
                             }
