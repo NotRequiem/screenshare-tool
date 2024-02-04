@@ -93,7 +93,7 @@ Please note that this tool exclusively retrieves information generated since the
 
 > `22.` Detects if certain string cleaners have been executed.
 
-> `23.` Detects if the Prefetch folder is deleted or renamed by using both normal and special characters.
+> `23.` Detects common Prefetch bypasses, like the Prefetch folder being deleted or renamed by using both normal and special characters, or read-only attributes in the Prefetch files.
 
 > `24.` Detects if useful processes for Screenshare have been restarted.
 
