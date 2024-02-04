@@ -15,7 +15,8 @@
 
 > 5. Forensic
 - Checks to detect executed files with Prefetch.
-
+- Checks to detect executed files with crash dumps.
+  
 > 6. ImportCode
 - Checks to detect the code import bypass.
 - Checks to detect fileless executions (almost the same as checking importcode bypasses).
@@ -27,13 +28,14 @@
 > 8. Memory
 - Checks to detect executed files.
 - Checks to detect accessed files.
-
+- Checks to detect cheats inside javaw's memory.
+  
 > 9. Mods
 - Checks to detect selfdestruct of internal cheats.
 
 > 10. Onboard Memory Macros
 - Checks to detect macros integrated in the memory of a keyboard.
-- Checks to detect macros integrated in the memory of a mice.
+- Checks to detect macros integrated in the memory of a mouse.
 
 > 11. System
 - Checks to detect if System Informer or Process Hacker was ran.
