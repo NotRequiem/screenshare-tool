@@ -1,5 +1,4 @@
 #include "appcrash.hpp"
-#include <memory>
 
 void AppCrash() {
     setConsoleTextColor(Magenta);
@@ -57,11 +56,14 @@ void AppCrash() {
 
         // Compare the modified time with the last logon time
         if (CompareFileTime(&lastWriteTime, &lastLogonFileTime) > 0) {
-            // Print the file name and modified time
-            std::wcout << L"[#] Executed file: " << fileName << L" at "
-                << stLocal.wYear << L"-" << stLocal.wMonth << L"-" << stLocal.wDay
-                << L" " << stLocal.wHour << L":" << stLocal.wMinute << L":" << stLocal.wSecond
-                << std::endl;
+            // Convert fileName to UTF-8
+            std::string fileNameUtf8 = convertWStringToUtf8(fileName);
+
+            // Print the file name and modified time using wprintf
+            wprintf(L"[#] Executed file: %hs at %04d-%02d-%02d %02d:%02d:%02d\n",
+                fileNameUtf8.c_str(),
+                stLocal.wYear, stLocal.wMonth, stLocal.wDay,
+                stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
         }
 
     } while (FindNextFileW(hFind.get(), &findFileData) != 0);
