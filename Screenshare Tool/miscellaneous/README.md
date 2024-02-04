@@ -8,7 +8,10 @@
 > 3. GUI
 - Console colors
 
-> 4. WMI
-- WMI Initialization for checks source files
-- WMI Execution Query for checks source files
-- WMI Uninitialization for checks source files
+> 4. String
+- Conversion to UTF-8 strings for better console output.
+
+> 5. WMI
+- WMI Initialization for checks source files.
+- WMI Execution Query for checks source files.
+- WMI Uninitialization for checks source files.
