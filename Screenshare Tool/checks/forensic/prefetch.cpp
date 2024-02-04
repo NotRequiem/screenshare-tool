@@ -50,6 +50,17 @@ static std::wstring GetDriveLetterFromVolumePath(const std::wstring& volumePath)
     return volumePath;
 }
 
+// Function to check for bypasses in the Prefetch folder
+void CheckPrefetchReadOnlyAttribute(const std::wstring& prefetchFilePath) {
+    DWORD fileAttributes = GetFileAttributesW(prefetchFilePath.c_str());
+
+    if (fileAttributes != INVALID_FILE_ATTRIBUTES) {
+        if ((fileAttributes & FILE_ATTRIBUTE_READONLY) != 0) {
+            std::wcout << L"[!] Prefetch file is marked as read-only: " << prefetchFilePath << L". This is bannable." << std::endl;
+        }
+    }
+}
+
 void Prefetch() {
     SYSTEMTIME lastLogonTime;
 
@@ -68,6 +79,8 @@ void Prefetch() {
     }
 
     setConsoleTextColor(Magenta);
+    std::wcout << "[Forensic Scanner] Running checks to detect renamed and deleted Prefetch folders...\n";
+    std::wcout << "[Forensic Scanner] Running checks to detect Prefetch bypasses...\n";
     std::wcout << "[Forensic Scanner] Running checks to detect executed files with Prefetch...\n";
     resetConsoleTextColor();
     std::unordered_set<std::wstring> printedPaths;  // Unordered set to store printed paths
@@ -82,6 +95,9 @@ void Prefetch() {
             }
 
             std::wstring prefetchFilePath = prefetchDir + prefetchFile;
+
+            // Check the read-only attribute of prefetch files
+            CheckPrefetchReadOnlyAttribute(prefetchFilePath);
 
             FILETIME lastWriteTime;
             FileTimeToLocalFileTime(&findFileData.ftLastWriteTime, &lastWriteTime);
