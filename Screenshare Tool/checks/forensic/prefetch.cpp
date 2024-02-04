@@ -51,7 +51,7 @@ static std::wstring GetDriveLetterFromVolumePath(const std::wstring& volumePath)
 }
 
 // Function to check for bypasses in the Prefetch folder
-void CheckPrefetchReadOnlyAttribute(const std::wstring& prefetchFilePath) {
+static void CheckPrefetchReadOnlyAttribute(const std::wstring& prefetchFilePath) {
     DWORD fileAttributes = GetFileAttributesW(prefetchFilePath.c_str());
 
     if (fileAttributes != INVALID_FILE_ATTRIBUTES) {
