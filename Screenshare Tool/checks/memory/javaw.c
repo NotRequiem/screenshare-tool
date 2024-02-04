@@ -63,7 +63,72 @@ static const char* cheatStrings[] = {
     "XRay.class",
     "EntityKiller.class",
     "Bhop.class",
-    "clicker.class"
+    "CrystalAura.class",
+    "clicker.class",
+    "ReachCommands.java",
+    "aimassist.java",
+    "aimbot.java",
+    "killaura.java",
+    "triggerbot.java",
+    "autopot.java",
+    "bhop.java",
+    "smoothaimbot.java",
+    "nofall.java",
+    "wallhack.java",
+    "autoclick.java",
+    "reach.java",
+    "forcefield.java",
+    "aimboat.java",
+    "antivoid.java",
+    "AimbotGui.java",
+    "AutoSoup.java",
+    "AutoPot.java",
+    "Freecam.java",
+    "NoSlowDown.java",
+    "NoFall.java",
+    "AntiFall.java",
+    "Scaffold.block",
+    "Player ESP.java",
+    "BedFucker.java",
+    "InvWalk.java",
+    "FastEat.java",
+    "ChestEsp.java",
+    "ChestStealer.java",
+    "InfinityJump.java",
+    "AutoArmor.java",
+    "MobAura.java",
+    "BaseFinder.java",
+    "FastBow.java",
+    "Misplace.java",
+    "FightBot.java",
+    "AutoGap.java",
+    "ChestAura.java",
+    "AutoBlockhit.java",
+    "SpawnerFinder.java",
+    "Cavefinder.java",
+    "StorageESP.java",
+    "NametagsESP.java",
+    "ItemESP.java",
+    "NoClickDelay.java",
+    "AutoRefill.java",
+    "AutoPearl.java",
+    "AutoEat.java",
+    "airjump.java",
+    "Lagback.java",
+    "Backtrack.java",
+    "TPAura_Attack.java",
+    "_Velocity_Horizontal.java",
+    "_Velocity_Vertical.java",
+    "_Regen_Health_.java",
+    "_NoFall_Mode_.java",
+    "WaterSpeed.java",
+    "AntiFire.java",
+    "AimSpeed.java",
+    "XRay.java",
+    "EntityKiller.java",
+    "Bhop.java",
+    "CrystalAura.java",
+    "clicker.java"
 };
 
 static void AnalyzeStrings(HANDLE hProcess) {
@@ -96,8 +161,9 @@ static void AnalyzeStrings(HANDLE hProcess) {
 
                         if (i - startIndex >= MIN_STRING_LENGTH) {
                             for (size_t j = 0; j < sizeof(cheatStrings) / sizeof(cheatStrings[0]); j++) {
-                                if (strstr((char*)&buffer[startIndex], cheatStrings[j]) != NULL) {
-                                    wprintf(L"Cheating string detected in minecraft process: %lu, ban the user.\n", GetProcessId(hProcess));
+                                // Use StrStrI for case-insensitive substring matching
+                                if (StrStrI((LPCSTR)&buffer[startIndex], cheatStrings[j]) != NULL) {
+                                    wprintf(L"Cheating string detected in Minecraft process: %lu, ban the user.\n", GetProcessId(hProcess));
                                 }
                             }
                         }
@@ -120,6 +186,9 @@ static void AnalyzeStrings(HANDLE hProcess) {
     }
     __except (EXCEPTION_EXECUTE_HANDLER) {
         fprintf(stderr, "Exception caught during memory analysis.\n");
+        free(buffer);
+        CloseHandle(hProcess);
+        return;
     }
 
     free(buffer);
@@ -131,7 +200,7 @@ void Javaw() {
     wprintf(L"[Memory Scanner] Running checks to detect internal cheats in Minecraft's memory...\n");
     resetConsoleTextColor();
 
-    PROCESSENTRY32 pe32;
+    PROCESSENTRY32 pe32 = { 0 };
     pe32.dwSize = sizeof(PROCESSENTRY32);
 
     HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -150,7 +219,7 @@ void Javaw() {
 
                 if (processCount > 1) {
                     // Print a warning if more than one process is detected
-                    wprintf(L"Warning: Multiple processes detected. The scan might take a while.\n");
+                    wprintf(L"[#] Multiple processes detected. The scan might take a while.\n");
                 }
 
                 HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pe32.th32ProcessID);
