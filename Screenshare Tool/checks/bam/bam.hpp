@@ -9,9 +9,10 @@
 #include <comdef.h>
 #include <iomanip>
 
-#include "..\..\miscellaneous\gui\color.h"
 #include "..\..\miscellaneous\digital signature\trustverify.hpp"
 #include "..\..\miscellaneous\boot\boot.hpp"
+#include "..\..\miscellaneous\string\string.hpp"
+#include "..\..\miscellaneous\gui\color.h"
 
 #pragma comment(lib, "wbemuuid.lib")
 
