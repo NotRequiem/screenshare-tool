@@ -202,57 +202,6 @@ As the tool is specifically designed for Windows, there are no CMake files provi
 To maintain compatibility across various Windows systems and minimize the impact on memory and disk usage, the journal parsing process has been optimized for efficiency, albeit with a slight trade-off in speed.
 
 # License
+I am not responsible nor liable for any damage you cause through any malicious usage of this project.
 
-<details>
-<summary>Click here to display the License's table of contents</summary>
-
-- [Overview](#overview)
-- [MIT License](#mit-license)
-- [Terms and Conditions](#terms-and-conditions)
-- [Support and Contact](#support-and-contact)
-- [Changes to this License](#changes-to-this-license)
-
-</details>
-
-## Overview
-The Advanced Screenshare Tool ("the Software") is provided under the terms of the MIT License. By using, modifying, or distributing the Software, you agree to comply with the terms of this license.
-
-## MIT License
-
-Copyright (c) [2024] [Advanced Screenshare Tool]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## Terms and Conditions
-- Use of the Software: You are permitted to use, modify, and distribute the Software for any purpose, including commercial purposes.
-
-- Distribution: If you distribute the Software or any substantial portion of it, you must include the original copyright notice and the license terms in any copy or substantial portion of the Software.
-
-- Attribution: Attribution is not required, but it is appreciated. You may attribute the Software to its original creator if you wish.
-
-- No Warranty: The Software is provided "as is," without warranty of any kind, express or implied. The authors or copyright holders are not liable for any claims, damages, or other liabilities.
-
-## Contributing
-Contributions to the Software are welcome. By contributing, you agree to license your contributions under the terms of the MIT License.
-
-## Support and Contact
-For support or inquiries related to the Software, you may contact me at my discord account (notrequiem).
-
-## Changes to this License
-This License documentation may be updated from time to time. It is your responsibility to check for updates. Substantial changes will be notified in the repository's release notes.
+License: GNU General Public License 3.0.
