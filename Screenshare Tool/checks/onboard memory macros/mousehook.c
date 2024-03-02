@@ -113,7 +113,7 @@ static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lPara
             lastUpTimeRight = upTimeRight;
         }
 
-        if (wParam == 516 || wParam == 518 && lastUpTimeRight != 0) { // Right mouse button is being pressed again
+        if ((wParam == 516 || wParam == 518) && lastUpTimeRight != 0) { // Right mouse button is being pressed again
             timeInterval = downTimeRight - lastUpTimeRight;
             if (timeInterval == 0) {
             printf("[!] Autoclicker detected in the right mouse button. Delay Release-To-Press is 0ms. Ban the user.\n");
