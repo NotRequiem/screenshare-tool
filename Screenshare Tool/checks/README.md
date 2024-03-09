@@ -16,6 +16,7 @@
 > 5. Forensic
 - Checks to detect executed files with Prefetch.
 - Checks to detect executed files with crash dumps.
+- Checks to detect recently accessed files with shortcuts.
   
 > 6. ImportCode
 - Checks to detect the code import bypass.
@@ -32,7 +33,8 @@
   
 > 9. Mods
 - Checks to detect selfdestruct of internal cheats.
-
+- Checks to detect XRay resource packs.
+  
 > 10. Onboard Memory Macros
 - Checks to detect macros integrated in the memory of a keyboard.
 - Checks to detect macros integrated in the memory of a mouse.
