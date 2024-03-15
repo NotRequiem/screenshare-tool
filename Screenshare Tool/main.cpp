@@ -68,11 +68,11 @@ int main(int argc, char* argv[]) {
 
     Javaw(); // Detects unlegit clients and mods using Minecraft's memory
 
+    XRay(imp); // Detects xray resource packs
+
     csrss(imp); // Detects execution of unsigned files with modified extensions, unsigned executed files and unsigned injected dlls
 
     USNJournal(imp); // Detects certain file modifications, such as macro modifications, replaced files and special characters
-
-    XRay(imp); // Detects xray resource packs
 
     Macros(); // Checks for macro files modifications. This should run at the end to counter macro switch profile bypasses
 
