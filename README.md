@@ -1,5 +1,6 @@
  **Discord:** https://discord.gg/AyqVMVF2gN
 
+
 <table>
     <tr>
       <th>Section</th>
@@ -42,11 +43,14 @@
 # Introduction
 This versatile screenshare tool is dedicated to accurately detecting various forms of cheats, macros, injectors, and any unauthorized modifications on video game servers (Minecraft Java, Minecraft Bedrock, Rust, FiveM, Roblox, GTA V, etc.). The tool ensures a robust defense against false positives and implements anti-forensic methods to safeguard the integrity of its detection mechanisms.
 
-Please note that this tool exclusively retrieves information generated since the last boot time.
+Please note that this tool exclusively retrieves information generated since the last boot time. The code is just meant to work and not to be professional at all.
+
+To use the tool, just run it and nothing else. The tool does not need specific explanations on how to be used. 
+You can use the "-i" or "-I" parameter when running the tool in the consoleto make it only print important information and not what the tool is scanning.
 
 # Currently In Development
 
-- Adding JumpLists as a forensic artifact to detect file execution.
+- Adding JumpLists (Automatic and Custom Destinations parsing) as a forensic artifact to detect file execution.
 
 # Detections
 
@@ -124,7 +128,8 @@ The tool indirectly or directly detects/is not affected by these bypasses:
 70. Code replaces.
 71. Any bypass based on deleting/bypassing browser history.
 72. Any bypass based on cleaning the memory of an user-mode process instance.
-
+73. Fileless injections.
+    
 # Direct Checks
 > `1.` Detects onboard memory macros in both mouse and keyboard devices by using low level hardware hooks.
 
@@ -217,7 +222,7 @@ In essence, the tool concentrates its efforts on scrutinizing ".exe" and ".dll" 
 This methodology consistently follows the approach of selecting the "strongest method" and subsequently developing patches to mitigate any bypasses that might compromise the effectiveness of the detection process.
 
 # Memory Scanner
-If anyone is interested, this is the external program coded to scan the memory of the necessary processes: [https://github.com/NotRequiem/memory-scanner](https://github.com/NotRequiem/memscanner)
+If anyone is interested, this is the external program made to scan the memory of the necessary processes: [https://github.com/NotRequiem/memory-scanner](https://github.com/NotRequiem/memscanner)
 
 # How to Build the project
 
@@ -239,7 +244,7 @@ Navigate to the location of your .sln file and select it.
 > 4. Build Solution:
 
 Once the solution is open, you can build it by going to "Build" -> "Build Solution" from the menu. Make sure the Unicode Character set is not set, and the C++ standard is 20.
-Alternatively, you can press Ctrl + Shift + B to build the solution.
+Alternatively, you can press Ctrl + Shift + B to build the solution. You will need to install Spectrum mitigation libraries for AMD64 in order to build the project.
 
 # Disclaimers
 
@@ -270,17 +275,17 @@ Alternatively, you can press Ctrl + Shift + B to build the solution.
 # Notes and Considerations
 
 ## 1. Digital Signature Limitations:
-The tool lacks a reliable counter against leaked (and official/valid) digital signatures sourced from places like the dark web. This is attributed to the inherent challenges of employing techniques such as sandboxing and string scanning, which could significantly slow down the scanning process.
+The tool lacks a reliable counter against leaked, official/valid digital signatures sourced from places like the dark web. It is impossible to detect and block these certificates unless manually whitelisting every leaked cert on the internet. This is attributed to the inherent challenges of employing techniques such as sandboxing and string scanning, which could significantly slow down the scanning process.
 Public API keys for contacting antivirus engines, such as VirusTotal, are not utilized due to the high restrictions imposed on the VirusTotal API. As a precaution, it is recommended to manually check any replaced file by uploading it to Hybrid or using tools like Bintext.
 
 ## 2. Kernel Driver Usage:
-The tool abstains from exploiting signed and vulnerable kernel drivers or utilizing any kernel driver to scan memory in "protected" processes like csrss. This decision is motivated by the requirement for a digital signature to avoid being blocked by Windows. Consequently, the tool is not equipped to scan for server-side cheats or detect some fileless malware techniques using the network.
+The tool abstains from exploiting signed and vulnerable kernel drivers or utilizing any kernel driver to scan memory in "protected" processes like csrss. This decision is motivated by the requirement for a digital signature to avoid being blocked by Windows. Consequently, the tool is not equipped to scan for server-side cheats by analyzing the network traffic or detect some fileless malware techniques using the network.
 
 ## 3. Build Process Simplification:
 As the tool is specifically designed for Windows, there are no CMake files provided to simplify the build process for a wider audience. Instead, users can streamline the build process by downloading Visual Studio, opening the solution file, and initiating the build by clicking on "Build." This straightforward approach ensures ease of use for Windows environments.
 
 ## 4. USNJournal Parsing:
-To maintain compatibility across various Windows systems and minimize the impact on memory and disk usage, the journal parsing process has been optimized for efficiency, albeit with a slight trade-off in speed.
+To maintain compatibility across various Windows systems and minimize the impact on memory and disk usage, the journal parsing process has been optimized for efficiency by just using system commands, albeit with a slight trade-off in speed.
 
 # License
 I am not responsible nor liable for any damage you cause through any malicious usage of this project.
