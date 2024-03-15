@@ -1,8 +1,10 @@
 #include "main.hpp"
 
 int main(int argc, char* argv[]) {
-    bool imp = false;
-
+    // ================================================================================================
+    //                                    SCREENSHARE TOOL INITIALIZATION
+    // ================================================================================================
+      
     // Check command line arguments to know if the ss tool should print important information
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "-i") == 0 || strcmp(argv[i], "-I") == 0) {
@@ -11,36 +13,21 @@ int main(int argc, char* argv[]) {
     }
 
     checkMemoryExe(); // Checks if the memory scanner is present
-    if (!imp) {
-        setConsoleTextColor(BrightWhite);
-        std::wcout << "[Virtual Machine Scanner] Running checks to detect virtual machines...\n";
-        resetConsoleTextColor();
-    }
-    
-    VirtualMachine(); // Detects if the user is using a Virtual Machine
-
     setlocale(LC_ALL, "");  // Set the locale for wide character support
 
     // ================================================================================================
     //                                    SCREENSHARE TOOL CHECKS
     // ================================================================================================
-    
-    std::wcout << "DO NOT CLICK INSIDE THE CONSOLE DURING THE SCAN!\n";
-    std::wcout << "If you press Enter, the console will continue but will skip the current check.\n";
 
     MacroStrings(imp); // Checks for macro strings. This should run first because macro strings are fastly erased
 
-    ExecutedFiles(imp); // Detects executed files using several processes
-
-    UnpluggedDevices(imp); // Detects unplugged devices
-
-    MouseCheck(imp); // Detects the VID and PID of the user
-
-    MouseKeys(); // Checks if autoclickers using MouseKeys are enabled.
+    ExecutedFiles(imp); // Checks executed files using several processes
 
     USNJournalCleared(imp); // Check if USNJournal was cleared
 
+#ifdef _WIN64
     SystemTimeChange(imp); // Checks if the system time was changed
+#endif
 
     SystemInformer(imp); // Checks if System Informer or Process Hacker were executed
 
@@ -56,8 +43,6 @@ int main(int argc, char* argv[]) {
 
     ReplacedDisks(imp); // Detects physical or virtual disks replaced or formatted before the Screenshare
 
-    ImportCode(imp); // Detects bypasses using code imports on system terminals
-
     TaskScheduler(imp); // Detects bypasses using Task Scheduler
 
     Prefetch(imp); // Detects executed files with Prefetch
@@ -69,6 +54,16 @@ int main(int argc, char* argv[]) {
     Javaw(); // Detects unlegit clients and mods using Minecraft's memory
 
     XRay(imp); // Detects xray resource packs
+
+    ImportCode(imp); // Detects bypasses using code imports on system terminals
+
+    UnpluggedDevices(imp); // Detects unplugged devices
+
+    MouseKeys(); // Checks if autoclickers using MouseKeys are enabled.
+
+    MouseCheck(imp); // Detects the VID and PID of the mouse being used.
+
+    VirtualMachine(imp); // Detects if the user is using a Virtual Machine
 
     csrss(imp); // Detects execution of unsigned files with modified extensions, unsigned executed files and unsigned injected dlls
 
