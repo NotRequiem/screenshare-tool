@@ -196,6 +196,10 @@ static void AnalyzeStrings(HANDLE hProcess) {
 }
 
 void Javaw() {
+    setConsoleTextColor(BrightYellow);
+    wprintf(L"[Memory Scanner] Running checks to detect internal cheats in Minecraft's memory...\n");
+    resetConsoleTextColor();
+
     PROCESSENTRY32 pe32 = { 0 };
     pe32.dwSize = sizeof(PROCESSENTRY32);
 
