@@ -69,6 +69,10 @@ static void GetProcessStartTime(const wchar_t* processName) {
 
 // Function to detect suspicious mods by checking the start time of relevant processes
 void SuspiciousMods() {
+    setConsoleTextColor(BrightMagenta);
+    wprintf(L"[Mods Scanner] Running checks to detect suspicious mods ran by the game...\n");
+    resetConsoleTextColor();
+
     // Get the start time of the Java process
     GetProcessStartTime(L"javaw.exe");
     // Get the start time of the Minecraft Windows process
