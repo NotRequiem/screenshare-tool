@@ -19,6 +19,12 @@ static void CleanupCOM() {
     CoUninitialize();
 }
 
+static void PrintError(const wchar_t* context, HRESULT hr) {
+    _com_error err(hr);
+    LPCTSTR errMsg = err.ErrorMessage();
+    std::wcerr << context << " Error: 0x" << std::hex << hr << " " << errMsg << std::endl;
+}
+
 void MouseCheck(bool imp) {
     // Set console color for informative output
     if (!imp) {
@@ -27,17 +33,17 @@ void MouseCheck(bool imp) {
         resetConsoleTextColor();
     }
 
-    // Initialize COM for multithreaded apartment model
-    HRESULT hr = CoInitializeEx(0, COINIT_MULTITHREADED);
+    // Initialize COM for singlethreaded apartment model
+    HRESULT hr = CoInitializeEx(0, COINIT_APARTMENTTHREADED);
     if (FAILED(hr)) {
-        std::wcerr << "Failed to initialize COM" << std::endl;
+        PrintError(L"COM Initialization", hr);
         return;
     }
 
     // Initialize COM security settings
-    hr = CoInitializeSecurity(nullptr, -1, nullptr, nullptr, RPC_C_AUTHN_LEVEL_DEFAULT, RPC_C_IMP_LEVEL_IMPERSONATE, nullptr, EOAC_NONE, nullptr);
-    if (FAILED(hr)) {
-        std::wcerr << "Failed to initialize COM security" << std::endl;
+    hr = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_DEFAULT, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, NULL);
+    if (FAILED(hr) && hr != RPC_E_TOO_LATE) { // Ignore RPC_E_TOO_LATE, indicating security settings are already initialized
+        PrintError(L"COM Security Initialization", hr);
         CleanupCOM();
         return;
     }
@@ -45,7 +51,7 @@ void MouseCheck(bool imp) {
     // Create an instance of the WbemLocator interface
     hr = CoCreateInstance(CLSID_WbemLocator, 0, CLSCTX_INPROC_SERVER, IID_IWbemLocator, reinterpret_cast<LPVOID*>(&pLoc));
     if (FAILED(hr)) {
-        std::wcerr << "Failed to create WbemLocator instance" << std::endl;
+        PrintError(L"WbemLocator Creation", hr);
         CleanupCOM();
         return;
     }
@@ -53,7 +59,7 @@ void MouseCheck(bool imp) {
     // Connect to the WMI service on the local machine
     hr = pLoc->ConnectServer(_bstr_t(L"ROOT\\CIMV2"), nullptr, nullptr, 0, 0, 0, 0, &pSvc);
     if (FAILED(hr)) {
-        std::wcerr << "Failed to connect to WMI service" << std::endl;
+        PrintError(L"WMI Connection", hr);
         CleanupCOM();
         return;
     }
@@ -61,7 +67,7 @@ void MouseCheck(bool imp) {
     // Set security levels on the proxy
     hr = CoSetProxyBlanket(pSvc, RPC_C_AUTHN_WINNT, RPC_C_AUTHZ_NONE, nullptr, RPC_C_AUTHN_LEVEL_CALL, RPC_C_IMP_LEVEL_IMPERSONATE, nullptr, EOAC_NONE);
     if (FAILED(hr)) {
-        std::wcerr << "Failed to set proxy blanket" << std::endl;
+        PrintError(L"Proxy Blanket Configuration", hr);
         CleanupCOM();
         return;
     }
