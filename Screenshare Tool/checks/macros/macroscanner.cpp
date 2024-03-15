@@ -101,7 +101,7 @@ static void scanProcessStrings(const wchar_t* processName, const std::wstring& s
 void MacroStrings(bool imp) {
     if (!imp) {
         setConsoleTextColor(BrightBlue);
-        std::wcout << "[Macro Scanner] Running checks for deleted macro traces in memory...\n";
+        std::wcout << "[Macro Scanner] Running checks to detect deleted macro traces in memory...\n";
         resetConsoleTextColor();
     }
 
@@ -126,4 +126,3 @@ void MacroStrings(bool imp) {
         scanProcessStrings(processName, searchPattern, useRegex, message);
     }
 }
-
