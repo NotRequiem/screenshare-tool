@@ -10,6 +10,8 @@ extern "C" {
 #include <psapi.h>
 #include <stdio.h>
 
+#include "..\..\miscellaneous\gui\color.h"
+
 void SuspiciousMods();
 
 #ifdef __cplusplus
