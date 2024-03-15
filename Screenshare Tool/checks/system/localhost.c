@@ -1,6 +1,10 @@
 #include "localhost.h"
 
 void LocalHost() {
+    setConsoleTextColor(Gray);
+    printf("[System Scanner] Running checks to detect localhost environments...\n");
+    resetConsoleTextColor();
+    
     DWORD dwEntriesRead = 0;
     NETRESOURCE* lpNetResource = NULL;
     HANDLE hEnum;
