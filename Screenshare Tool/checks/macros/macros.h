@@ -9,6 +9,8 @@ extern "C" {
 #include <wchar.h>
 #include <Windows.h>
 
+#include "..\..\miscellaneous\gui\color.h"
+
 	extern wchar_t username[MAX_PATH];
 
 	void Macros();
