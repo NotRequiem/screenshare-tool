@@ -16,13 +16,13 @@ static void BootTime(SYSTEMTIME& lastBootTime) {
 
     // Calculate the start time by subtracting the elapsed time
     FILETIME ftStartTime = SystemTimeToFileTime(lastBootTime);
-    ULARGE_INTEGER startDateTime;
+    ULARGE_INTEGER startDateTime{};
     startDateTime.HighPart = ftStartTime.dwHighDateTime;
     startDateTime.LowPart = ftStartTime.dwLowDateTime;
     startDateTime.QuadPart -= elapsedTime * 10000;
 
     // Convert the new time back to SYSTEMTIME
-    FILETIME ftNewTime;
+    FILETIME ftNewTime{};
     ftNewTime.dwHighDateTime = startDateTime.HighPart;
     ftNewTime.dwLowDateTime = startDateTime.LowPart;
 
