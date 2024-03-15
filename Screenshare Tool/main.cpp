@@ -41,33 +41,33 @@ int main(int argc, char* argv[]) {
 
     SuspiciousMods(); // Checks for mods that were modified while Minecraft was running
 
-    ReplacedDisks(imp); // Detects physical or virtual disks replaced or formatted before the Screenshare
+    ReplacedDisks(imp); // Checks physical or virtual disks replaced or formatted before the Screenshare
 
-    TaskScheduler(imp); // Detects bypasses using Task Scheduler
+    TaskScheduler(imp); // Checks bypasses using Task Scheduler
 
-    Prefetch(imp); // Detects executed files with Prefetch
+    Prefetch(imp); // Checks executed files with Prefetch
 
-    RecentFiles(imp); // Detects recently accessed files.
+    RecentFiles(imp); // Checks recently accessed files.
 
-    AppCrash(imp); // Detects executed (and crashed) files with WER
+    AppCrash(imp); // Checks executed (and crashed) files with WER
 
-    Javaw(); // Detects unlegit clients and mods using Minecraft's memory
+    Javaw(); // Checks unlegit clients and mods using Minecraft's memory
 
-    XRay(imp); // Detects xray resource packs
+    XRay(imp); // Checks xray resource packs
 
-    ImportCode(imp); // Detects bypasses using code imports on system terminals
+    ImportCode(imp); // Checks bypasses using code imports on system terminals
 
-    UnpluggedDevices(imp); // Detects unplugged devices
+    UnpluggedDevices(imp); // Checks unplugged devices
 
     MouseKeys(); // Checks if autoclickers using MouseKeys are enabled.
 
-    MouseCheck(imp); // Detects the VID and PID of the mouse being used.
+    MouseCheck(imp); // Checks the VID and PID of the mouse being used.
 
-    VirtualMachine(imp); // Detects if the user is using a Virtual Machine
+    VirtualMachine(imp); // Checks if the user is using a Virtual Machine
 
-    csrss(imp); // Detects execution of unsigned files with modified extensions, unsigned executed files and unsigned injected dlls
+    csrss(imp); // Checks execution of unsigned files with modified extensions, unsigned executed files and unsigned injected dlls
 
-    USNJournal(imp); // Detects certain file modifications, such as macro modifications, replaced files and special characters
+    USNJournal(imp); // Checks certain file modifications, such as macro modifications, replaced files and special characters
 
     Macros(); // Checks for macro files modifications. This should run at the end to counter macro switch profile bypasses
 
