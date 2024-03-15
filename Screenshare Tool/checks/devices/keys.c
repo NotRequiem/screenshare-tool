@@ -1,6 +1,10 @@
 #include "keys.h"
 
 void MouseKeys() {
+    setConsoleTextColor(BrightGreen);
+    wprintf(L"[Device Scanner] Running checks for MouseKeys autoclickers...\n");
+    resetConsoleTextColor();
+
     // Detects if MouseKeys are enabled in the registry
     HKEY hKey;
     if (RegOpenKeyExW(HKEY_CURRENT_USER, L"Control Panel\\Accessibility\\MouseKeys", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
