@@ -90,7 +90,9 @@ void VirtualMachine() {
     bool isVM = VM::detect();
 
     if (isVM) {
-        std::cout << "WARNING: Virtual Machine detected: " << VM::brand() << ". This is considered bannable." << std::endl;
+        if (VM::brand() != "Unknown") {
+            std::cout << "WARNING: Virtual Machine detected: " << VM::brand() << ". This is considered bannable." << std::endl;
+        }
     }
 }
 
@@ -104,5 +106,6 @@ void checkMemoryExe() {
 
     if (!std::filesystem::exists(memoryExePath)) {
         std::wcerr << L"Download 'memory.exe' at: https://github.com/NotRequiem/memscanner/releases/download/memscanner/memory.exe and place it near the Screenshare Tool program." << std::endl;
+        std::system("pause");
     }
 }
