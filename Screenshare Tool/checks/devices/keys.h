@@ -7,6 +7,8 @@ extern "C" {
 #include <windows.h>
 #include <wchar.h>
 
+#include "..\..\miscellaneous\gui\color.h"
+
 	void MouseKeys();
 
 #ifdef __cplusplus
