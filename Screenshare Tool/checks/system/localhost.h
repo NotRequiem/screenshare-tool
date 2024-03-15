@@ -10,6 +10,8 @@ extern "C" {
 #include <stdio.h>
 #include <wchar.h>
 
+#include "..\..\miscellaneous\gui\color.h"
+
 #pragma comment(lib, "Mpr.lib")
 
 void LocalHost();
