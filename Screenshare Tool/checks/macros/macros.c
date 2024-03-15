@@ -198,6 +198,11 @@ static void CheckReadOnlyFilesWithExtension(const wchar_t* folderPath, const wch
 
 // Start macro checks
 void Macros() {
+    setConsoleTextColor(BrightBlue);
+    wprintf(L"[Macro Scanner] Running checks to detect macro file bypasses...\n");
+    wprintf(L"[Macro Scanner] Running checks to detect macro file modifications...\n");
+    resetConsoleTextColor();
+
     DWORD usernameSize = MAX_PATH;
     if (GetUserNameW(username, &usernameSize)) {
         // List of macro file paths to check
