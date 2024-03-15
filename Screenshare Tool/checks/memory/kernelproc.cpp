@@ -79,7 +79,6 @@ static std::wstring PromptForFilePath(const std::wstring& promptMessage) {
     } while (true);
 }
 
-
 // Function to perform file execution and dll injection checks in csrss memory dumps
 void csrss(bool imp) {
     if (!imp) {
@@ -136,145 +135,156 @@ void csrss(bool imp) {
     bool fileScanned = false;
 
     while (!fileScanned) {
+        if (!imp) {       
         setConsoleTextColor(BrightYellow);
         std::wcout << L"[Memory Scanner] Scanning DLL Injections...\n";
         std::wcout << L"[Memory Scanner] Scanning executed files with modified extensions...\n";
         std::wcout << L"[Memory Scanner] Scanning executed files without extension...\n";
         std::wcout << L"[Memory Scanner] Scanning executed files without name...\n";
         resetConsoleTextColor();
+        }
 
-        while (std::getline(inputFile1, line)) {
-            // Skip lines that exceed the maximum allowed length to avoid crashing
-            if (line.length() > MAX_LINE_LENGTH) {
-                continue;
-            }
+        try {
+            while (std::getline(inputFile1, line)) {
+                // Skip lines that exceed the maximum allowed length to avoid crashing
+                if (line.length() > MAX_LINE_LENGTH) {
+                    continue;
+                }
 
-            // csrss string dumps start always with "0x" when done with System Informer, so we need to capture only the file path
-            // we consider every file path found in the csrss memory dump as an executed file
-            size_t colonPos = line.find(':');
-            if (colonPos != std::wstring::npos && colonPos + 2 < line.length()) {
-                std::wstring matchedString = line.substr(colonPos + 2);
+                // csrss string dumps start always with "0x" when done with System Informer, so we need to capture only the file path
+                // we consider every file path found in the csrss memory dump as an executed file
+                size_t colonPos = line.find(':');
+                if (colonPos != std::wstring::npos && colonPos + 2 < line.length()) {
+                    std::wstring matchedString = line.substr(colonPos + 2);
 
-                if (std::regex_search(matchedString, regexModifiedExtension)) {
-                    // Check for file existence
-                    if (printedMatches.find(matchedString) == printedMatches.end()) {
-                        if (!std::filesystem::exists(matchedString)) {
+                    if (std::regex_search(matchedString, regexModifiedExtension)) {
+                        // Check for file existence
+                        if (printedMatches.find(matchedString) == printedMatches.end()) {
+                            if (!std::filesystem::exists(matchedString)) {
 
-                            if (matchedString.find(L"C:\\") != std::wstring::npos || matchedString.find(L"c:\\") != std::wstring::npos) {
+                                if (matchedString.find(L"C:\\") != std::wstring::npos || matchedString.find(L"c:\\") != std::wstring::npos) {
 
-                                // If the file exists in C:, we check with USNJournal if it was actually deleted to avoid false flags
-                                if (IsLineInDeletedFile(matchedString, deletedFileContents)) {
+                                    // If the file exists in C:, we check with USNJournal if it was actually deleted to avoid false flags
+                                    if (IsLineInDeletedFile(matchedString, deletedFileContents)) {
+                                        std::wcout << L"[#] Executed & Deleted file with a modified extension: " << matchedString << std::endl;
+                                    }
+                                }
+                                else {
+                                    // If the file was not deleted in the C: drive, we flag it as a deleted file since it will not be a deleted system file
                                     std::wcout << L"[#] Executed & Deleted file with a modified extension: " << matchedString << std::endl;
                                 }
                             }
+                        }
+
+                        // If the file exists, we check:
+                        // If it's unsigned (not legitimate files will not be signed to avoid detections)
+                        // If it's a .exe or .dll (since the regex for modified extensions will also capture non-executable files, and we need to avoid false flags).
+                        if (std::filesystem::exists(matchedString) && IsPEExecutable(matchedString) && !IsFileSignatureValid(matchedString)) {
+                            std::wcout << L"[#] Executed & Unsigned file with a modified extension: " << matchedString << std::endl;
+                        }
+
+                        printedMatches.insert(matchedString); // Add to the set to avoid duplicate output
+                        continue;  // Jump to the next line. This way, once a line matches a regex, it won't check the remaining regex patterns for the same line.
+                    }
+
+                    if (std::regex_search(matchedString, regexDllInjection)) {
+                        if (printedMatches.find(matchedString) == printedMatches.end()) {
+                            if (std::filesystem::exists(matchedString)) {
+                                if (!IsFileSignatureValid(matchedString)) {
+                                    std::wcout << L"[#] Executed & Unsigned file: " << matchedString << std::endl;
+                                }
+                            }
                             else {
-                                // If the file was not deleted in the C: drive, we flag it as a deleted file since it will not be a deleted system file
-                                std::wcout << L"[#] Executed & Deleted file with a modified extension: " << matchedString << std::endl;
+                                std::wcout << L"[#] Executed & Deleted file: " << matchedString << std::endl;
                             }
+
+                            printedMatches.insert(matchedString); // Add to the set to avoid duplicate output
+                            continue;  // Jump to the next line. This way, once a line matches a regex, it won't check the remaining regex patterns for the same line.
                         }
                     }
 
-                    // If the file exists, we check:
-                    // If it's unsigned (not legitimate files will not be signed to avoid detections)
-                    // If it's a .exe or .dll (since the regex for modified extensions will also capture non-executable files, and we need to avoid false flags).
-                    if (std::filesystem::exists(matchedString) && IsPEExecutable(matchedString) && !IsFileSignatureValid(matchedString)) {
-                        std::wcout << L"[#] Executed & Unsigned file with a modified extension: " << matchedString << std::endl;
-                    }
-
-                    printedMatches.insert(matchedString); // Add to the set to avoid duplicate output
-                    continue;  // Jump to the next line. This way, once a line matches a regex, it won't check the remaining regex patterns for the same line.
-                }
-
-                if (std::regex_search(matchedString, regexDllInjection)) {
-                    if (printedMatches.find(matchedString) == printedMatches.end()) {
-                        if (std::filesystem::exists(matchedString)) {
-                            if (!IsFileSignatureValid(matchedString)) {
-                                std::wcout << L"[#] Executed & Unsigned file: " << matchedString << std::endl;
+                    if (std::regex_search(matchedString, regexFilesWithoutExtension1) || std::regex_search(matchedString, regexFilesWithoutExtension2)) {
+                        // Check if the path corresponds to a directory, because directories are sometimes falsely flagged by these regex
+                        // Check if the file exists and is not already printed
+                        if (!std::filesystem::is_directory(matchedString) && std::filesystem::exists(matchedString)) {
+                            if (printedMatches.find(matchedString) == printedMatches.end()) {
+                                std::wcout << L"[#] Executed file without extension: " << matchedString << std::endl;
                             }
                         }
-                        else {
-                            std::wcout << L"[#] Executed & Deleted file: " << matchedString << std::endl;
+
+                        if (!std::filesystem::exists(matchedString)) {
+                            // Check if "C:\" or "c:\" is present in the line to avoid false flagging not really deleted system files
+                            if ((matchedString.find(L"C:\\") != std::wstring::npos || matchedString.find(L"c:\\") != std::wstring::npos)) {
+                                if (IsLineInDeletedFile(matchedString, deletedFileContents) && printedMatches.find(matchedString) == printedMatches.end()) {
+                                    std::wcout << L"[#] Executed & Deleted file without extension: " << matchedString << std::endl;
+                                }
+                            }
+                            else {
+                                // The file was not deleted in C:. Check if the file contains a letter, followed by a colon, and followed by a backslash "\"
+                                size_t backslashPos = matchedString.find(L"\\", colonPos + 1);
+                                if (backslashPos != std::wstring::npos) {
+                                    std::wcout << L"[#] Executed & Deleted file without extension (false flags here can't be fixed): " << matchedString << std::endl;
+                                }
+                            }
                         }
 
                         printedMatches.insert(matchedString); // Add to the set to avoid duplicate output
                         continue;  // Jump to the next line. This way, once a line matches a regex, it won't check the remaining regex patterns for the same line.
                     }
                 }
-
-                if (std::regex_search(matchedString, regexFilesWithoutExtension1) || std::regex_search(matchedString, regexFilesWithoutExtension2)) {
-                    // Check if the path corresponds to a directory, because directories are sometimes falsely flagged by these regex
-                    // Check if the file exists and is not already printed
-                    if (!std::filesystem::is_directory(matchedString) && std::filesystem::exists(matchedString)) {
-                        if (printedMatches.find(matchedString) == printedMatches.end()) {
-                            std::wcout << L"[#] Executed file without extension: " << matchedString << std::endl;
-                        }
-                    }
-
-                    if (!std::filesystem::exists(matchedString)) {
-                        // Check if "C:\" or "c:\" is present in the line to avoid false flagging not really deleted system files
-                        if ((matchedString.find(L"C:\\") != std::wstring::npos || matchedString.find(L"c:\\") != std::wstring::npos)) {
-                            if (IsLineInDeletedFile(matchedString, deletedFileContents) && printedMatches.find(matchedString) == printedMatches.end()) {
-                                std::wcout << L"[#] Executed & Deleted file without extension: " << matchedString << std::endl;
-                            }
-                        }
-                        else {
-                            // The file was not deleted in C:. Check if the file contains a letter, followed by a colon, and followed by a backslash "\"
-                            size_t backslashPos = matchedString.find(L"\\", colonPos + 1);
-                            if (backslashPos != std::wstring::npos) {
-                                std::wcout << L"[#] Executed & Deleted file without extension (false flags here can't be fixed): " << matchedString << std::endl;
-                            }
-                        }
-                    }
-
-                    printedMatches.insert(matchedString); // Add to the set to avoid duplicate output
-                    continue;  // Jump to the next line. This way, once a line matches a regex, it won't check the remaining regex patterns for the same line.
-                }
             }
-        }
 
-        inputFile1.close();
-        std::filesystem::remove(L"journal.txt");
+            inputFile1.close();
+            std::filesystem::remove(L"journal.txt");
+        }
+        catch (const std::exception& e) {
+            std::cerr << "[#] The SS Tool has detected and prevented a possible crash. Report this error to Requiem: " << e.what() << std::endl;
+        }
 
         setConsoleTextColor(BrightYellow);
         std::wcout << L"[Memory Scanner] Scanning executed and unsigned files...\n";
         resetConsoleTextColor();
 
+        try {
+            while (std::getline(inputFile2, line)) {
+                // Skip lines that exceed the maximum allowed length to avoid crashing
+                if (line.length() > MAX_LINE_LENGTH) {
+                    continue;
+                }
 
-        while (std::getline(inputFile2, line)) {
-            // Skip lines that exceed the maximum allowed length to avoid crashing
-            if (line.length() > MAX_LINE_LENGTH) {
-                continue;
-            }
+                // csrss string dumps start always with "0x" when done with System Informer, so we need to capture only the file path
+                // we consider every file path found in the csrss memory dump as an executed file
+                size_t colonPos = line.find(':');
+                if (colonPos != std::wstring::npos && colonPos + 2 < line.length()) {
+                    std::wstring matchedString = line.substr(colonPos + 2);
 
-            // csrss string dumps start always with "0x" when done with System Informer, so we need to capture only the file path
-            // we consider every file path found in the csrss memory dump as an executed file
-            size_t colonPos = line.find(':');
-            if (colonPos != std::wstring::npos && colonPos + 2 < line.length()) {
-                std::wstring matchedString = line.substr(colonPos + 2);
-
-                if (std::regex_search(matchedString, regexExecutedFile)) {
-                    if (printedMatches.find(matchedString) == printedMatches.end()) {
-                        if (std::filesystem::exists(matchedString)) {
-                            if (!IsFileSignatureValid(matchedString)) {
-                                std::wcout << L"[#] Executed & Unsigned file: " << matchedString << std::endl;
+                    if (std::regex_search(matchedString, regexExecutedFile)) {
+                        if (printedMatches.find(matchedString) == printedMatches.end()) {
+                            if (std::filesystem::exists(matchedString)) {
+                                if (!IsFileSignatureValid(matchedString)) {
+                                    std::wcout << L"[#] Executed & Unsigned file: " << matchedString << std::endl;
+                                }
                             }
-                        }
-                        else {
-                            std::wcout << L"[#] Executed & Deleted file: " << matchedString << std::endl;
-                        }
+                            else {
+                                std::wcout << L"[#] Executed & Deleted file: " << matchedString << std::endl;
+                            }
 
-                        printedMatches.insert(matchedString); // Add to the set to avoid duplicate output
-                        continue;  // Jump to the next line. This way, once a line matches a regex, it won't check the remaining regex patterns for the same line.
+                            printedMatches.insert(matchedString); // Add to the set to avoid duplicate output
+                            continue;  // Jump to the next line. This way, once a line matches a regex, it won't check the remaining regex patterns for the same line.
+                        }
                     }
                 }
             }
+
+            inputFile2.close();
+            fileScanned = true;  // Assuming both files are processed now
+            std::filesystem::remove(filePath2);
+
+            std::string journal = "journal.txt";
+            std::filesystem::remove(journal);
         }
-
-        inputFile2.close();
-        fileScanned = true;  // Assuming both files are processed now
-        std::filesystem::remove(filePath2);
+        catch (const std::exception& e) {
+            std::cerr << "[#] The SS Tool has detected and prevented a possible crash. Report this error to Requiem: " << e.what() << std::endl;
+        }
     }
-
-    std::string journal = "journal.txt";
-    std::filesystem::remove(journal);
 }
