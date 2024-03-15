@@ -2,8 +2,8 @@
 
 static void DetectJarsAndBats(DWORD pid) {
     const std::vector<std::pair<std::wstring, std::wstring>> patternsAndMessages = {
-        { L"-jar", L"[[#] Executed file: " },
-        { L".bat", L"[[#] Executed file: " },
+        { L"-jar", L"[#] Executed file: " },
+        { L".bat", L"[#] Executed file: " },
     };
 
     // Build command line to execute the memory scanner
