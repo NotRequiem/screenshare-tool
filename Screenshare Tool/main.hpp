@@ -85,10 +85,17 @@
 #include "checks\mods\xray.hpp"
 #include "checks\mods\mods.h"
 
-// Checks if the sreenshare tool is running under a Virtual Machine:
-void VirtualMachine() {
-    bool isVM = VM::detect();
+bool imp = false
 
+// Checks if the sreenshare tool is running under a Virtual Machine:
+void VirtualMachine(bool imp) {
+   if (!imp) {
+        setConsoleTextColor(White);
+        std::wcout << L"[Virtual Machine Scanner] Running checks to detect virtual machines...\n";
+        resetConsoleTextColor();
+    }
+   
+    bool isVM = VM::detect();
     if (isVM) {
         if (VM::brand() != "Unknown") {
             std::cout << "WARNING: Virtual Machine detected: " << VM::brand() << ". This is considered bannable." << std::endl;
