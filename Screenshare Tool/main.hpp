@@ -85,7 +85,7 @@
 #include "checks\mods\xray.hpp"
 #include "checks\mods\mods.h"
 
-bool imp = false
+bool imp = false;
 
 // Checks if the sreenshare tool is running under a Virtual Machine:
 void VirtualMachine(bool imp) {
