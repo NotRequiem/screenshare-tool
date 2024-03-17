@@ -46,7 +46,7 @@ This versatile screenshare tool is dedicated to accurately detecting various for
 Please note that this tool exclusively retrieves information generated since the last boot time. The code is just meant to work and not to be professional at all.
 
 To use the tool, just run it and nothing else. The tool does not need specific explanations on how to be used. 
-You can use the "-i" or "-I" parameter when running the tool in the consoleto make it only print important information and not what the tool is scanning.
+You can use the "-i" or "-I" parameter when running the tool in the console to make it only print important information and not what the tool is scanning.
 
 # Currently In Development
 
