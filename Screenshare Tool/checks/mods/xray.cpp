@@ -43,6 +43,11 @@ void XRay(bool imp) { // Defines the main function XRay, which takes a boolean p
     }
     if (appdata_path != nullptr) { // Checks if the path is valid
         std::string res_path = std::string(appdata_path) + "\\.minecraft\\resourcepacks"; // Constructs the path to the resource packs directory
+        if (!std::filesystem::exists(res_path)) {
+            log("[#] .minecraft folder or resourcepacks folder does not exist.");
+            return;
+        }
+
         std::vector<std::string> listFiles = files_in_folder(res_path.c_str()); // Retrieves the list of files in the resource packs directory
 
         bool p1 = true; // Initializes a boolean flag for the first check
