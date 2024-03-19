@@ -1,5 +1,7 @@
 #include "userproc.hpp"
 
+std::unordered_set<std::wstring> printedLines;
+
 // Function to check if a file signature is valid
 static bool IsFileSignatureValid(const std::wstring& filePath) {
     TrustVerifyWrapper wrapper;
@@ -18,7 +20,6 @@ static void DetectExes(DWORD pid) {
     saAttr.lpSecurityDescriptor = NULL;
 
     if (!CreatePipe(&hChildStdoutRd, &hChildStdoutWr, &saAttr, 0)) {
-        std::cerr << "Failed to create pipe." << std::endl;
         return;
     }
 
@@ -32,7 +33,6 @@ static void DetectExes(DWORD pid) {
 
     // Launch the memory scanner process
     if (!CreateProcessW(NULL, const_cast<wchar_t*>(commandLine.c_str()), NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)) {
-        std::cerr << "Failed to create process." << std::endl;
         CloseHandle(hChildStdoutRd);
         CloseHandle(hChildStdoutWr);
         return;
