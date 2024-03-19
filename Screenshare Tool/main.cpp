@@ -75,17 +75,50 @@ int main(int argc, char* argv[]) {
     //                                  ONBOARD MEMORY MACROS CHECKS
     // ------------------------------------------------------------------------------------------------
 
-    if (InstallMouseHook() && InstallKeyboardHook()) {
-        MSG msg;
-        while (!GetAsyncKeyState(VK_DELETE)) {
-            while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-            }
-        }
+    STARTUPINFO si = { sizeof(si) };
+    PROCESS_INFORMATION pi;
 
-        UninstallMouseHook();
-        UninstallKeyboardHook();
+    if (!CreateProcess(NULL,   // Module name (NULL to use the same module as the calling process)
+        NULL,                   // Command line (NULL to indicate no command line arguments)
+        NULL,                   // Process handle not inheritable
+        NULL,                   // Thread handle not inheritable
+        FALSE,                  // Set handle inheritance to FALSE
+        CREATE_NEW_CONSOLE,     // Create a new console window for the new process
+        NULL,                   // Use parent's environment block
+        NULL,                   // Use parent's starting directory 
+        &si,                    // Pointer to STARTUPINFO structure
+        &pi))                   // Pointer to PROCESS_INFORMATION structure
+    {
+        // If the process creation fails, fallback to AllocConsole
+        if (AllocConsole()) {
+            FILE* pCout, * pCerr;
+            if (freopen_s(&pCout, "CONOUT$", "w", stdout) != 0) {
+                MessageBox(NULL, "Failed to redirect stdout", "Error", MB_OK | MB_ICONERROR);
+                return 1;
+            }
+            if (freopen_s(&pCerr, "CONOUT$", "w", stderr) != 0) {
+                MessageBox(NULL, "Failed to redirect stderr", "Error", MB_OK | MB_ICONERROR);
+                return 1;
+            }
+
+            // Execute hook code
+            ExecuteHookCode();
+
+            // Free the console
+            FreeConsole();
+        }
+        else {
+            // If AllocConsole also fails, execute the hook code without a console
+            ExecuteHookCode();
+        }
+    }
+    else {
+        // Execute the hook code within the new process
+        ExecuteHookCode();
+
+        // Close process and thread handles
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
     }
 
     return 0;
