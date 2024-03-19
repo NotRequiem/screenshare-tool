@@ -211,6 +211,7 @@
     <ClCompile Include="checks\usn journal\journal.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="miscellaneous\boot\boot.cpp" />
+    <ClCompile Include="miscellaneous\device\device.cpp" />
     <ClCompile Include="miscellaneous\digital signature\trustverify.cpp" />
     <ClCompile Include="miscellaneous\gui\color.c" />
     <ClCompile Include="miscellaneous\string\string.cpp" />
@@ -248,10 +249,18 @@
     <ClInclude Include="checks\virtual machines\vmaware.hpp" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="miscellaneous\boot\boot.hpp" />
+    <ClInclude Include="miscellaneous\device\device.hpp" />
     <ClInclude Include="miscellaneous\digital signature\trustverify.hpp" />
     <ClInclude Include="miscellaneous\gui\color.h" />
     <ClInclude Include="miscellaneous\string\string.hpp" />
     <ClInclude Include="miscellaneous\wmi\wmi.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Screenshare Tool.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="miscellaneous\gui\screenshare tool.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
