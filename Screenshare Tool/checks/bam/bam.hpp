@@ -8,6 +8,7 @@
 #include <Wbemidl.h>
 #include <comdef.h>
 #include <iomanip>
+#include <filesystem>
 
 #include "..\..\miscellaneous\digital signature\trustverify.hpp"
 #include "..\..\miscellaneous\boot\boot.hpp"
