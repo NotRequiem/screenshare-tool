@@ -12,6 +12,4 @@
 #include "..\..\miscellaneous\digital signature\trustverify.hpp"
 #include "..\..\miscellaneous\device\device.hpp"
 
-std::unordered_set<std::wstring> printedLines;
-
 void ExecutedFiles(bool imp);
