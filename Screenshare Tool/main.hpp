@@ -116,3 +116,19 @@ void checkMemoryExe() {
         std::system("pause");
     }
 }
+
+// Install hardware hooks to detect onboard memory macros
+void ExecuteHookCode() {
+    if (InstallMouseHook() && InstallKeyboardHook()) {
+        MSG msg;
+        while (!GetAsyncKeyState(VK_DELETE)) {
+            while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+
+        UninstallMouseHook();
+        UninstallKeyboardHook();
+    }
+}
