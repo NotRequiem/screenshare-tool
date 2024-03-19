@@ -79,10 +79,17 @@ static void DetectExes(DWORD pid) {
                     // Adjust wideStr's length to include only up to the last occurrence of ".exe"
                     wideStr.resize(lastExePos + 4);
                     if (printedLines.find(wideStr) == printedLines.end()) {
-                        if (!IsFileSignatureValid(wideStr)) {
-                            std::wcout << "[#] Executed & Unsigned file: " << wideStr << std::endl;
-                            printedLines.insert(wideStr);
+                        // Check if the file exists
+                        if (std::filesystem::exists(wideStr)) {
+                            if (!IsFileSignatureValid(wideStr)) {
+                                std::wcout << "[#] Executed & Unsigned file: " << wideStr << std::endl;
+                            }
                         }
+                        else {
+                            std::wcout << "[#] Executed & Deleted file: " << wideStr << std::endl;
+                        }
+                        // Add the filename to printedLines to avoid duplicated results
+                        printedLines.insert(wideStr);
                     }
                 }
             }
