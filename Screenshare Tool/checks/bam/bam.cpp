@@ -89,11 +89,21 @@ void ListBinaryRegistryValues(HKEY hKey, const wchar_t* subKey) {
                                     // Check if local time is after the last logon time
                                     if (CompareFileTime(&fileTime, &lastLogonFileTime) > 0) {
                                         // Check if the file signature is valid
-                                        if (!IsFileSignatureValid(ConvertDevicePathToFilePath(devicePath))) {
-                                            std::string filePathUtf8 = convertWStringToUtf8(ConvertDevicePathToFilePath(devicePath));
+                                        std::wstring filePath = ConvertDevicePathToFilePath(devicePath);
 
-                                            // Display file path using wprintf
-                                            wprintf(L"[#] Executed & Unsigned file: %hs at: %04d/%02d/%02d %02d:%02d:%02d\n",
+                                        if (std::filesystem::exists(filePath)) {
+                                            if (!IsFileSignatureValid(filePath)) {
+                                                std::string filePathUtf8 = convertWStringToUtf8(filePath);
+                                                // Display file path using wprintf for better unicode character output
+                                                wprintf(L"[#] Executed & Unsigned file: %hs at: %04d/%02d/%02d %02d:%02d:%02d\n",
+                                                    filePathUtf8.c_str(),
+                                                    localTime.wYear, localTime.wMonth, localTime.wDay,
+                                                    localTime.wHour, localTime.wMinute, localTime.wSecond);
+                                            }
+                                        }
+                                        else {
+                                            std::string filePathUtf8 = convertWStringToUtf8(filePath);
+                                            wprintf(L"[#] Executed & Deleted file: %hs. File was executed at: %04d/%02d/%02d %02d:%02d:%02d\n",
                                                 filePathUtf8.c_str(),
                                                 localTime.wYear, localTime.wMonth, localTime.wDay,
                                                 localTime.wHour, localTime.wMinute, localTime.wSecond);
