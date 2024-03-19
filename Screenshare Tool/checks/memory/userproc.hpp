@@ -6,6 +6,7 @@
 #include <set>
 #include <unordered_set>
 #include <map>
+#include <filesystem>
 
 #include "..\..\miscellaneous\wmi\wmi.hpp"
 #include "..\..\miscellaneous\gui\color.h"
