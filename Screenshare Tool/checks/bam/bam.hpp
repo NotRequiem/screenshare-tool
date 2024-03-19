@@ -12,6 +12,7 @@
 #include "..\..\miscellaneous\digital signature\trustverify.hpp"
 #include "..\..\miscellaneous\boot\boot.hpp"
 #include "..\..\miscellaneous\string\string.hpp"
+#include "..\..\miscellaneous\device\device.hpp"
 #include "..\..\miscellaneous\gui\color.h"
 
 #pragma comment(lib, "wbemuuid.lib")
