@@ -4,12 +4,6 @@
 
 enum class log_type { INFO, ERR, WARNING }; // Defines an enumeration for different types of log messages
 
-static void set_global(log_type type) {} // Declares a function to set the global log type, but the implementation is empty
-
-static void log(const std::string& message) { // Declares a function to log a message
-    std::cout << message << std::endl; // Prints the message to the console
-}
-
 static std::vector<std::string> files_in_folder(const char* folder_path) { // Declares a function to retrieve files in a folder
     std::vector<std::string> files; // Declares a vector to store file names
     for (const auto& entry : std::filesystem::directory_iterator(folder_path)) { // Iterates through the folder
@@ -23,7 +17,6 @@ static std::vector<std::string> files_in_folder(const char* folder_path) { // De
 int passed = 0; // Declares a global variable to count the number of passed checks
 
 void XRay(bool imp) { // Defines the main function XRay, which takes a boolean parameter imp
-    set_global(log_type::INFO); // Sets the global log type to INFO
 
     if (!imp) {
         setConsoleTextColor(BrightMagenta);
@@ -38,13 +31,12 @@ void XRay(bool imp) { // Defines the main function XRay, which takes a boolean p
         appdata_path = temp_appdata_path;
     }
     else {
-        // Handle error case
         appdata_path = nullptr;
     }
     if (appdata_path != nullptr) { // Checks if the path is valid
         std::string res_path = std::string(appdata_path) + "\\.minecraft\\resourcepacks"; // Constructs the path to the resource packs directory
         if (!std::filesystem::exists(res_path)) {
-            log("[#] .minecraft folder or resourcepacks folder does not exist.");
+            std::cout << ("[#] .minecraft folder or resourcepacks folder does not exist.") << std::endl;
             return;
         }
 
@@ -53,8 +45,7 @@ void XRay(bool imp) { // Defines the main function XRay, which takes a boolean p
         bool p1 = true; // Initializes a boolean flag for the first check
         for (const std::string& s : listFiles) { // Iterates through the list of files
             if (s.find("xray") != std::string::npos || s.find("Xray") != std::string::npos || s.find("XRay") != std::string::npos) { // Checks if the file name contains "xray", "Xray", or "XRay"
-                set_global(log_type::ERR); // Sets the global log type to ERR
-                log("[#] Found possible XRay texture pack in %appdata% (.zip)\n"); // Logs a message indicating the presence of XRay
+                std::cout << ("[#] Found possible XRay texture pack in %appdata% (.zip)\n") << std::endl; // Logs a message indicating the presence of XRay
                 p1 = false; // Sets the flag to false
                 break; // Exits the loop
             }
@@ -64,8 +55,7 @@ void XRay(bool imp) { // Defines the main function XRay, which takes a boolean p
         if (p1) {
             for (const auto& entry : std::filesystem::directory_iterator(res_path)) {
                 if (entry.is_directory() && (entry.path().string().find("xray") != std::string::npos || entry.path().string().find("Xray") != std::string::npos || entry.path().string().find("XRay") != std::string::npos)) {
-                    set_global(log_type::ERR);
-                    log("[#] Found possible XRay texture pack in %appdata% (folder)\n");
+                    std::cout << ("[#] Found possible XRay texture pack in %appdata% (folder)\n") << std::endl;
                     p1 = false;
                     break;
                 }
@@ -98,15 +88,13 @@ void XRay(bool imp) { // Defines the main function XRay, which takes a boolean p
                 for (int i = 0; i < numFiles; ++i) { // Iterates through the files in the zip archive
                     status = mz_zip_reader_file_stat(&zipArchive, i, &fileStat); // Retrieves statistics for the file
                     if (!status) { // Checks if retrieval failed
-                        set_global(log_type::ERR); // Sets the global log type to ERR
                         mz_zip_reader_end(&zipArchive); // Ends the zip archive reading
                         return; // Exits the function
                     }
 
                     std::string fileName = fileStat.m_filename; // Retrieves the file name
                     if (fileStat.m_uncomp_size < 1000000 && (fileName.size() > 5 && fileName.substr(fileName.size() - 5) == ".json")) { // Checks if the file is smaller than 1MB and ends with ".json"
-                        set_global(log_type::WARNING); // Sets the global log type to WARNING
-                        log("[#] Found possible XRay texture pack in %appdata% (file size): " + s + "\n"); // Logs a warning message
+                        std::cout << ("[#] Found possible XRay texture pack in %appdata% (file size): " + s + "\n") << std::endl; // Logs a warning message
                         break; // Exits the loop
                     }
                 }
