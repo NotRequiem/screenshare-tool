@@ -97,11 +97,13 @@ void csrss(bool imp) {
     std::unordered_set<std::wstring> printedMatches;
 
     std::wstring filePath1, filePath2;
+    std::string journal = "journal.txt";
 
     // Prompt the user for the first file path
     std::wcout << L"Dump the \"csrss.exe\" process with the MOST private bytes using System Informer and save the results to any directory.\n";
     filePath1 = PromptForFilePath(L"After doing this, enter here the full path of the results file. Type 'cancel' to exit this check if you cant dump csrss or there's no strings inside it: ");
     if (filePath1.empty()) {
+        std::filesystem::remove(journal);
         return;  // User canceled, skip to the NTFS Scanner module
     }
 
@@ -109,6 +111,7 @@ void csrss(bool imp) {
     std::wcout << L"Now, repeat the same process again, but now dump the \"csrss.exe\" process with the LESS private bytes.\n";
     filePath2 = PromptForFilePath(L"Enter here the full path of the second results file. Type 'cancel' to exit this check if you cant dump csrss or there's no strings inside it: ");
     if (filePath2.empty()) {
+        std::filesystem::remove(journal);
         return;  // User canceled, skip to the NTFS Scanner module
     }
 
@@ -235,6 +238,7 @@ void csrss(bool imp) {
             }
 
             inputFile1.close();
+            std::filesystem::remove(filePath1);
             std::filesystem::remove(L"journal.txt");
         }
         catch (const std::exception& e) {
@@ -279,9 +283,6 @@ void csrss(bool imp) {
             inputFile2.close();
             fileScanned = true;  // Assuming both files are processed now
             std::filesystem::remove(filePath2);
-
-            std::string journal = "journal.txt";
-            std::filesystem::remove(journal);
         }
         catch (const std::exception& e) {
             std::cerr << "[#] The SS Tool has detected and prevented a possible crash. Report this error to Requiem: " << e.what() << std::endl;
