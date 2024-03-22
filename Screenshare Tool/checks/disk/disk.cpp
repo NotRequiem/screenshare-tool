@@ -83,6 +83,6 @@ void ReplacedDisks(bool imp) {
             }
         }
     }
-    catch () {
+    catch (const std::exception&) {
     }
 }
