@@ -25,9 +25,6 @@ static void ExtractFilePath(const std::string& line) {
     if (line.find("TRACE,0000,0000,PcaClient,MonitorProcess,") == 0) {
         startPos = line.find("TRACE,0000,0000,PcaClient,MonitorProcess,") + 41; // Move past "TRACE,0000,0000,PcaClient,MonitorProcess,"
     }
-    else if (line.find("file:///") == 0) {
-        startPos = line.find("file:///") + 8; // Move past "file:///"
-    }
 
     // Find the extension
     for (const auto& ext : extensions) {
