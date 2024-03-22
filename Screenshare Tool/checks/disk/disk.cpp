@@ -80,19 +80,9 @@ void ReplacedDisks(bool imp) {
                             << L". Ban the user." << std::endl;
                     }
                 }
-                else {
-                    // Handle error when getting local time fails
-                    std::wcerr << L"[#] Error getting local time for drive " << driveLetter << std::endl;
-                }
-            }
-            else {
-                // Handle error when the path doesn't exist
-                std::wcerr << L"[#] Could not detect disk bypasses in drive letter: " << rootPath << L" maybe a FAT32 drive..?" << std::endl;
             }
         }
     }
     catch (const std::exception& ex) {
-        // Handle any other exceptions that might occur
-        std::wcerr << L"[#] The SS Tool has detected and prevented a possible crash: " << ex.what() << L". Report the error to Requiem if you see this warning." << std::endl;
     }
 }
