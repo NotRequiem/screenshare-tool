@@ -19,10 +19,6 @@
       <td><a href="#detections">#detections</a></td>
     </tr>
     <tr>
-      <td>Detection Methodology</td>
-      <td><a href="#detection-methodology">#detection-methodology</a></td>
-    </tr>
-    <tr>
       <td>Memory Scanner</td>
       <td><a href="#memory-scanner">#memory-scanner</a></td>
     </tr>
@@ -194,32 +190,6 @@ The tool indirectly or directly detects/is not affected by these bypasses:
 > `31.` Detects XRay texture packs.
 
 > `32.` Detects recently accessed files.
-
-# Detection Methodology
-
-The methodology employed by the tool is characterized by a strategic focus on a singular, robust detection method, followed by the implementation of comprehensive patches to counteract any potential bypasses associated with that method.
-
-Let's illustrate this approach using the example of detecting executed ".exe" files. Numerous forensic artifacts can be employed for this purpose, including:
-
-> 1. BAM
-> 2. Prefetch
-> 3. DPS, SgrmBroker, CSRSS
-> 4. SRUM
-
-While there is a plethora of forensic artifacts available, the tool opts for a concentrated strategy. Rather than incorporating all available methods, it zeroes in on the most potent one. For instance, by analyzing a kernel-level process, such as csrss, the tool increases the difficulty for bypassers attempting to manipulate or erase strings in that domain.
-
-Choosing csrss over alternatives like SgrmBroker is intentional, considering SgrmBroker's suboptimal memory persistence. Once the decision is made to utilize csrss for detecting ".exes" (and also ".dlls"), the tool proactively addresses various potential bypasses, including:
-
-> 1. Task Scheduler
-> 2. Special characters
-> 3. Clearing strings with a kernel driver
-> 4. Modified extensions
-> 5. Replaced files
-> 6. Executing files using intermediary processes like cmd
-
-In essence, the tool concentrates its efforts on scrutinizing ".exe" and ".dll" files through csrss, directing attention towards fortifying this primary method against all conceivable bypass scenarios.
-
-This methodology consistently follows the approach of selecting the "strongest method" and subsequently developing patches to mitigate any bypasses that might compromise the effectiveness of the detection process.
 
 # Memory Scanner
 If anyone is interested, this is the external program made to scan the memory of the necessary processes: [https://github.com/NotRequiem/memory-scanner](https://github.com/NotRequiem/memscanner)
