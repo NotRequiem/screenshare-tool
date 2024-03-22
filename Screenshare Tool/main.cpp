@@ -10,8 +10,7 @@ namespace Checks {
     class MacroStringsCheck : public Check {
     public:
         void runCheck(bool imp) override {
-            std::cout << "Running Macro Strings Check." << std::endl;
-
+            MacroStrings(imp);
         }
     };
 
