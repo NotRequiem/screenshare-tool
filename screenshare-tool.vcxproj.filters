@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -13,109 +13,127 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Header Files\main">
+      <UniqueIdentifier>{c130a63c-705c-4735-ada4-3dfc4faa8c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\checks">
+      <UniqueIdentifier>{2b20917f-562a-4ada-97f7-0715fd2732f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{93453425-5993-4d10-87e4-b1279e989aad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main">
+      <UniqueIdentifier>{23fd1119-0994-4b3e-bbd7-680d4dff394c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\checks">
+      <UniqueIdentifier>{4cbd0f9e-e304-47b7-8f7d-cbb1e9d85df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{a1cce78b-d4b6-4ec4-9bd0-4d917c5eb30f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="screenshare tool\main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="screenshare tool\checks\forensic\appcrash.cpp">
+      <Filter>Source Files\checks</Filter>
     </ClCompile>
     <ClCompile Include="screenshare tool\checks\bam\bam.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\devices\devices.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\devices\mouse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\devices\keys.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\disk\disk.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\eventlog\evthandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\eventlog\evtquery.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\forensic\appcrash.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\forensic\prefetch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\forensic\recentfiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\import code\importcode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\macros\macroscanner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\macros\macros.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\memory\kernelproc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\memory\userproc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\memory\javaw.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\mods\xray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\mods\miniz.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\mods\mods.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\onboard memory macros\keyboardhook.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\onboard memory macros\mousehook.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\system\prochacker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\system\prochandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\system\localhost.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\task scheduler\scheduler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\usn journal\fsutil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\checks\usn journal\journal.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\checks</Filter>
     </ClCompile>
     <ClCompile Include="screenshare tool\miscellaneous\boot\boot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\miscellaneous\device\device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="screenshare tool\miscellaneous\digital signature\trustverify.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="screenshare tool\miscellaneous\gui\color.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\disk\disk.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\eventlog\evthandler.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\eventlog\evtquery.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\usn journal\fsutil.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\import code\importcode.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\memory\javaw.c">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\usn journal\journal.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\memory\kernelproc.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\onboard memory macros\keyboardhook.c">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\devices\keys.c">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\system\localhost.c">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\macros\macros.c">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\macros\macroscanner.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\main.cpp">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\mods\miniz.c">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\devices\mouse.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\onboard memory macros\mousehook.c">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\forensic\prefetch.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\system\prochacker.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\system\prochandler.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\forensic\recentfiles.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\task scheduler\scheduler.cpp">
+      <Filter>Source Files\checks</Filter>
     </ClCompile>
     <ClCompile Include="screenshare tool\miscellaneous\string\string.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\miscellaneous\digital signature\trustverify.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="screenshare tool\miscellaneous\wmi\wmi.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\memory\userproc.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\mods\xray.cpp">
+      <Filter>Source Files\checks</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\checks\devices\devices.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="screenshare tool\miscellaneous\device\device.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Screenshare Tool\miscellaneous\files\filetracker.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,112 +141,112 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="screenshare tool\main.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\bam\bam.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\devices\keys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\devices\devices.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\devices\mouse.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\disk\disk.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\eventlog\evthandler.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\eventlog\evtquery.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\forensic\prefetch_parser.hh">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\main</Filter>
     </ClInclude>
     <ClInclude Include="screenshare tool\checks\forensic\appcrash.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
-    <ClInclude Include="screenshare tool\checks\forensic\prefetch.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="screenshare tool\checks\bam\bam.hpp">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
-    <ClInclude Include="screenshare tool\checks\forensic\recentfiles.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="screenshare tool\checks\devices\devices.hpp">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
-    <ClInclude Include="screenshare tool\checks\import code\importcode.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="screenshare tool\checks\disk\disk.hpp">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
-    <ClInclude Include="screenshare tool\checks\macros\macros.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="screenshare tool\checks\eventlog\evthandler.hpp">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
-    <ClInclude Include="screenshare tool\checks\macros\macroscanner.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\memory\javaw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\memory\kernelproc.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\memory\userproc.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\mods\miniz.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\mods\mods.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\mods\xray.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\onboard memory macros\keyboardhook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\onboard memory macros\mousehook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\system\localhost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\system\prochacker.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\system\prochandler.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\checks\task scheduler\scheduler.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="screenshare tool\checks\eventlog\evtquery.hpp">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
     <ClInclude Include="screenshare tool\checks\usn journal\fsutil.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\import code\importcode.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\memory\javaw.h">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
     <ClInclude Include="screenshare tool\checks\usn journal\journal.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
-    <ClInclude Include="screenshare tool\checks\virtual machines\vmaware.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="screenshare tool\checks\memory\kernelproc.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\onboard memory macros\keyboardhook.h">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\devices\keys.h">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\system\localhost.h">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\macros\macros.h">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\macros\macroscanner.hpp">
+      <Filter>Header Files\checks</Filter>
     </ClInclude>
     <ClInclude Include="screenshare tool\miscellaneous\boot\boot.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\miscellaneous\device\device.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="screenshare tool\miscellaneous\digital signature\trustverify.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="screenshare tool\miscellaneous\gui\color.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="screenshare tool\miscellaneous\string\string.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="screenshare tool\checks\mods\miniz.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\onboard memory macros\mousehook.h">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\forensic\prefetch.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\forensic\prefetch_parser.hh">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\system\prochacker.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\system\prochandler.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\forensic\recentfiles.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\devices\mouse.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\miscellaneous\digital signature\trustverify.hpp">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="screenshare tool\miscellaneous\wmi\wmi.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\miscellaneous\string\string.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\task scheduler\scheduler.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\memory\userproc.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\virtual machines\vmaware.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\checks\mods\xray.hpp">
+      <Filter>Header Files\checks</Filter>
+    </ClInclude>
+    <ClInclude Include="screenshare tool\miscellaneous\device\device.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Screenshare Tool\miscellaneous\files\filetracker.hpp">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
