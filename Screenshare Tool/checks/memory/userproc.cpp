@@ -247,7 +247,7 @@ static void DetectExes(DWORD pid) {
     CloseHandle(hChildStdoutRd);
 }
 
-static void DetectJarsAndBats(DWORD pid) {
+static void DetectJarsAndBats(DWORD pid, const std::wstring& servicename) {
     const std::vector<std::pair<std::wstring, std::wstring>> patternsAndMessages = {
         { L"-jar", L"[#] Executed file: " },
         { L".bat", L"[#] Executed file: " },
@@ -311,7 +311,7 @@ static void DetectJarsAndBats(DWORD pid) {
                 }
 
                 // Check if the line matches the regex pattern
-                if (!foundMatch && std::regex_search(line, regexPattern) && !screenshare_tool::FileTracker::isFileProcessed(line)) {
+                if (!foundMatch && (servicename != L"Winmgmt") && std::regex_search(line, regexPattern) && !screenshare_tool::FileTracker::isFileProcessed(line)) {
                     std::wcout << L"[#] Executed file with modified extension: " << line << std::endl;
                     // Add to the FileTracker to avoid duplicate output
                     screenshare_tool::FileTracker::addProcessedFile(line);
@@ -410,7 +410,7 @@ void ExecutedFiles(bool imp) {
             if (wcscmp(serviceName, L"DiagTrack") == 0) {
                 // Detect exe and jar/bat file executions for DiagTrack service
                 DetectExes(V_I4(&processId));
-                DetectJarsAndBats(V_I4(&processId));
+                DetectJarsAndBats(V_I4(&processId), serviceName);
             }
             else if (wcscmp(fileType, L"exe") == 0) {
                 // Detect exe file executions for other services
@@ -418,7 +418,7 @@ void ExecutedFiles(bool imp) {
             }
             else {
                 // Detect jar and bat file executions for other services
-                DetectJarsAndBats(V_I4(&processId));
+                DetectJarsAndBats(V_I4(&processId), serviceName);
             }
         }
         else {
